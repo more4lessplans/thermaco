@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /private/  # Example directory to restrict (update if needed)
+
+Sitemap: https://thermaco.ca/sitemap.xml
