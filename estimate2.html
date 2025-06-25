@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>ThermaCo | Quote</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Rubik:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- Custom CSS for CalendarView -->
+    <style>
+        .calendar-field-wrapper {
+            position: relative;
+            width: 100%;
+        }
+        .calendar-field-wrapper .form-control {
+            padding-right: 2.5rem;
+        }
+        .calendar-trigger {
+            position: absolute;
+            top: 50%;
+            right: 1rem;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #6c757d;
+        }
+        .calendar.popup {
+            z-index: 1050;
+            background-color: #fff;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+            min-width: 280px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .calendar td.selected {
+            background-color: #007bff !important;
+            color: #fff !important;
+        }
+        .calendar td.unselectable {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Topbar Start -->
+    <div class="container-fluid bg-dark px-0">
+        <div class="row g-0 d-none d-lg-flex">
+            <div class="col-lg-6 ps-5 text-start">
+                <div class="h-100 d-inline-flex align-items-center text-white">
+                </div>
+            </div>
+            <div class="col-lg-6 text-end">
+                <div class="h-100 topbar-right d-inline-flex align-items-center text-white py-2 px-5">
+                    <span class="fs-5 fw-bold me-2"><i class="fa fa-phone-alt me-2"></i>Call Us:</span>
+                    <span class="fs-5 fw-bold">1 (289) 890 2222</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top py-0 pe-5">
+        <a href="index.html" class="navbar-brand ps-5 me-0" style="display: flex; align-items: center; justify-content: center;">
+            <img src="img/logo.png" alt="InteliAir Logo" style="max-height: 20px; width: auto; margin: 0; padding: 0;">
+        </a>
+        <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="/" class="nav-item nav-link">Home</a>
+                <a href="/about" class="nav-item nav-link">About Us</a>
+                <a href="/services" class="nav-item nav-link">Our Services</a>
+                <div class="nav-item dropdown">
+                    <div class="dropdown-menu bg-light m-0">
+                        <a href="project.html" class="dropdown-item">Projects</a>
+                        <a href="feature.html" class="dropdown-item">Features</a>
+                        <a href="team.html" class="dropdown-item">Our Team</a>
+                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                        <a href="404.html" class="dropdown-item">404 Page</a>
+                    </div>
+                </div>
+            </div>
+            <a href="/estimate" class="btn btn-primary px-3 d-none d-lg-block">Get A Quote</a>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <!-- Contact Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
+                    <p class="fw-medium text-uppercase text-primary mb-2">No-Hassle Quotes</p>
+                    <h1 class="display-5 mb-4">Request A Free Quote</h1>
+                    <p>
+                        To help us provide you with the most accurate quote, please include as much detail as possible about your needs. Be specific about the type of service or installation you're looking for, and any particular requirements or preferences you may have.
+                    </p>
+                    <p>
+                        If applicable, uploading pictures can be incredibly helpful, especially of the current setup or location where the work will be done. For HVAC services, please include a clear image of the equipment's nameplate, showing model numbers and specifications. This ensures we have all the information necessary to tailor our quote to your exact situation, saving time and minimizing any back-and-forth.
+                    </p>
+                    <p>
+                        The more detail you provide, the more precise and customized your quote will be!
+                    </p>
+                </div>
+                <div class="col-lg-6">
+                    <form method="post" action="https://submit.jotform.com/submit/242634271405047" enctype="multipart/form-data" name="form_242634271405047" id="242634271405047" accept-charset="utf-8" autocomplete="on" onsubmit="return validateAppointment()">
+                        <input type="hidden" name="formID" value="242634271405047" />
+                        <input type="hidden" id="JWTContainer" value="" />
+                        <input type="hidden" id="cardinalOrderNumber" value="" />
+                        <input type="hidden" id="jsExecutionTracker" name="jsExecutionTracker" value="build-date-1750870686065" />
+                        <input type="hidden" id="submitSource" name="submitSource" value="unknown" />
+                        <input type="hidden" id="submitDate" name="submitDate" value="undefined" />
+                        <input type="hidden" id="buildDate" name="buildDate" value="1750870686065" />
+                        <input type="hidden" name="uploadServerUrl" value="https://upload.jotform.com/upload" />
+                        <input type="hidden" name="eventObserver" value="1" />
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" name="q3_name[first]" id="first_3" placeholder="First Name" required>
+                                    <label for="first_3">First Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" name="q3_name[last]" id="last_3" placeholder="Last Name" required>
+                                    <label for="last_3">Last Name</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" name="q4_email" id="input_4" placeholder="example@example.com" required>
+                                    <label for="input_4">Email</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="tel" class="form-control" name="q6_phoneNumber[full]" id="input_6" placeholder="(000) 000-0000" required data-type="mask-number" data-masked="true">
+                                    <label for="input_6">Phone Number</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" name="q5_address[addr_line1]" id="input_5_addr_line1" placeholder="Street Address" required>
+                                    <label for="input_5_addr_line1">Street Address</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" name="q5_address[addr_line2]" id="input_5_addr_line2" placeholder="Street Address Line 2">
+                                    <label for="input_5_addr_line2">Street Address Line 2</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="row g-3">
+                                    <div class="col-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" name="q5_address[city]" id="input_5_city" placeholder="City" required>
+                                            <label for="input_5_city">City</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" name="q5_address[state]" id="input_5_state" placeholder="Province" required>
+                                            <label for="input_5_state">Province</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="row g-3">
+                                    <div class="col-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" name="q5_address[postal]" id="input_5_postal" placeholder="Postal Code" required>
+                                            <label for="input_5_postal">Postal Code</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" name="q5_address[country]" id="input_5_country" placeholder="Country" required>
+                                            <label for="input_5_country">Country</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <select class="form-select" name="q10_serviceType" id="input_10" required>
+                                        <option value="">Please Select</option>
+                                        <option value="Repair/Service">Repair/Service</option>
+                                        <option value="Installation">Installation</option>
+                                        <option value="Maintenance">Maintenance</option>
+                                    </select>
+                                    <label for="input_10">Service Type</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control" name="q11_yourInquiry" id="input_11" placeholder="Tell Us About Your Needs" style="height: 150px" required></textarea>
+                                    <label for="input_11">Your Inquiry</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="file" class="form-control" name="q12_fileUpload[]" id="input_12" multiple data-file-accept="pdf, doc, docx, xls, xlsx, csv, txt, rtf, html, zip, mp3, wma, mpg, flv, avi, jpg, jpeg, png, gif" data-limit-file-size="Yes" data-file-maxsize="10854" data-file-minsize="0">
+                                    <label for="input_12">File Upload</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating calendar-field-wrapper">
+                                    <input type="text" class="form-control" name="q22_appointment[date]" id="input_22_date" placeholder="Appointment Date" required readonly>
+                                    <label for="input_22_date">Appointment Date <span class="form-required">*</span></label>
+                                    <span class="calendar-trigger" id="calendar_trigger_22"><i class="fas fa-calendar-alt"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary py-3 px-5" type="submit" id="input_2">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark footer mt-5 py-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white mb-4">Contact</h5>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>1 (289) 890 2222</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>contact@thermaco.ca</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Tottenham, Ontario</p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white mb-4">Connect & Support</h5>
+                    <a class="btn btn-link" href="/contact">Contact Form</a>
+                    <a class="btn btn-link" href="/support">Tech Support</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="https://cdn.jotfor.ms/js/vendor/maskedinput_5.0.9.min.js"></script>
+    <script src="https://cdn.jotfor.ms/js/vendor/imageinfo.js?3.3.63780"></script>
+    <script src="https://cdn.jotfor.ms/file-uploader/fileuploader.js"></script>
+
+    <!-- CalendarView Script -->
+    <script src="js/calendarview.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+
+    <!-- Calendar and Validation Initialization -->
+    <script type="text/javascript">
+        // Initialize phone masking
+        jQuery('#input_6').mask('(999) 999-9999');
+
+        // Initialize file upload
+        setTimeout(function() {
+            JotForm.initMultipleUploads();
+        }, 2);
+
+        // Validate appointment field
+        function validateAppointment() {
+            var appointmentInput = document.getElementById('input_22_date');
+            if (!appointmentInput.value) {
+                alert('Please select an appointment date and time.');
+                appointmentInput.focus();
+                return false;
+            }
+            return true;
+        }
+
+        // Initialize CalendarView
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                // Custom select handler to include time and enforce restrictions
+                function customSelectHandler(calendar, dateStr) {
+                    var selectedDate = new Date(dateStr);
+                    var dayOfWeek = selectedDate.getDay();
+                    var hours = selectedDate.getHours();
+                    var minutes = selectedDate.getMinutes();
+
+                    // Restrict to Mon-Fri (1-5)
+                    if (dayOfWeek === 0 || dayOfWeek === 6) {
+                        alert('Please select a weekday (Monday–Friday).');
+                        return;
+                    }
+
+                    // Restrict to 9 AM–5 PM, excluding 12–2 PM
+                    if (hours < 9 || hours >= 17 || (hours >= 12 && hours < 14)) {
+                        alert('Please select a time between 9 AM–12 PM or 2 PM–5 PM.');
+                        return;
+                    }
+
+                    // Ensure 60-minute slots (minutes should be 0)
+                    if (minutes !== 0) {
+                        selectedDate.setMinutes(0);
+                    }
+
+                    // Format date and time for input
+                    var formattedDate = selectedDate.toLocaleString('en-US', {
+                        month: '2-digit',
+                        day: '2-digit',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: true
+                    }).replace(',', '');
+                    document.getElementById('input_22_date').value = formattedDate;
+
+                    // Close calendar
+                    calendar.callCloseHandler();
+                }
+
+                // Setup CalendarView
+                Calendar.setup({
+                    dateField: 'input_22_date',
+                    triggerElement: 'calendar_trigger_22',
+                    dateFormat: '%m/%d/%Y %I:%M %p',
+                    selectHandler: customSelectHandler,
+                    startOnMonday: false,
+                    limits: {
+                        days: {
+                            sunday: false,
+                            monday: true,
+                            tuesday: true,
+                            wednesday: true,
+                            thursday: true,
+                            friday: true,
+                            saturday: false
+                        },
+                        start: 'today',
+                        future: true,
+                        past: false
+                    }
+                });
+
+                // Ensure readonly input
+                document.getElementById('input_22_date').addEventListener('keydown', function(e) {
+                    e.preventDefault();
+                });
+            } catch (e) {
+                console.error('Error initializing CalendarView:', e);
+            }
+        });
+    </script>
+</body>
+
+</html>
