@@ -27,8 +27,7 @@
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-         <!-- Status bar color for iPhone and other devices -->
-       <meta name="theme-color" content="#45473D">
+    <meta name="theme-color" content="#45473D">
     <style>
         .form-floating .form-control[type="date"] {
             height: calc(3.5rem + 2px);
@@ -110,6 +109,8 @@
                         <input type="hidden" name="q23_preferredContact23[month]" id="input_23_preferred_month">
                         <input type="hidden" name="q23_preferredContact23[day]" id="input_23_preferred_day">
                         <input type="hidden" name="q23_preferredContact23[year]" id="input_23_preferred_year">
+                        <input type="hidden" name="q23_preferredContact23" id="input_23_full_date">
+                        <input type="hidden" name="q23_preferredContact" id="input_23_preferred_contact">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating">
@@ -191,7 +192,7 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <input type="date" class="form-control" id="lite_mode_23" name="q23_preferredContact23[lite_mode]" min="2025-06-26" required aria-label="Preferred Contact Date">
+                                    <input type="date" class="form-control" id="lite_mode_23" name="q23_preferredContact23[lite_mode]" min="2025-06-30" required aria-label="Preferred Contact Date">
                                     <label for="lite_mode_23">Preferred Contact Date</label>
                                 </div>
                             </div>
@@ -333,25 +334,32 @@
         function syncDateTime() {
             var dateInput = document.getElementById('lite_mode_23').value;
             var timeInput = document.getElementById('input_25').value;
-            if (dateInput && timeInput && timeInput !== 'No Preference') {
+            if (dateInput) {
                 var dateParts = dateInput.split('-');
                 var year = parseInt(dateParts[0], 10);
                 var month = parseInt(dateParts[1], 10);
                 var day = parseInt(dateParts[2], 10);
+                var formattedDate = `${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}-${year}`;
                 document.getElementById('input_23_preferred_month').value = month;
                 document.getElementById('input_23_preferred_day').value = day;
                 document.getElementById('input_23_preferred_year').value = year;
-                console.log('Submitted date values:', {
-                    month: month,
-                    day: day,
-                    year: year,
-                    time: timeInput
+                document.getElementById('input_23_full_date').value = formattedDate;
+                document.getElementById('input_23_preferred_contact').value = formattedDate;
+                console.log('Submitted date values:', { 
+                    month: month, 
+                    day: day, 
+                    year: year, 
+                    full_date: formattedDate, 
+                    preferred_contact: formattedDate, 
+                    time: timeInput 
                 });
             } else {
                 document.getElementById('input_23_preferred_month').value = '';
                 document.getElementById('input_23_preferred_day').value = '';
                 document.getElementById('input_23_preferred_year').value = '';
-                console.log('Submitted values: cleared (no date/time selected or No Preference)');
+                document.getElementById('input_23_full_date').value = '';
+                document.getElementById('input_23_preferred_contact').value = '';
+                console.log('Submitted date values: cleared (no date selected)');
             }
         }
         document.getElementById('lite_mode_23').addEventListener('change', syncDateTime);
@@ -389,9 +397,9 @@
                 document.getElementById('lite_mode_23').focus();
                 return false;
             }
-            var minDate = new Date(2025, 5, 26);
+            var minDate = new Date(2025, 5, 30);
             if (dateTime < minDate) {
-                alert('Please select a date on or after June 26, 2025.');
+                alert('Please select a date on or after June 30, 2025.');
                 document.getElementById('lite_mode_23').focus();
                 return false;
             }

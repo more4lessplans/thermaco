@@ -20,15 +20,14 @@
     <link href="img/favicon.ico" rel="icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Rubik:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Rubik:wght@500;600;700&display=stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="lib/animate/animate.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-         <!-- Status bar color for iPhone and other devices -->
-       <meta name="theme-color" content="#45473D">
+    <meta name="theme-color" content="#45473D">
     <style>
         .form-floating .form-control[type="date"] {
             height: calc(3.5rem + 2px);
@@ -116,6 +115,8 @@
                         <input type="hidden" name="q23_preferredService23[month]" id="input_23_preferred_month">
                         <input type="hidden" name="q23_preferredService23[day]" id="input_23_preferred_day">
                         <input type="hidden" name="q23_preferredService23[year]" id="input_23_preferred_year">
+                        <input type="hidden" name="q23_preferredService23" id="input_23_full_date">
+                        <input type="hidden" name="q23_preferredService" id="input_23_preferred_service">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating">
@@ -197,7 +198,7 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <input type="date" class="form-control" id="lite_mode_23" name="q23_preferredService23[lite_mode]" min="2025-06-26" required aria-label="Preferred Service Date">
+                                    <input type="date" class="form-control" id="lite_mode_23" name="q23_preferredService23[lite_mode]" min="2025-06-30" required aria-label="Preferred Service Date">
                                     <label for="lite_mode_23">Preferred Service Date</label>
                                 </div>
                             </div>
@@ -339,25 +340,32 @@
         function syncDateTime() {
             var dateInput = document.getElementById('lite_mode_23').value;
             var timeInput = document.getElementById('input_25').value;
-            if (dateInput && timeInput && timeInput !== 'No Preference') {
+            if (dateInput) {
                 var dateParts = dateInput.split('-');
                 var year = parseInt(dateParts[0], 10);
                 var month = parseInt(dateParts[1], 10);
                 var day = parseInt(dateParts[2], 10);
+                var formattedDate = `${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}-${year}`;
                 document.getElementById('input_23_preferred_month').value = month;
                 document.getElementById('input_23_preferred_day').value = day;
                 document.getElementById('input_23_preferred_year').value = year;
-                console.log('Submitted date values:', {
-                    month: month,
-                    day: day,
-                    year: year,
-                    time: timeInput
+                document.getElementById('input_23_full_date').value = formattedDate;
+                document.getElementById('input_23_preferred_service').value = formattedDate;
+                console.log('Submitted date values:', { 
+                    month: month, 
+                    day: day, 
+                    year: year, 
+                    full_date: formattedDate, 
+                    preferred_service: formattedDate, 
+                    time: timeInput 
                 });
             } else {
                 document.getElementById('input_23_preferred_month').value = '';
                 document.getElementById('input_23_preferred_day').value = '';
                 document.getElementById('input_23_preferred_year').value = '';
-                console.log('Submitted values: cleared (no date/time selected or No Preference)');
+                document.getElementById('input_23_full_date').value = '';
+                document.getElementById('input_23_preferred_service').value = '';
+                console.log('Submitted date values: cleared (no date selected)');
             }
         }
         document.getElementById('lite_mode_23').addEventListener('change', syncDateTime);
@@ -395,9 +403,9 @@
                 document.getElementById('lite_mode_23').focus();
                 return false;
             }
-            var minDate = new Date(2025, 5, 26);
+            var minDate = new Date(2025, 5, 30);
             if (dateTime < minDate) {
-                alert('Please select a date on or after June 26, 2025.');
+                alert('Please select a date on or after June 30, 2025.');
                 document.getElementById('lite_mode_23').focus();
                 return false;
             }
