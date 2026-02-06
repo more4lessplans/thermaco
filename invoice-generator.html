@@ -10,7 +10,7 @@
         body { font-family: 'Inter', sans-serif; background-color: #f9fafb; }
         .btn-primary { background-color: #81974A; color: white; transition: all 0.2s; }
         .btn-primary:hover { background-color: #6d813d; }
-        #main-content { display: none; } /* Hidden by default for security */
+        #main-content { display: none; }
     </style>
 </head>
 <body class="p-4 md:p-8">
@@ -34,7 +34,7 @@
                     </div>
                     <div class="md:col-span-2">
                         <label class="block text-sm font-semibold text-gray-700">Service Address</label>
-                        <input type="text" id="customer_address" required placeholder="Street, City, Postal Code" class="w-full mt-1 p-2 border rounded-md focus:ring-2 focus:ring-[#81974A] outline-none">
+                        <input type="text" id="customer_address" required class="w-full mt-1 p-2 border rounded-md focus:ring-2 focus:ring-[#81974A] outline-none">
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-gray-700">Invoice Date</label>
@@ -48,33 +48,27 @@
 
                 <hr class="border-gray-100">
 
-                <div>
-                    <div class="flex justify-between items-center mb-4">
-                        <h2 class="text-lg font-bold text-gray-800">Line Items</h2>
-                        <button type="button" onclick="addRow()" class="text-sm font-semibold text-[#81974A] hover:underline">+ Add Item</button>
-                    </div>
-                    
-                    <div id="itemsContainer" class="space-y-4">
-                        <div class="item-row grid grid-cols-1 md:grid-cols-12 gap-3 p-4 bg-gray-50 rounded-lg border border-gray-100 relative">
-                            <div class="md:col-span-5">
-                                <label class="text-xs font-bold text-gray-500 uppercase">Service/Item</label>
-                                <input type="text" name="item_name" required class="w-full mt-1 p-2 border rounded-md">
-                            </div>
-                            <div class="md:col-span-5">
-                                <label class="text-xs font-bold text-gray-500 uppercase">Description</label>
-                                <input type="text" name="item_desc" class="w-full mt-1 p-2 border rounded-md">
-                            </div>
-                            <div class="md:col-span-2">
-                                <label class="text-xs font-bold text-gray-500 uppercase">Price</label>
-                                <input type="number" step="0.01" name="item_price" required class="w-full mt-1 p-2 border rounded-md">
-                            </div>
+                <div id="itemsContainer" class="space-y-4">
+                    <div class="item-row grid grid-cols-1 md:grid-cols-12 gap-3 p-4 bg-gray-50 rounded-lg border border-gray-100 relative">
+                        <div class="md:col-span-5">
+                            <label class="text-xs font-bold text-gray-500 uppercase">Service</label>
+                            <input type="text" name="item_name" required class="w-full mt-1 p-2 border rounded-md">
+                        </div>
+                        <div class="md:col-span-5">
+                            <label class="text-xs font-bold text-gray-500 uppercase">Description</label>
+                            <input type="text" name="item_desc" class="w-full mt-1 p-2 border rounded-md">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="text-xs font-bold text-gray-500 uppercase">Price</label>
+                            <input type="number" step="0.01" name="item_price" required class="w-full mt-1 p-2 border rounded-md">
                         </div>
                     </div>
                 </div>
+                <button type="button" onclick="addRow()" class="text-sm font-semibold text-[#81974A]">+ Add Item</button>
 
                 <hr class="border-gray-100">
 
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
                     <div class="w-full md:w-1/3">
                         <label class="block text-sm font-semibold text-gray-700">Discount ($)</label>
                         <input type="number" id="discount" value="0" step="0.01" class="w-full mt-1 p-2 border rounded-md">
@@ -88,16 +82,10 @@
     </div>
 
     <script>
-        // 1. PASSWORD PROTECTION LOGIC
-        const pass = prompt("Enter password to access the Thermaco Invoice Portal:");
-        if (pass === "hvac") {
-            document.getElementById('main-content').style.display = "block";
-        } else {
-            alert("Access Denied.");
-            window.location.href = "https://thermaco.ca"; // Redirects away if wrong
-        }
+        const pass = prompt("Enter password:");
+        if (pass === "hvac") { document.getElementById('main-content').style.display = "block"; } 
+        else { window.location.href = "https://thermaco.ca"; }
 
-        // 2. FORM LOGIC
         const today = new Date().toISOString().split('T')[0];
         document.getElementById('invoice_date').value = today;
         document.getElementById('due_date').value = today;
@@ -112,27 +100,32 @@
         document.getElementById('invoiceForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
-            const invDate = document.getElementById('invoice_date').value;
-            
-            btn.disabled = true;
-            btn.innerText = "SYNCING...";
+            btn.disabled = true; btn.innerText = "SYNCING...";
 
             const names = Array.from(document.querySelectorAll('[name="item_name"]')).map(i => i.value);
-            const prices = Array.from(document.querySelectorAll('[name="item_price"]')).map(i => i.value);
+            const prices = Array.from(document.querySelectorAll('[name="item_price"]')).map(i => parseFloat(i.value) || 0);
             const descs = Array.from(document.querySelectorAll('[name="item_desc"]')).map(i => i.value);
-            const dates = names.map(() => invDate);
+            
+            // MATH ENGINE
+            const subtotal = prices.reduce((a, b) => a + b, 0);
+            const discount = parseFloat(document.getElementById('discount').value) || 0;
+            const tax = (subtotal - discount) * 0.13;
+            const total = (subtotal - discount) + tax;
 
             const payload = {
                 customer_name: document.getElementById('customer_name').value,
                 customer_email: document.getElementById('customer_email').value,
                 customer_address: document.getElementById('customer_address').value,
-                invoice_date: invDate,
+                invoice_date: document.getElementById('invoice_date').value,
                 due_date: document.getElementById('due_date').value,
-                discount: document.getElementById('discount').value || 0,
+                discount: discount.toFixed(2),
+                subtotal: subtotal.toFixed(2),
+                tax: tax.toFixed(2),
+                total: total.toFixed(2),
                 item_name: names,
                 item_price: prices,
                 item_desc: descs,
-                item_date: dates
+                item_date: names.map(() => document.getElementById('invoice_date').value)
             };
 
             try {
@@ -141,19 +134,9 @@
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload)
                 });
-
-                if (response.ok) {
-                    alert("Invoice Sent Successfully!");
-                    location.reload();
-                } else {
-                    alert("Error: Check Pipedream logs.");
-                }
-            } catch (err) {
-                alert("Connection failed.");
-            } finally {
-                btn.disabled = false;
-                btn.innerText = "Send Invoice";
-            }
+                if (response.ok) { alert("Sent!"); location.reload(); }
+            } catch (err) { alert("Failed."); } 
+            finally { btn.disabled = false; btn.innerText = "Send Invoice"; }
         });
     </script>
 </body>
