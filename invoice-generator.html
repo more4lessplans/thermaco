@@ -3,207 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thermaco | Invoice Admin</title>
+    <title>Thermaco Invoice Generator</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #fcfcfc; padding: 40px 20px; font-family: 'Inter', sans-serif; color: #46473D; }
-        .form-container { max-width: 850px; margin: 0 auto; background: white; padding: 40px; border-radius: 16px; border: 1px solid #e1e1e1; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
-        .input-label { display: block; font-size: 0.75rem; font-weight: 700; color: #717171; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
-        .form-input { width: 100%; padding: 0.75rem; border: 1px solid #ededed; border-radius: 8px; background-color: #f9f9f9; transition: all 0.2s; font-size: 0.95rem; }
-        .form-input:focus { outline: none; border-color: #81974A; background-color: #fff; ring: 2px ring-[#81974A]/10; }
-        .line-item { background: #fff; padding: 24px; border: 1px solid #ededed; border-radius: 12px; margin-bottom: 1.5rem; position: relative; transition: border-color 0.2s; }
-        .line-item:hover { border-color: #81974A; }
-        .section-title { font-size: 0.7rem; font-weight: 800; color: #81974A; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; margin-bottom: 20px; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f9fafb; }
+        .btn-primary { background-color: #81974A; color: white; transition: all 0.2s; }
+        .btn-primary:hover { background-color: #6d813d; }
     </style>
 </head>
-<body>
-
-<div class="form-container">
-    <div class="flex justify-between items-start mb-12">
-        <div>
-            <h1 class="text-2xl font-extrabold tracking-tight text-[#46473D]">Invoice Creator</h1>
-            <p class="text-gray-400 text-sm">Thermaco Internal Billing Portal</p>
-        </div>
-        <img src="main.png" alt="Logo" class="h-12 w-auto grayscale brightness-50">
-    </div>
-
-    <form id="invoiceForm">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-            <div>
-                <label class="input-label">Invoice Number</label>
-                <input type="text" name="invoice_id" placeholder="e.g. 7616510" class="form-input" required>
-            </div>
-            <div>
-                <label class="input-label">Workflow Status</label>
-                <select name="status" class="form-input font-medium text-[#81974A]">
-                    <option value="Send Now">Generate & Send Email</option>
-                    <option value="Draft">Save to Sheets Only</option>
-                </select>
-            </div>
-            <div>
-                <label class="input-label">Issue Date</label>
-                <input type="date" name="invoice_date" id="currentDate" class="form-input" required>
-            </div>
+<body class="p-4 md:p-8">
+    <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-xl overflow-hidden border border-gray-200">
+        <div class="p-6 border-b bg-gray-50 flex justify-between items-center">
+            <img src="https://more4lessplans.github.io/invoice-app/main.png" alt="Thermaco Logo" class="h-12">
+            <h1 class="text-xl font-bold text-gray-800">New Invoice</h1>
         </div>
 
-        <div class="mb-10">
-            <h2 class="section-title">Client Information</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <form id="invoiceForm" class="p-6 space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <label class="input-label">Customer Name</label>
-                    <input type="text" name="customer_name" placeholder="Contact Name" class="form-input" required>
+                    <label class="block text-sm font-semibold text-gray-700">Customer Name</label>
+                    <input type="text" id="customer_name" required class="w-full mt-1 p-2 border rounded-md focus:ring-2 focus:ring-[#81974A] outline-none">
                 </div>
                 <div>
-                    <label class="input-label">Email Address</label>
-                    <input type="email" name="customer_email" placeholder="client@example.com" class="form-input" required>
+                    <label class="block text-sm font-semibold text-gray-700">Customer Email</label>
+                    <input type="email" id="customer_email" required class="w-full mt-1 p-2 border rounded-md focus:ring-2 focus:ring-[#81974A] outline-none">
                 </div>
                 <div class="md:col-span-2">
-                    <label class="input-label">Billing Address</label>
-                    <textarea name="customer_address" rows="2" placeholder="Street, City, Province, Postal Code" class="form-input"></textarea>
+                    <label class="block text-sm font-semibold text-gray-700">Service Address</label>
+                    <input type="text" id="customer_address" required placeholder="Street, City, Postal Code" class="w-full mt-1 p-2 border rounded-md focus:ring-2 focus:ring-[#81974A] outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700">Invoice Date</label>
+                    <input type="date" id="invoice_date" required class="w-full mt-1 p-2 border rounded-md">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700">Due Date</label>
+                    <input type="date" id="due_date" required class="w-full mt-1 p-2 border rounded-md">
                 </div>
             </div>
-        </div>
 
-        <div class="mb-10">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="section-title mb-0 border-0">Services Rendered</h2>
-                <button type="button" onclick="addItem()" class="text-[#81974A] font-bold text-xs uppercase tracking-widest hover:text-[#46473D] transition">+ Add Line Item</button>
-            </div>
-            
-            <div id="itemsContainer">
-                <div class="line-item">
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
-                        <div class="md:col-span-1">
-                            <label class="input-label">Date</label>
-                            <input type="date" name="item_date[]" class="form-input item-date-sync">
+            <hr class="border-gray-100">
+
+            <div>
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-bold text-gray-800">Line Items</h2>
+                    <button type="button" onclick="addRow()" class="text-sm font-semibold text-[#81974A] hover:underline">+ Add Item</button>
+                </div>
+                
+                <div id="itemsContainer" class="space-y-4">
+                    <div class="item-row grid grid-cols-1 md:grid-cols-12 gap-3 p-4 bg-gray-50 rounded-lg border border-gray-100 relative">
+                        <div class="md:col-span-4">
+                            <label class="text-xs font-bold text-gray-500 uppercase">Service/Item</label>
+                            <input type="text" name="item_name" required class="w-full mt-1 p-2 border rounded-md">
+                        </div>
+                        <div class="md:col-span-4">
+                            <label class="text-xs font-bold text-gray-500 uppercase">Description</label>
+                            <input type="text" name="item_desc" class="w-full mt-1 p-2 border rounded-md">
                         </div>
                         <div class="md:col-span-2">
-                            <label class="input-label">Service Item</label>
-                            <input type="text" name="item_name[]" placeholder="Description of service" class="form-input" required>
+                            <label class="text-xs font-bold text-gray-500 uppercase">Price</label>
+                            <input type="number" step="0.01" name="item_price" required class="w-full mt-1 p-2 border rounded-md">
                         </div>
-                        <div class="md:col-span-1">
-                            <label class="input-label">Price ($)</label>
-                            <input type="number" name="item_price[]" step="0.01" placeholder="0.00" class="form-input" required>
+                        <div class="md:col-span-2">
+                            <label class="text-xs font-bold text-gray-500 uppercase">Date</label>
+                            <input type="date" name="item_date" required class="w-full mt-1 p-2 border rounded-md">
                         </div>
-                    </div>
-                    <div>
-                        <label class="input-label">Detailed Notes (Visible on PDF)</label>
-                        <textarea name="item_desc[]" rows="1" placeholder="Optional details..." class="form-input"></textarea>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 pt-8 border-t border-gray-100">
-            <div>
-                <label class="input-label">Manual Discount ($)</label>
-                <input type="number" name="discount" step="0.01" value="0.00" class="form-input">
-                
-                <div class="mt-6 flex items-center p-4 bg-[#F8F9F5] rounded-lg border border-[#81974A]/20">
-                    <input type="checkbox" id="cc_toggle" name="enable_cc" class="w-4 h-4 accent-[#81974A]">
-                    <label for="cc_toggle" class="ml-3 text-xs font-bold text-[#46473D] uppercase tracking-wide cursor-pointer">Include CC Payment Link</label>
+            <hr class="border-gray-100">
+
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div class="w-full md:w-1/3">
+                    <label class="block text-sm font-semibold text-gray-700">Discount ($)</label>
+                    <input type="number" id="discount" value="0" step="0.01" class="w-full mt-1 p-2 border rounded-md">
                 </div>
+                <button type="submit" id="submitBtn" class="w-full md:w-auto px-8 py-3 btn-primary font-bold rounded-lg shadow-md uppercase tracking-wider">
+                    Create Invoice
+                </button>
             </div>
-            <div>
-                <label class="input-label">Due Date</label>
-                <input type="date" name="due_date" id="dueDate" class="form-input" required>
-                <div class="mt-4">
-                    <label class="input-label text-gray-400">Internal Office Notes</label>
-                    <textarea name="internal_notes" rows="2" placeholder="Private notes for records..." class="form-input text-xs"></textarea>
-                </div>
-            </div>
-        </div>
+        </form>
+    </div>
 
-        <button type="submit" id="submitBtn" class="w-full bg-[#46473D] text-white font-extrabold py-5 rounded-xl mt-12 hover:bg-black shadow-xl transition-all duration-300 tracking-widest text-sm uppercase">
-            Finalize & Transmit Invoice
-        </button>
-    </form>
-</div>
+    <script>
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('invoice_date').value = today;
+        document.getElementById('due_date').value = today;
 
-<script>
-    // Set default dates to Today
-    const today = new Date().toISOString().split('T')[0];
-    document.getElementById('currentDate').value = today;
-    document.getElementById('dueDate').value = today;
-    document.querySelectorAll('.item-date-sync').forEach(el => el.value = today);
-    
-    function addItem() {
-        const container = document.getElementById('itemsContainer');
-        const div = document.createElement('div');
-        const currentSelectedDate = document.getElementById('currentDate').value;
-        div.className = 'line-item';
-        div.innerHTML = `
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
-                <div class="md:col-span-1"><input type="date" name="item_date[]" class="form-input" value="${currentSelectedDate}"></div>
-                <div class="md:col-span-2"><input type="text" name="item_name[]" placeholder="Service Name" class="form-input" required></div>
-                <div class="md:col-span-1"><input type="number" name="item_price[]" step="0.01" placeholder="0.00" class="form-input" required></div>
-            </div>
-            <div><textarea name="item_desc[]" rows="1" placeholder="Details..." class="form-input"></textarea></div>
-            <button type="button" onclick="this.parentElement.remove()" class="text-red-400 text-[10px] font-bold mt-4 uppercase tracking-widest hover:text-red-600 transition">Remove</button>
-        `;
-        container.appendChild(div);
-    }
+        function addRow() {
+            const container = document.getElementById('itemsContainer');
+            const newRow = container.children[0].cloneNode(true);
+            newRow.querySelectorAll('input').forEach(input => input.value = '');
+            newRow.querySelector('[name="item_date"]').value = today;
+            container.appendChild(newRow);
+        }
 
-    document.getElementById('invoiceForm').onsubmit = async (e) => {
-        e.preventDefault();
-        const btn = document.getElementById('submitBtn');
-        const originalBtnText = btn.innerText;
-        
-        btn.disabled = true;
-        btn.innerText = "TRANSMITTING DATA...";
-        btn.style.opacity = "0.7";
+        document.getElementById('invoiceForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.innerText = "SYNCING...";
 
-        const formData = new FormData(e.target);
-        const data = {};
+            const names = Array.from(document.querySelectorAll('[name="item_name"]')).map(i => i.value);
+            const prices = Array.from(document.querySelectorAll('[name="item_price"]')).map(i => i.value);
+            const descs = Array.from(document.querySelectorAll('[name="item_desc"]')).map(i => i.value);
+            const dates = Array.from(document.querySelectorAll('[name="item_date"]')).map(i => i.value);
 
-        formData.forEach((value, key) => {
-            if (key.includes('[]')) {
-                const cleanKey = key.replace('[]', '');
-                if (!data[cleanKey]) data[cleanKey] = [];
-                data[cleanKey].push(value);
-            } else if (key === 'enable_cc') {
-                data[key] = true;
-            } else {
-                data[key] = value;
+            const payload = {
+                customer_name: document.getElementById('customer_name').value,
+                customer_email: document.getElementById('customer_email').value,
+                customer_address: document.getElementById('customer_address').value,
+                invoice_date: document.getElementById('invoice_date').value,
+                due_date: document.getElementById('due_date').value,
+                discount: document.getElementById('discount').value || 0,
+                item_name: names,
+                item_price: prices,
+                item_desc: descs,
+                item_date: dates
+            };
+
+            try {
+                const response = await fetch("https://eoo3wwe7a3mfvp9.m.pipedream.net", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    alert("Invoice Generated Successfully!");
+                    location.reload();
+                } else {
+                    alert("Error: Check Pipedream logs.");
+                }
+            } catch (err) {
+                alert("Connection failed.");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Create Invoice";
             }
         });
-        
-        if (!data.enable_cc) data.enable_cc = false;
-
-        try {
-            const response = await fetch('https://eo2vkqauvbx2pff.m.pipedream.net', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
-
-            if (response.ok) {
-                btn.style.backgroundColor = "#81974A";
-                btn.style.opacity = "1";
-                btn.innerText = "SUCCESS ✓ INVOICE SENT";
-                
-                setTimeout(() => {
-                    e.target.reset();
-                    document.getElementById('itemsContainer').innerHTML = '';
-                    addItem();
-                    document.getElementById('currentDate').value = new Date().toISOString().split('T')[0];
-                    document.getElementById('dueDate').value = new Date().toISOString().split('T')[0];
-                    btn.style.backgroundColor = "#46473D";
-                    btn.innerText = originalBtnText;
-                    btn.disabled = false;
-                }, 3000);
-            } else {
-                throw new Error('Transmission Failed');
-            }
-        } catch (err) {
-            alert('Error: ' + err.message);
-            btn.disabled = false;
-            btn.innerText = originalBtnText;
-            btn.style.opacity = "1";
-        }
-    };
-</script>
-
+    </script>
 </body>
 </html>
