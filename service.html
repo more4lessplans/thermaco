@@ -35,6 +35,18 @@
         .form-floating .form-select {
             height: calc(3.5rem + 2px);
         }
+        /* Mobile adjustment to prevent label cutoff */
+        @media (max-width: 576px) {
+            .form-floating > label {
+                font-size: 0.85rem;
+                padding-top: 0.8rem;
+            }
+            .form-floating > .form-control:focus ~ label,
+            .form-floating > .form-control:not(:placeholder-shown) ~ label,
+            .form-floating > .form-select ~ label {
+                transform: scale(.85) translateY(-0.75rem) translateX(0.15rem);
+            }
+        }
         [id*="input_23_preferred"], [id*="input_25_preferred"] {
             display: none;
         }
@@ -90,7 +102,7 @@
                     </p>
                 </div>
                 <div class="col-lg-6">
-                    <form method="POST" action="https://submit.jotform.com/submit/242634271405047" enctype="multipart/form-data" id="242634271405047" onsubmit="return validateAppointment()">
+                    <form method="POST" action="https://submit.jotform.com/submit/242634271405047" enctype="multipart/form-data" id="242634271405047">
                         <input type="hidden" name="formID" value="242634271405047">
                         <input type="hidden" name="q23_preferredService23[month]" id="input_23_preferred_month">
                         <input type="hidden" name="q23_preferredService23[day]" id="input_23_preferred_day">
@@ -172,7 +184,7 @@
                             <div class="col-12">
                                 <div class="form-floating">
                                     <textarea class="form-control" name="q11_yourInquiry" id="input_11" placeholder="Issue" style="height: 120px" required></textarea>
-                                    <label for="input_11">Brief Description of Issue</label>
+                                    <label for="input_11">Brief Description</label>
                                 </div>
                             </div>
                             <div class="col-12">
