@@ -7,29 +7,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     
     <meta content="local HVAC technician, gas contractor Schomberg, furnace repair Tottenham, AC installation Beeton, Bradford HVAC service, owner-operator HVAC Ontario, emergency furnace repair, licensed gas fitter, white glove HVAC service, Thermaco HVAC" name="keywords">
-    
     <meta content="Thermaco is your local, owner-operated HVAC partner. Experience professional white-glove service directly from a licensed expert specializing in furnace repair, AC installation, and air quality in Schomberg, Tottenham, and the GTA." name="description">
-
-    <meta property="og:title" content="Thermaco HVAC | Local Licensed Owner-Operator">
-    <meta property="og:description" content="Deal directly with the expert. Professional HVAC solutions in Schomberg, Tottenham, Beeton, and the GTA. 24/7 emergency service and high-end craftsmanship.">
-    <meta property="og:image" content="https://thermaco.ca/img/social-preview.jpg">
-    <meta property="og:url" content="https://thermaco.ca">
-    <meta property="og:type" content="website">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Thermaco HVAC | Professional Local Service">
-    <meta name="twitter:description" content="Expert heating and cooling in Schomberg and the GTA. Licensed owner-operator service with a focus on quality and reliability.">
-    <meta name="twitter:image" content="https://thermaco.ca/img/social-preview.jpg">
-
-       <meta name="theme-color" content="#45473D">
-
-    <link rel="apple-touch-icon" sizes="180x180" href="/img/favi/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/img/favi/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/img/favi/favicon-16x16.png">
-    <link rel="manifest" href="/img/favi/site.webmanifest">
-    <link rel="mask-icon" href="/img/favi/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,27 +15,59 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
     <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        /* 1. Prevent text wrapping while allowing scaling */
+        .non-breaking-list p {
+            white-space: nowrap !important;
+            font-size: clamp(0.85rem, 4vw, 1.1rem); /* Dynamically shrinks on small screens */
+            margin-bottom: 0.5rem;
+        }
+
+        /* 2. Responsive Flexbox for the Experience Box */
+        .experience-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap; /* Allows stacking on very small screens */
+            gap: 1.5rem;
+        }
+
+        .experience-badge {
+            min-width: 140px;
+            text-align: center;
+        }
+
+        /* 3. Center alignment for the whole section */
+        .content-center-max {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 576px) {
+            .experience-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .non-breaking-list {
+                text-align: left; /* Keeps checkmarks aligned even when stacked */
+                margin-left: 0 !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <div id="spinner"
-        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
     </div>
 
     <div class="container-fluid bg-dark px-0">
         <div class="row g-0 d-none d-lg-flex">
-            <div class="col-lg-6 ps-5 text-start">
-                <div class="h-100 d-inline-flex align-items-center text-white">
-                </div>
-            </div>
-            <div class="col-lg-6 text-end">
+            <div class="col-lg-12 text-end">
                 <div class="h-100 topbar-right d-inline-flex align-items-center text-white py-2 px-5">
                     <span class="fs-5 fw-bold me-2"><i class="fa fa-phone-alt me-2"></i>Direct Line:</span>
                     <span class="fs-5 fw-bold">289·890·2222</span>
@@ -67,15 +77,15 @@
     </div>
 
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top py-0 pe-5">
-        <a href="/" class="navbar-brand ps-5 me-0" style="display: flex; align-items: center; justify-content: center;">
-            <img src="img/logo.png" alt="Thermaco Logo" style="max-height: 20px; width: auto; margin: 0; padding: 0;">
+        <a href="/" class="navbar-brand ps-5 me-0" style="display: flex; align-items: center;">
+            <img src="img/logo.png" alt="Thermaco Logo" style="max-height: 20px; width: auto;">
         </a>
         <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="/about" class="nav-item nav-link">About Me</a>
+                <a href="/about" class="nav-item nav-link">About</a>
                 <a href="/services" class="nav-item nav-link">Services</a>
                 <a href="/contact" class="nav-item nav-link">Contact</a>
                 <a href="/blog" class="nav-item nav-link">HVAC Tips</a>
@@ -86,9 +96,9 @@
 
     <div class="container-fluid px-0 mb-5">
         <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner position-relative">
+            <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" src="img/carousel-2.jpg" alt="Local HVAC Professional">
+                    <img class="w-100" src="img/carousel-2.jpg" alt="Local HVAC" style="height: 50vh; object-fit: cover;">
                     <div class="carousel-caption">
                         <div class="container">
                             <div class="row justify-content-center">
@@ -107,30 +117,18 @@
 
     <div class="container-xxl py-5">
         <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-6">
-                    <div class="row gx-3 h-100">
-                        <div class="col-6 align-self-start wow fadeInUp hide-on-mobile" data-wow-delay="0.1s">
-                            <img class="img-fluid" src="img/about-1.jpg">
-                        </div>
-                        <div class="col-6 align-self-end wow fadeInDown hide-on-mobile" data-wow-delay="0.1s">
-                            <img class="img-fluid" src="img/about-2.jpg">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 content-center-max text-center wow fadeIn" data-wow-delay="0.5s">
                     <h1 class="display-5 mb-4">Direct Expertise, No Middlemen</h1>
-                    <p class="mb-4">As an owner-operator, I personally handle every service call and installation. My mission is simple: provide Schomberg and the surrounding area with elite technical skill and honest, white-glove professionalism.
-                    </p>
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="flex-shrink-0 bg-primary p-4">
-                            <h1 class="display-2">10</h1>
-                            <h5 class="text-white">Years of</h5>
-                            <h5 class="text-white">Direct Experience</h5>
+                    <p class="mb-5 fs-5">As an owner-operator, I personally handle every service call and installation. My mission is simple: provide the local community with elite technical skill and honest, white-glove professionalism.</p>
+                    
+                    <div class="experience-container">
+                        <div class="experience-badge bg-primary p-4 shadow">
+                            <h1 class="display-2 text-white mb-0">10</h1>
+                            <p class="text-white fw-bold text-uppercase mb-0" style="letter-spacing: 1px;">Years of Experience</p>
                         </div>
-                        <div class="ms-4">
+                        <div class="non-breaking-list ms-md-2">
                             <p><i class="fa fa-check text-primary me-2"></i>Owner-Operated Care</p>
-                            <p><i class="fa fa-check text-primary me-2"></i>High-Efficiency Installs</p>
                             <p><i class="fa fa-check text-primary me-2"></i>Licensed Gas & AC Expert</p>
                             <p><i class="fa fa-check text-primary me-2"></i>Transparent Local Pricing</p>
                             <p class="mb-0"><i class="fa fa-check text-primary me-2"></i>24/7 Priority Repair</p>
@@ -140,49 +138,44 @@
             </div>
         </div>
     </div>
-    
-    <div class="container-fluid bg-dark footer mt-5 py-5 wow fadeIn" data-wow-delay="0.1s">
+
+    <footer class="container-fluid bg-dark footer mt-5 py-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
-                    <h5 class="text-white mb-4">Thermaco Local Care</h5>
+                    <h5 class="text-white mb-4">Thermaco HVAC</h5>
                     <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>289·890·2222</p>
                     <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@thermaco.ca</p>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Schomberg, Ontario</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Schomberg, ON</p>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h5 class="text-white mb-4">Direct Support</h5>
                     <a class="btn btn-link" href="/contact">Ask Me Anything</a>
                     <a class="btn btn-link" href="/support">Technical Advice</a>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="text-white mb-4">Service Availability</h5>
+                <div class="col-lg-3 col-md-6 text-white">
+                    <h5 class="text-white mb-4">Business Hours</h5>
                     <p class="mb-1">Mon - Fri: 9am - 7pm</p>
                     <p class="mb-1">Sat: 9am - 12pm</p>
                     <hr class="border-light">
-                    <p class="mb-1 text-light"><strong>24/7 Emergency Repairs</strong></p>
-                    <h6 class="text-light">Available for Schomberg & Area</h6>
+                    <p class="mb-0"><strong>24/7 Emergency Repairs</strong></p>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h5 class="text-white mb-4">Expert Insights</h5>
-                    <p>Get professional HVAC maintenance tips directly from my van to your inbox.</p>
-                    <div class="position-relative w-100">
-                        <form method="post" action="https://submit.jotform.com/submit/240495998882075">
+                    <h5 class="text-white mb-4"> Newsletter Sign-Up</h5>
+                    <form method="post" action="https://submit.jotform.com/submit/240495998882075">
+                        <div class="position-relative w-100">
                             <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5 text-white" type="email" name="q4_email" placeholder="Your Email" required>
                             <button type="submit" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Join</button>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
 </body>
 
