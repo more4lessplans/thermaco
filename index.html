@@ -23,7 +23,7 @@
         /* 1. Prevent text wrapping while allowing scaling */
         .non-breaking-list p {
             white-space: nowrap !important;
-            font-size: clamp(0.85rem, 4vw, 1.1rem); /* Dynamically shrinks on small screens */
+            font-size: clamp(0.85rem, 4vw, 1.1rem); 
             margin-bottom: 0.5rem;
         }
 
@@ -32,7 +32,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-wrap: wrap; /* Allows stacking on very small screens */
+            flex-wrap: wrap; 
             gap: 1.5rem;
         }
 
@@ -47,13 +47,32 @@
             margin: 0 auto;
         }
 
+        /* FIX: Header Mobile Display & Grey Bar Removal */
+        #header-carousel .carousel-item {
+            background: #ffffff; /* Matches body to hide background gaps */
+        }
+
+        #header-carousel img {
+            height: 50vh;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            #header-carousel img {
+                height: 400px; /* Force a consistent height on mobile */
+            }
+            .carousel-caption h1 {
+                font-size: 2.5rem !important; /* Scale down the display-1 on mobile */
+            }
+        }
+
         @media (max-width: 576px) {
             .experience-container {
                 flex-direction: column;
                 text-align: center;
             }
             .non-breaking-list {
-                text-align: left; /* Keeps checkmarks aligned even when stacked */
+                text-align: left; 
                 margin-left: 0 !important;
             }
         }
@@ -98,7 +117,7 @@
         <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" src="img/carousel-2.jpg" alt="Local HVAC" style="height: 50vh; object-fit: cover;">
+                    <img class="w-100" src="img/carousel-2.jpg" alt="Local HVAC">
                     <div class="carousel-caption">
                         <div class="container">
                             <div class="row justify-content-center">
