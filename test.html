@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<!-- ============================================================
+     PRIMARY SEO META
+============================================================ -->
+<title>Thermaco HVAC Solutions | 24/7 Emergency Furnace &amp; AC Repair — Schomberg, Tottenham, New Tecumseth, King City</title>
+<meta name="description" content="Owner-operated HVAC contractor serving Schomberg, Tottenham, New Tecumseth, King City, Alliston, Bradford, Beeton &amp; Bond Head. 24/7 emergency furnace &amp; AC repair, high-efficiency heat pump installs. Call direct: 289-890-2222.">
+<meta name="keywords" content="HVAC Schomberg, furnace repair Tottenham, emergency heating New Tecumseth, air conditioning King City, heat pump install Alliston, HVAC contractor Bradford, furnace repair Beeton, Bond Head HVAC">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.thermaco.ca/">
+
+<!-- OpenGraph -->
+<meta property="og:type" content="business.business">
+<meta property="og:title" content="Thermaco HVAC Solutions — Owner-Operated Heating &amp; Cooling, Schomberg ON">
+<meta property="og:description" content="24/7 emergency repairs and high-efficiency installs across King Township, New Tecumseth &amp; surrounding Ontario towns. Direct line, zero subcontractors: 289-890-2222.">
+<meta property="og:url" content="https://www.thermaco.ca/">
+<meta property="og:image" content="https://www.thermaco.ca/assets/furnace-banner.jpeg">
+<meta property="og:locale" content="en_CA">
+<meta property="business:contact_data:street_address" content="Schomberg, ON">
+<meta property="business:contact_data:locality" content="Schomberg">
+<meta property="business:contact_data:region" content="ON">
+<meta property="business:contact_data:country_name" content="Canada">
+<meta property="business:contact_data:phone_number" content="+1-289-890-2222">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Thermaco HVAC Solutions — Schomberg, ON">
+<meta name="twitter:description" content="Owner-operated. 24/7 emergency HVAC repair. Call direct: 289-890-2222.">
+
+<!-- ============================================================
+     LOCAL BUSINESS SCHEMA (JSON-LD)
+============================================================ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HVACBusiness",
+  "name": "Thermaco HVAC Solutions",
+  "image": "https://www.thermaco.ca/assets/furnace-banner.jpeg",
+  "telephone": "+1-289-890-2222",
+  "priceRange": "$$",
+  "url": "https://www.thermaco.ca/",
+  "description": "Owner-operated HVAC company providing 24/7 emergency furnace and air conditioning repair, plus high-efficiency heat pump and furnace installation across King Township, New Tecumseth, and surrounding Ontario communities.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Schomberg",
+    "addressRegion": "ON",
+    "addressCountry": "CA"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 44.0801,
+    "longitude": -79.6858
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+      "opens": "00:00",
+      "closes": "23:59",
+      "description": "24/7 emergency service"
+    }
+  ],
+  "areaServed": [
+    { "@type": "Place", "name": "Schomberg, ON" },
+    { "@type": "Place", "name": "Tottenham, ON" },
+    { "@type": "Place", "name": "New Tecumseth, ON" },
+    { "@type": "Place", "name": "King City, ON" },
+    { "@type": "Place", "name": "Alliston, ON" },
+    { "@type": "Place", "name": "Bradford, ON" },
+    { "@type": "Place", "name": "Beeton, ON" },
+    { "@type": "Place", "name": "Bond Head, ON" }
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "87",
+    "bestRating": "5"
+  },
+  "makesOffer": [
+    {
+      "@type": "Offer",
+      "itemOffered": { "@type": "Service", "name": "Emergency Furnace Repair" }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": { "@type": "Service", "name": "Emergency Air Conditioning Repair" }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": { "@type": "Service", "name": "High-Efficiency Heat Pump Installation" }
+    }
+  ]
+}
+</script>
+
+<!-- ============================================================
+     FONTS
+============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- ============================================================
+     TAILWIND CDN + CONFIG
+============================================================ -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: {
+            DEFAULT: '#45483D',
+            50:  '#f2f3ef',
+            100: '#e2e4d9',
+            200: '#c5c9b4',
+            300: '#a4aa8b',
+            400: '#7d8365',
+            500: '#5f6349',
+            600: '#4b4e3a',
+            700: '#45483D',
+            800: '#33352c',
+            900: '#22231d'
+          },
+          moss: {
+            DEFAULT: '#82983A',
+            50:  '#f4f7ea',
+            100: '#e6edcd',
+            200: '#cddb9d',
+            300: '#b1c66c',
+            400: '#9bb64c',
+            500: '#82983A',
+            600: '#68792e',
+            700: '#4f5c24',
+            800: '#3a4419',
+            900: '#272d10'
+          },
+          paper: '#FAF9F4'
+        },
+        fontFamily: {
+          display: ['"Fraunces"', 'ui-serif', 'Georgia', 'serif'],
+          sans: ['"Inter"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace']
+        }
+      }
+    }
+  }
+</script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { background-color: #FAF9F4; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(14px); animation: reveal .7s cubic-bezier(.16,1,.3,1) forwards; }
+    .reveal-1 { animation-delay: .05s; }
+    .reveal-2 { animation-delay: .18s; }
+    .reveal-3 { animation-delay: .31s; }
+    .reveal-4 { animation-delay: .44s; }
+    @keyframes reveal { to { opacity: 1; transform: translateY(0); } }
+  }
+
+  [x-cloak] { display: none !important; }
+
+  .grain::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .focus-ring:focus-visible {
+    outline: 2px solid #82983A;
+    outline-offset: 3px;
+  }
+</style>
+</head>
+
+<body class="font-sans text-ink-800 antialiased">
+
+<!-- ============================================================
+     SKIP LINK
+============================================================ -->
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-ink focus:text-white focus:px-4 focus:py-2 focus:rounded-full">Skip to content</a>
+
+<!-- ============================================================
+     TOP UTILITY BAR
+============================================================ -->
+<div class="bg-ink text-paper text-xs sm:text-sm">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 py-2 flex items-center justify-between">
+    <p class="flex items-center gap-2">
+      <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-moss-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-moss-400"></span>
+      </span>
+      Answering calls now &mdash; Schomberg &amp; King Township
+    </p>
+    <a href="tel:2898902222" class="font-semibold tracking-wide hover:text-moss-300 transition-colors focus-ring rounded">289-890-2222</a>
+  </div>
+</div>
+
+<!-- ============================================================
+     HEADER / NAV
+============================================================ -->
+<header class="sticky top-0 z-40 bg-paper/90 backdrop-blur-md border-b border-ink-100">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
+    <a href="#main" class="font-display text-lg sm:text-xl font-semibold tracking-tight text-ink-700">
+      Thermaco <span class="text-moss-600">HVAC</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-ink-600">
+      <a href="#savings" class="hover:text-moss-600 transition-colors focus-ring rounded">Savings Estimate</a>
+      <a href="#about" class="hover:text-moss-600 transition-colors focus-ring rounded">About Us</a>
+      <a href="#emergency" class="hover:text-moss-600 transition-colors focus-ring rounded">Emergency</a>
+      <a href="#areas" class="hover:text-moss-600 transition-colors focus-ring rounded">Service Areas</a>
+    </nav>
+    <a href="tel:2898902222" class="inline-flex items-center gap-2 rounded-full bg-ink text-paper text-sm font-semibold px-4 py-2.5 hover:bg-ink-600 transition-colors focus-ring">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Call Direct
+    </a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============================================================
+     DYNAMIC SEASONAL HERO
+============================================================ -->
+<section
+  x-data="{
+    season: 'shoulder',
+    label: '',
+    sub: '',
+    img: '',
+    init() {
+      const month = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Toronto', month: 'numeric' }).format(new Date());
+      const m = parseInt(month, 10);
+      if (m === 6 || m === 7 || m === 8) {
+        this.season = 'summer';
+        this.label = 'High-Efficiency Cooling, Installed Right';
+        this.sub = 'Beat the Ontario heat with a quiet, high-SEER system sized correctly for your home &mdash; not oversold.';
+        this.img = '/assets/heat-pump-banner.jpeg';
+      } else if (m === 11 || m === 12 || m === 1 || m === 2 || m === 3) {
+        this.season = 'winter';
+        this.label = 'Furnace &amp; Heat Pump Season Is Here';
+        this.sub = 'Reliable heat before the deep freeze hits. Furnace tune-ups, replacements, and hybrid heat pump installs.';
+        this.img = '/assets/furnace-banner.jpeg';
+      } else {
+        this.season = 'shoulder';
+        this.label = 'Comfort You Can Call Directly';
+        this.sub = 'The right time to plan your system upgrade &mdash; before the next heat wave or cold snap arrives.';
+        this.img = '';
+      }
+    }
+  }"
+  x-init="init()"
+  class="relative overflow-hidden"
+>
+  <!-- Background image layer (seasonal) -->
+  <div class="absolute inset-0 bg-ink-800">
+    <template x-if="img">
+      <img :src="img" alt="Seasonal HVAC service promotion" class="w-full h-full object-cover" onerror="this.style.display='none'">
+    </template>
+    <template x-if="!img">
+      <div class="w-full h-full bg-gradient-to-br from-ink-700 via-ink-800 to-moss-800"></div>
+    </template>
+  </div>
+  <!-- Dark overlay + blur so type stays focal -->
+  <div class="absolute inset-0 bg-ink-900/70 backdrop-blur-[2px]"></div>
+  <div class="absolute inset-0 grain"></div>
+
+  <div class="relative max-w-7xl mx-auto px-5 sm:px-8 pt-16 pb-20 sm:pt-24 sm:pb-28">
+    <div class="max-w-3xl">
+      <p class="reveal reveal-1 inline-flex items-center gap-2 text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] text-moss-300 mb-6">
+        <span x-text="season === 'summer' ? 'Summer Cooling Promo' : season === 'winter' ? 'Winter Heating Promo' : 'Schomberg, Ontario &middot; Owner-Operated'"></span>
+      </p>
+
+      <h1 class="reveal reveal-2 font-display text-4xl sm:text-6xl leading-[1.05] font-semibold text-paper tracking-tight" x-text="label"></h1>
+
+      <p class="reveal reveal-3 mt-6 text-lg sm:text-xl text-ink-100/90 max-w-xl" x-text="sub"></p>
+
+      <div class="reveal reveal-4 mt-10 flex flex-col sm:flex-row gap-4">
+        <a href="tel:2898902222" class="inline-flex items-center justify-center gap-2 rounded-full bg-moss-500 text-ink-900 font-semibold px-7 py-4 text-base hover:bg-moss-400 active:scale-[0.98] transition-all shadow-lg shadow-moss-900/30 focus-ring">
+          Call Direct: 289-890-2222
+        </a>
+        <a href="#quote" class="inline-flex items-center justify-center gap-2 rounded-full border border-paper/30 text-paper font-semibold px-7 py-4 text-base hover:bg-paper/10 transition-colors focus-ring">
+          Get a Free Quote
+        </a>
+      </div>
+
+      <!-- 5-star verified badge -->
+      <div class="reveal reveal-4 mt-10 inline-flex items-center gap-3 rounded-2xl bg-paper/10 border border-paper/15 px-5 py-3">
+        <div class="flex gap-0.5 text-moss-300">
+          <template x-for="i in 5" :key="i">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.958a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.363 1.118l1.287 3.957c.3.922-.755 1.688-1.538 1.118l-3.367-2.447a1 1 0 00-1.176 0l-3.367 2.447c-.783.57-1.838-.196-1.538-1.118l1.287-3.957a1 1 0 00-.363-1.118L2.062 9.385c-.783-.57-.38-1.81.588-1.81h4.163a1 1 0 00.95-.69l1.286-3.958z"/></svg>
+          </template>
+        </div>
+        <p class="text-sm text-paper/90"><span class="font-semibold">5.0</span> rated &middot; verified by homeowners across King Township</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SAVINGS CALCULATOR
+============================================================ -->
+<section id="savings" class="max-w-7xl mx-auto px-5 sm:px-8 py-20 sm:py-28">
+  <div class="grid lg:grid-cols-2 gap-14 items-start">
+
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-moss-600 mb-4">Savings Estimate</p>
+      <h2 class="font-display text-3xl sm:text-4xl font-semibold text-ink-800 leading-tight">
+        See what a high-efficiency install actually saves you.
+      </h2>
+      <p class="mt-5 text-ink-500 text-lg max-w-md">
+        Move the sliders to match your home and current system. This is a directional estimate &mdash; your free in-home quote gives you the exact number.
+      </p>
+
+      <ul class="mt-10 space-y-4">
+        <li class="flex items-start gap-3">
+          <span class="mt-1 h-1.5 w-1.5 rounded-full bg-moss-500 shrink-0"></span>
+          <span class="text-ink-600">Based on average Ontario energy rates and system efficiency gains.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="mt-1 h-1.5 w-1.5 rounded-full bg-moss-500 shrink-0"></span>
+          <span class="text-ink-600">Older systems (15&plus; years) typically show the largest gains.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="mt-1 h-1.5 w-1.5 rounded-full bg-moss-500 shrink-0"></span>
+          <span class="text-ink-600">Rebate eligibility reviewed at no cost during your quote.</span>
+        </li>
+      </ul>
+    </div>
+
+    <div
+      x-data="{
+        sqft: 1800,
+        age: 12,
+        get savings() {
+          const sizeFactor = this.sqft / 1800;
+          const ageFactor = Math.min(this.age / 15, 1.6);
+          const base = 340;
+          return Math.round(base * sizeFactor * ageFactor);
+        },
+        get pct() {
+          return Math.min(Math.round((this.age / 25) * 38) + 6, 44);
+        }
+      }"
+      class="rounded-3xl bg-ink-900 text-paper p-8 sm:p-10 shadow-2xl shadow-ink-900/20"
+    >
+      <p class="text-sm text-ink-100/70">Estimated annual savings</p>
+      <p class="font-display text-5xl sm:text-6xl font-semibold mt-2 mb-1 text-moss-300">
+        $<span x-text="savings.toLocaleString()"></span>
+        <span class="text-lg font-sans font-medium text-ink-100/60">/ yr</span>
+      </p>
+      <p class="text-sm text-ink-100/60 mb-10">~<span x-text="pct"></span>% lower energy costs vs. your current system</p>
+
+      <div class="space-y-8">
+        <div>
+          <div class="flex justify-between text-sm mb-3">
+            <label for="sqft" class="text-ink-100/80">Home size</label>
+            <span class="font-mono text-moss-300" x-text="sqft.toLocaleString() + ' sq ft'"></span>
+          </div>
+          <input id="sqft" type="range" min="800" max="4000" step="50" x-model.number="sqft"
+            class="w-full h-2 rounded-full appearance-none bg-ink-700 accent-moss-500 cursor-pointer focus-ring">
+        </div>
+
+        <div>
+          <div class="flex justify-between text-sm mb-3">
+            <label for="age" class="text-ink-100/80">Age of current system</label>
+            <span class="font-mono text-moss-300" x-text="age + (age === 1 ? ' year' : ' years')"></span>
+          </div>
+          <input id="age" type="range" min="0" max="25" step="1" x-model.number="age"
+            class="w-full h-2 rounded-full appearance-none bg-ink-700 accent-moss-500 cursor-pointer focus-ring">
+        </div>
+      </div>
+
+      <a href="#quote" class="mt-10 flex items-center justify-center gap-2 w-full rounded-full bg-moss-500 text-ink-900 font-semibold px-6 py-4 hover:bg-moss-400 active:scale-[0.98] transition-all focus-ring">
+        Get My Exact Number &mdash; Free Quote
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ABOUT / WHITE GLOVE STANDARDS
+============================================================ -->
+<section id="about" class="bg-ink-50 border-y border-ink-100">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 py-20 sm:py-28">
+    <div class="grid lg:grid-cols-12 gap-14">
+      <div class="lg:col-span-5">
+        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-moss-600 mb-4">White Glove Standards</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-semibold text-ink-800 leading-tight">
+          One name on the truck. One person accountable.
+        </h2>
+        <p class="mt-5 text-ink-500 text-lg">
+          Thermaco is owner-operated &mdash; the person who quotes your job is the person standing in your basement. No subcontractors, no call centre, no handoffs.
+        </p>
+      </div>
+
+      <div class="lg:col-span-7 grid sm:grid-cols-2 gap-6">
+        <div class="bg-paper rounded-2xl p-7 border border-ink-100">
+          <div class="h-10 w-10 rounded-full bg-moss-100 flex items-center justify-center mb-5">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-moss-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+          </div>
+          <h3 class="font-semibold text-ink-800 mb-2">Owner on every job</h3>
+          <p class="text-sm text-ink-500">You get a direct line, not a dispatcher relay.</p>
+        </div>
+
+        <div class="bg-paper rounded-2xl p-7 border border-ink-100">
+          <div class="h-10 w-10 rounded-full bg-moss-100 flex items-center justify-center mb-5">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-moss-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </div>
+          <h3 class="font-semibold text-ink-800 mb-2">Zero subcontractors</h3>
+          <p class="text-sm text-ink-500">Every install and repair is done by our own crew.</p>
+        </div>
+
+        <div class="bg-paper rounded-2xl p-7 border border-ink-100">
+          <div class="h-10 w-10 rounded-full bg-moss-100 flex items-center justify-center mb-5">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-moss-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+          </div>
+          <h3 class="font-semibold text-ink-800 mb-2">Direct accountability</h3>
+          <p class="text-sm text-ink-500">If something's off, you call the person who fixes it &mdash; today.</p>
+        </div>
+
+        <div class="bg-paper rounded-2xl p-7 border border-ink-100">
+          <div class="h-10 w-10 rounded-full bg-moss-100 flex items-center justify-center mb-5">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-moss-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3 class="font-semibold text-ink-800 mb-2">Full local coverage</h3>
+          <p class="text-sm text-ink-500">Schomberg to New Tecumseth, and everywhere between.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     24/7 EMERGENCY REPAIRS
+============================================================ -->
+<section id="emergency" class="relative overflow-hidden bg-ink-900">
+  <div class="absolute inset-0 grain"></div>
+  <div class="relative max-w-7xl mx-auto px-5 sm:px-8 py-16 sm:py-20 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-moss-400 mb-3">No Heat? No Cooling? We Answer.</p>
+      <h2 class="font-display text-3xl sm:text-4xl font-semibold text-paper">24/7 Emergency Repairs</h2>
+      <p class="mt-3 text-ink-100/70 max-w-lg">Furnace down at midnight? AC quit in a heat wave? Call the direct line &mdash; day, night, or weekend.</p>
+    </div>
+    <a href="tel:2898902222" class="shrink-0 inline-flex items-center gap-3 rounded-full bg-moss-500 text-ink-900 font-semibold px-8 py-5 text-lg hover:bg-moss-400 active:scale-[0.98] transition-all shadow-xl shadow-moss-900/30 focus-ring">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      289-890-2222
+    </a>
+  </div>
+</section>
+
+<!-- ============================================================
+     SERVICE AREAS (Local SEO)
+============================================================ -->
+<section id="areas" class="max-w-7xl mx-auto px-5 sm:px-8 py-20 sm:py-28">
+  <p class="text-xs font-semibold uppercase tracking-[0.18em] text-moss-600 mb-4">Where We Work</p>
+  <h2 class="font-display text-3xl sm:text-4xl font-semibold text-ink-800 leading-tight max-w-2xl">
+    Rooted in Schomberg. Covering every town around it.
+  </h2>
+  <p class="mt-5 text-ink-500 text-lg max-w-xl">
+    We service homes and small businesses throughout King Township, New Tecumseth, and the surrounding Ontario countryside.
+  </p>
+
+  <ul class="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-5">
+    <li class="flex items-center gap-2 text-ink-700 font-medium"><span class="h-1.5 w-1.5 rounded-full bg-moss-500 shrink-0"></span>Schomberg</li>
+    <li class="flex items-center gap-2 text-ink-700 font-medium"><span class="h-1.5 w-1.5 rounded-full bg-moss-500 shrink-0"></span>Tottenham</li>
+    <li class="flex items-center gap-2 text-ink-700 font-medium"><span class="h-1.5 w-1.5 rounded-full bg-moss-500 shrink-0"></span>New Tecumseth</li>
+    <li class="flex items-center gap-2 text-ink-700 font-medium"><span class="h-1.5 w-1.5 rounded-full bg-moss-500 shrink-0"></span>King City</li>
+    <li class="flex items-center gap-2 text-ink-700 font-medium"><span class="h-1.5 w-1.5 rounded-full bg-moss-500 shrink-0"></span>Alliston</li>
+    <li class="flex items-center gap-2 text-ink-700 font-medium"><span class="h-1.5 w-1.5 rounded-full bg-moss-500 shrink-0"></span>Bradford</li>
+    <li class="flex items-center gap-2 text-ink-700 font-medium"><span class="h-1.5 w-1.5 rounded-full bg-moss-500 shrink-0"></span>Beeton</li>
+    <li class="flex items-center gap-2 text-ink-700 font-medium"><span class="h-1.5 w-1.5 rounded-full bg-moss-500 shrink-0"></span>Bond Head</li>
+  </ul>
+  <p class="mt-6 text-sm text-ink-400">&amp; surrounding Ontario regions &mdash; ask when you call if you're just outside the list.</p>
+</section>
+
+<!-- ============================================================
+     QUOTE / CONTACT
+============================================================ -->
+<section id="quote" class="bg-moss-500">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 py-20 sm:py-24 text-center">
+    <h2 class="font-display text-3xl sm:text-5xl font-semibold text-ink-900 max-w-2xl mx-auto leading-tight">
+      Ready when you are &mdash; no pressure, no upsell.
+    </h2>
+    <p class="mt-5 text-ink-800/80 text-lg max-w-lg mx-auto">
+      Call direct for a free, no-obligation quote on your repair or install.
+    </p>
+    <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="tel:2898902222" class="inline-flex items-center justify-center gap-2 rounded-full bg-ink-900 text-paper font-semibold px-8 py-4 text-base hover:bg-ink-800 active:scale-[0.98] transition-all focus-ring">
+        Call Direct: 289-890-2222
+      </a>
+      <span class="text-ink-800/70 text-sm">Owner-operated &middot; Schomberg, ON</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="bg-ink-900 text-ink-100/70">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 py-16 grid sm:grid-cols-3 gap-10">
+    <div>
+      <p class="font-display text-xl font-semibold text-paper mb-3">Thermaco HVAC Solutions</p>
+      <p class="text-sm max-w-xs">Owner-operated heating &amp; cooling based in Schomberg, Ontario.</p>
+    </div>
+    <div>
+      <p class="text-sm font-semibold text-paper mb-3">Contact</p>
+      <p class="text-sm">
+        <a href="tel:2898902222" class="hover:text-moss-300 transition-colors focus-ring rounded">289-890-2222</a><br>
+        Schomberg, ON &middot; Canada<br>
+        Available 24/7 for emergencies
+      </p>
+    </div>
+    <div>
+      <p class="text-sm font-semibold text-paper mb-3">Service Areas</p>
+      <p class="text-sm leading-relaxed">Schomberg, Tottenham, New Tecumseth, King City, Alliston, Bradford, Beeton, Bond Head &amp; surrounding Ontario regions.</p>
+    </div>
+  </div>
+  <div class="border-t border-ink-800">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 py-6 text-xs text-ink-100/50">
+      &copy; <span x-data x-text="new Date().getFullYear()"></span> Thermaco HVAC Solutions. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     MOBILE STICKY BOTTOM BAR
+============================================================ -->
+<div class="md:hidden fixed bottom-0 inset-x-0 z-50 bg-paper border-t border-ink-100 shadow-[0_-4px_20px_rgba(0,0,0,0.08)]" style="padding-bottom: env(safe-area-inset-bottom);">
+  <div class="grid grid-cols-2 gap-2 p-3">
+    <a href="tel:2898902222" class="flex items-center justify-center gap-2 rounded-full bg-ink text-paper font-semibold py-3.5 text-sm active:scale-[0.97] transition-transform focus-ring">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Call Direct
+    </a>
+    <a href="#quote" class="flex items-center justify-center gap-2 rounded-full bg-moss-500 text-ink-900 font-semibold py-3.5 text-sm active:scale-[0.97] transition-transform focus-ring">
+      Get Free Quote
+    </a>
+  </div>
+</div>
+
+<!-- Spacer so sticky bar never covers footer content on mobile -->
+<div class="md:hidden h-20"></div>
+
+</body>
+</html>
