@@ -370,7 +370,7 @@
   <!-- Background image layer (seasonal) -->
   <div class="absolute inset-0 bg-ink-800">
     <template x-if="img">
-      <img :src="img" alt="Seasonal HVAC service promotion" class="w-full h-full object-cover" onerror="this.style.display='none'" fetchpriority="high" decoding="async" loading="eager">
+      <img :src="img" alt="Seasonal HVAC service promotion" class="w-full h-full object-cover object-right sm:object-center" onerror="this.style.display='none'" fetchpriority="high" decoding="async" loading="eager">
     </template>
     <template x-if="!img">
       <div class="w-full h-full bg-gradient-to-br from-ink-700 via-ink-800 to-moss-800"></div>
