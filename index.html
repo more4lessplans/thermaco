@@ -649,8 +649,9 @@
       Call direct for a free, no-obligation quote on your repair or install.
     </p>
     <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-      <a href="#quote" data-jsphone class="inline-flex items-center justify-center gap-2 rounded-full bg-ink-900 text-paper font-semibold px-8 py-4 text-base hover:bg-ink-800 active:scale-[0.98] transition-all focus-ring">
-        Call Direct: <span data-jsphone-num>Tap to Call</span>
+      <a href="mailto:estimates@thermaco.ca?subject=Requesting%20Free%20Estimate" class="inline-flex items-center justify-center gap-2 rounded-full bg-ink-900 text-paper font-semibold px-8 py-4 text-base hover:bg-ink-800 active:scale-[0.98] transition-all focus-ring">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+        Email for a Free Estimate
       </a>
       <span class="text-ink-800/70 text-sm">Owner-operated &middot; Schomberg, ON</span>
     </div>
@@ -672,6 +673,7 @@
       <p class="text-sm font-semibold text-paper mb-3">Contact</p>
       <p class="text-sm">
         <a href="#quote" data-jsphone class="hover:text-moss-300 transition-colors focus-ring rounded"><span data-jsphone-num>Call Now</span></a><br>
+        <a href="#" data-jsemail class="hover:text-moss-300 transition-colors focus-ring rounded"><span data-jsemail-addr>Loading&hellip;</span></a><br>
         Schomberg, ON &middot; Canada<br>
         Available 24/7 for emergencies
       </p>
@@ -745,6 +747,20 @@
     a.setAttribute('href', 'tel:' + digits);
     var num = a.querySelector('[data-jsphone-num]');
     if (num) num.textContent = phone;
+  });
+})();
+
+(function () {
+  // "hello@thermaco.ca" built from char codes so it never sits in
+  // the raw HTML source as plain text (same approach as the phone
+  // number above) — keeps basic scrapers from harvesting it while
+  // still rendering a live mailto: link for real visitors.
+  var codes = [104,101,108,108,111,64,116,104,101,114,109,97,99,111,46,99,97];
+  var email = String.fromCharCode.apply(null, codes);
+  document.querySelectorAll('a[data-jsemail]').forEach(function (a) {
+    a.setAttribute('href', 'mailto:' + email);
+    var span = a.querySelector('[data-jsemail-addr]');
+    if (span) span.textContent = email;
   });
 })();
 </script>
