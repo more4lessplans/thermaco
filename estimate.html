@@ -90,6 +90,8 @@
   }
 </script>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.14.1/dist/cdn.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
 
@@ -148,6 +150,13 @@
     padding-right: 2.75rem;
   }
   input[type="date"].field { color-scheme: light; }
+
+  /* Flatpickr: make it match the site's field styling */
+  .flatpickr-calendar { font-family: "Inter", ui-sans-serif, system-ui, sans-serif; box-shadow: 0 20px 40px rgba(34,35,29,0.12); border-radius: 1rem; border: 1px solid #e2e4d9; }
+  .flatpickr-day.flatpickr-disabled,
+  .flatpickr-day.flatpickr-disabled:hover { color: #c5c9b4; background: #f2f3ef; text-decoration: line-through; cursor: not-allowed; }
+  .flatpickr-day.selected, .flatpickr-day.selected:hover { background: #82983A; border-color: #82983A; }
+  .flatpickr-day.today { border-color: #82983A; }
 </style>
 </head>
 
@@ -202,16 +211,10 @@
 ============================================================ -->
 <section class="relative overflow-hidden bg-ink-900">
   <div class="absolute inset-0 grain"></div>
-  <div class="relative max-w-7xl mx-auto px-5 sm:px-8 pt-14 pb-16 sm:pt-20 sm:pb-20 text-center">
-    <p class="reveal reveal-1 inline-flex items-center gap-2 text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] text-moss-300 mb-5">
-      Free &amp; No-Obligation
-    </p>
-    <h1 class="reveal reveal-2 font-display text-3xl sm:text-5xl leading-[1.1] font-semibold text-paper tracking-tight max-w-2xl mx-auto">
-      Request Your HVAC Estimate
+  <div class="relative max-w-7xl mx-auto px-5 sm:px-8 pt-8 pb-8 sm:pt-10 sm:pb-10 text-center">
+    <h1 class="reveal reveal-1 font-display text-2xl sm:text-4xl leading-[1.1] font-semibold text-paper tracking-tight max-w-2xl mx-auto">
+      Request Your Free HVAC Estimate
     </h1>
-    <p class="reveal reveal-3 mt-5 text-base sm:text-lg text-ink-100/80 max-w-xl mx-auto">
-      Tell us about your project below, or skip the form and call the owner directly.
-    </p>
   </div>
 </section>
 
@@ -238,7 +241,7 @@
         </li>
         <li class="flex items-start gap-3">
           <span class="mt-1 h-1.5 w-1.5 rounded-full bg-moss-500 shrink-0"></span>
-          <span class="text-ink-600 text-sm">We'll confirm your preferred contact window before reaching out.</span>
+          <span class="text-ink-600 text-sm">Let us know your preferred service date &amp; time, or leave it open &mdash; either works.</span>
         </li>
         <li class="flex items-start gap-3">
           <span class="mt-1 h-1.5 w-1.5 rounded-full bg-moss-500 shrink-0"></span>
@@ -354,14 +357,33 @@
 
             <div class="grid sm:grid-cols-2 gap-4 mt-4">
               <div>
-                <label for="lite_mode_23" class="block text-xs font-semibold uppercase tracking-wide text-ink-500 mb-2">Preferred Contact Date</label>
-                <input type="date" class="field" id="lite_mode_23" x-ref="dateInput" name="q23_preferredContact23[lite_mode]" :min="minDate" required>
+                <label for="lite_mode_23" class="block text-xs font-semibold uppercase tracking-wide text-ink-500 mb-2">Preferred Service Date <span class="normal-case font-normal text-ink-300">(optional)</span></label>
+                <div class="relative">
+                  <input
+                    type="text"
+                    class="field pr-16"
+                    id="lite_mode_23"
+                    x-ref="dateInput"
+                    name="q23_preferredContact23[lite_mode]"
+                    placeholder="No preference"
+                    autocomplete="off"
+                    readonly
+                    x-init="initDatePicker()"
+                  >
+                  <button
+                    type="button"
+                    x-show="dateVal"
+                    x-cloak
+                    @click="clearDate()"
+                    class="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-ink-400 hover:text-ink-700 transition-colors focus-ring rounded px-1"
+                  >Clear</button>
+                </div>
+            
               </div>
               <div>
-                <label for="input_25" class="block text-xs font-semibold uppercase tracking-wide text-ink-500 mb-2">Preferred Contact Time</label>
-                <select class="field" id="input_25" x-ref="timeInput" name="q25_preferredContact" required>
-                  <option value="">Please select&hellip;</option>
-                  <option value="No Preference">No preference</option>
+                <label for="input_25" class="block text-xs font-semibold uppercase tracking-wide text-ink-500 mb-2">Preferred Service Time <span class="normal-case font-normal text-ink-300">(optional)</span></label>
+                <select class="field" id="input_25" x-ref="timeInput" name="q25_preferredContact">
+                  <option value="No Preference" selected>No preference</option>
                   <option value="9:00 AM">9:00 AM</option>
                   <option value="9:30 AM">9:30 AM</option>
                   <option value="10:00 AM">10:00 AM</option>
@@ -378,7 +400,7 @@
                 </select>
               </div>
             </div>
-            <p class="mt-2 text-xs text-ink-400">Weekdays only, 9 AM&ndash;3 PM.</p>
+        
 
             <div class="mt-4">
               <label for="input_11" class="block text-xs font-semibold uppercase tracking-wide text-ink-500 mb-2">Describe the Project</label>
@@ -458,40 +480,6 @@
 </footer>
 
 <!-- ============================================================
-     MOBILE STICKY BOTTOM BAR
-============================================================ -->
-<div
-  x-data="{ show: false }"
-  x-init="
-    show = window.scrollY > 400;
-    window.addEventListener('scroll', () => { show = window.scrollY > 400 }, { passive: true });
-  "
-  x-cloak
-  x-show="show"
-  x-transition:enter="transition ease-out duration-300"
-  x-transition:enter-start="opacity-0 translate-y-full"
-  x-transition:enter-end="opacity-100 translate-y-0"
-  x-transition:leave="transition ease-in duration-200"
-  x-transition:leave-start="opacity-100 translate-y-0"
-  x-transition:leave-end="opacity-0 translate-y-full"
-  class="md:hidden fixed bottom-0 inset-x-0 z-50 bg-paper border-t border-ink-100 shadow-[0_-4px_20px_rgba(0,0,0,0.08)]"
-  style="padding-bottom: env(safe-area-inset-bottom);"
->
-  <div class="grid grid-cols-2 gap-2 p-3">
-    <a href="tel:" data-jsphone class="flex items-center justify-center gap-2 rounded-full bg-ink text-paper font-semibold py-3.5 text-sm active:scale-[0.97] transition-transform focus-ring">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      Call Direct
-    </a>
-    <a href="#form" class="flex items-center justify-center gap-2 rounded-full bg-moss-500 text-ink-900 font-semibold py-3.5 text-sm active:scale-[0.97] transition-transform focus-ring">
-      Get Free Quote
-    </a>
-  </div>
-</div>
-
-<!-- Spacer so sticky bar never covers footer content on mobile -->
-<div class="md:hidden h-20"></div>
-
-<!-- ============================================================
      PHONE / EMAIL INJECTION
      (Same obfuscation approach as the homepage — keeps the raw
      values out of static page source while still rendering live
@@ -531,11 +519,37 @@ function estimateForm() {
   return {
     fileNames: [],
     error: '',
+    dateVal: '',
+    datePicker: null,
     minDate: (function () {
       var d = new Date();
       d.setDate(d.getDate() + 1); // earliest bookable day is tomorrow
       return d.toISOString().split('T')[0];
     })(),
+
+    initDatePicker() {
+      var self = this;
+      this.datePicker = flatpickr(this.$refs.dateInput, {
+        minDate: this.minDate,
+        dateFormat: 'Y-m-d',
+        altInput: true,
+        altFormat: 'F j, Y',
+        altInputClass: 'field pr-16',
+        disableMobile: true,
+        disable: [function (date) {
+          var day = date.getDay();
+          return day === 0 || day === 6; // grey out Sat/Sun — weekdays only
+        }],
+        onChange: function (selectedDates, dateStr) {
+          self.dateVal = dateStr;
+        }
+      });
+    },
+
+    clearDate() {
+      if (this.datePicker) this.datePicker.clear();
+      this.dateVal = '';
+    },
 
     formatPhone(e) {
       var digits = e.target.value.replace(/\D/g, '').slice(0, 10);
@@ -548,7 +562,18 @@ function estimateForm() {
 
     syncDateTime() {
       var dateVal = this.$refs.dateInput.value;
-      if (!dateVal) return;
+      if (!dateVal) {
+        // No date chosen — leave JotForm's actual Date-field subfields blank
+        // (writing text like "No Preference" into those fails JotForm's own
+        // date validation and can silently block the whole submission).
+        // The plain-text companion field still gets a human-readable note.
+        this.$refs.month.value = '';
+        this.$refs.day.value = '';
+        this.$refs.year.value = '';
+        this.$refs.fullDate.value = '';
+        this.$refs.preferredContact.value = 'No Preference';
+        return;
+      }
       var parts = dateVal.split('-');
       var year = parseInt(parts[0], 10), month = parseInt(parts[1], 10), day = parseInt(parts[2], 10);
       var formatted = String(month).padStart(2,'0') + '-' + String(day).padStart(2,'0') + '-' + year;
@@ -564,29 +589,25 @@ function estimateForm() {
       var dateVal = this.$refs.dateInput.value;
       var timeVal = this.$refs.timeInput.value;
 
-      if (!dateVal || !timeVal) {
-        this.error = 'Please select both a preferred contact date and time.';
-        (dateVal ? this.$refs.timeInput : this.$refs.dateInput).focus();
-        e.preventDefault();
-        return false;
+      // Both fields are optional — "no preference" is a valid choice.
+      if (dateVal) {
+        var d = new Date(dateVal + 'T00:00:00');
+        var dow = d.getDay();
+        if (dow === 0 || dow === 6) {
+          this.error = 'We only offer estimate consultations on weekdays (Monday–Friday). Leave the date blank if you have no preference.';
+          this.$refs.dateInput.focus();
+          e.preventDefault();
+          return false;
+        }
       }
 
-      var d = new Date(dateVal + 'T00:00:00');
-      var dow = d.getDay();
-      if (dow === 0 || dow === 6) {
-        this.error = 'We only offer estimate consultations on weekdays (Monday–Friday).';
-        this.$refs.dateInput.focus();
-        e.preventDefault();
-        return false;
-      }
-
-      if (timeVal !== 'No Preference') {
+      if (timeVal && timeVal !== 'No Preference') {
         var m = timeVal.match(/(\d+):(\d+)\s(AM|PM)/);
         var hour = parseInt(m[1], 10);
         if (m[3].toUpperCase() === 'PM' && hour < 12) hour += 12;
         if (m[3].toUpperCase() === 'AM' && hour === 12) hour = 0;
         if (hour < 9 || hour > 15) {
-          this.error = 'Please select a time between 9 AM and 3 PM.';
+          this.error = 'Please select a time between 9 AM and 3 PM, or choose no preference.';
           this.$refs.timeInput.focus();
           e.preventDefault();
           return false;
