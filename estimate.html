@@ -152,9 +152,9 @@
   input[type="date"].field { color-scheme: light; }
 
   /* Flatpickr: make it match the site's field styling */
-  .flatpickr-calendar { font-family: "Inter", ui-sans-serif, system-ui, sans-serif; box-shadow: 0 20px 40px rgba(34,35,29,0.12); border-radius: 1rem; border: 1px solid #e2e4d9; }
+  .flatpickr-calendar { font-family: "Inter", ui-sans-serif, system-ui, sans-serif; box-shadow: 0 4px 14px rgba(34,35,29,0.08); border-radius: 6px; border: 1px solid #e2e4d9; }
   .flatpickr-day.flatpickr-disabled,
-  .flatpickr-day.flatpickr-disabled:hover { color: #c5c9b4; background: #f2f3ef; text-decoration: line-through; cursor: not-allowed; }
+  .flatpickr-day.flatpickr-disabled:hover { color: #c5c9b4; cursor: not-allowed; }
   .flatpickr-day.selected, .flatpickr-day.selected:hover { background: #82983A; border-color: #82983A; }
   .flatpickr-day.today { border-color: #82983A; }
 </style>
@@ -281,11 +281,6 @@
           <input type="hidden" id="submitSource" name="submitSource" value="website-redesign">
           <input type="hidden" name="uploadServerUrl" value="https://upload.jotform.com/upload">
           <input type="hidden" name="eventObserver" value="1">
-          <input type="hidden" name="q23_preferredContact23[month]" x-ref="month">
-          <input type="hidden" name="q23_preferredContact23[day]" x-ref="day">
-          <input type="hidden" name="q23_preferredContact23[year]" x-ref="year">
-          <input type="hidden" name="q23_preferredContact23" x-ref="fullDate">
-          <input type="hidden" name="q23_preferredContact" x-ref="preferredContact">
 
           <!-- Name -->
           <div class="grid sm:grid-cols-2 gap-4">
@@ -363,8 +358,8 @@
                     type="text"
                     class="field pr-16"
                     id="lite_mode_23"
+                    name="q28_preferredService28"
                     x-ref="dateInput"
-                    name="q23_preferredContact23[lite_mode]"
                     placeholder="No preference"
                     autocomplete="off"
                     readonly
@@ -382,7 +377,7 @@
               </div>
               <div>
                 <label for="input_25" class="block text-xs font-semibold uppercase tracking-wide text-ink-500 mb-2">Preferred Service Time <span class="normal-case font-normal text-ink-300">(optional)</span></label>
-                <select class="field" id="input_25" x-ref="timeInput" name="q25_preferredContact">
+                <select class="field" id="input_25" x-ref="timeInput" name="q25_preferredService">
                   <option value="No Preference" selected>No preference</option>
                   <option value="9:00 AM">9:00 AM</option>
                   <option value="9:30 AM">9:30 AM</option>
@@ -560,30 +555,6 @@ function estimateForm() {
       e.target.value = out;
     },
 
-    syncDateTime() {
-      var dateVal = this.$refs.dateInput.value;
-      if (!dateVal) {
-        // No date chosen — leave JotForm's actual Date-field subfields blank
-        // (writing text like "No Preference" into those fails JotForm's own
-        // date validation and can silently block the whole submission).
-        // The plain-text companion field still gets a human-readable note.
-        this.$refs.month.value = '';
-        this.$refs.day.value = '';
-        this.$refs.year.value = '';
-        this.$refs.fullDate.value = '';
-        this.$refs.preferredContact.value = 'No Preference';
-        return;
-      }
-      var parts = dateVal.split('-');
-      var year = parseInt(parts[0], 10), month = parseInt(parts[1], 10), day = parseInt(parts[2], 10);
-      var formatted = String(month).padStart(2,'0') + '-' + String(day).padStart(2,'0') + '-' + year;
-      this.$refs.month.value = month;
-      this.$refs.day.value = day;
-      this.$refs.year.value = year;
-      this.$refs.fullDate.value = formatted;
-      this.$refs.preferredContact.value = formatted;
-    },
-
     handleSubmit(e) {
       this.error = '';
       var dateVal = this.$refs.dateInput.value;
@@ -614,7 +585,6 @@ function estimateForm() {
         }
       }
 
-      this.syncDateTime();
       return true;
     }
   }
