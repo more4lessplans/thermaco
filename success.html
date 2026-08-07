@@ -1,146 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-CA">
 <head>
-    <meta charset="utf-8">
-    <title>Thermaco | Thanks</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
-    <link href="img/favicon.ico" rel="icon">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Rubik:wght@500;600;700&display=swap" rel="stylesheet">
-    <meta name="theme-color" content="#45473D">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-             <!-- Status bar color for iPhone and other devices -->
-       <meta name="theme-color" content="#45473D">
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>Request Received | Thermaco — Schomberg, ON</title>
+<meta name="description" content="Your HVAC estimate request has been received. Thermaco HVAC Solutions will be in touch shortly.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://www.thermaco.ca/estimate/success">
+
+<link rel="icon" type="image/svg+xml" href="/favi/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favi/favicon-32x32.png">
+<link rel="shortcut icon" href="/favi/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" sizes="180x180" href="/favi/apple-icon-180x180.png">
+<link rel="manifest" href="/favi/manifest.json">
+<meta name="theme-color" content="#FAF9F4">
+
+<!-- ============================================================
+     FONTS
+============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- ============================================================
+     TAILWIND CDN + CONFIG (matches estimate.html tokens exactly)
+============================================================ -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: {
+            DEFAULT: '#45483D',
+            50:  '#f2f3ef',
+            100: '#e2e4d9',
+            200: '#c5c9b4',
+            300: '#a4aa8b',
+            400: '#7d8365',
+            500: '#5f6349',
+            600: '#4b4e3a',
+            700: '#45483D',
+            800: '#33352c',
+            900: '#22231d'
+          },
+          moss: {
+            DEFAULT: '#82983A',
+            50:  '#f4f7ea',
+            100: '#e6edcd',
+            200: '#cddb9d',
+            300: '#b1c66c',
+            400: '#9bb64c',
+            500: '#82983A',
+            600: '#68792e',
+            700: '#4f5c24',
+            800: '#3a4419',
+            900: '#272d10'
+          },
+          paper: '#FAF9F4'
+        },
+        fontFamily: {
+          display: ['"Fraunces"', 'ui-serif', 'Georgia', 'serif'],
+          sans: ['"Inter"', 'ui-sans-serif', 'system-ui', 'sans-serif']
         }
-        body {
-            display: flex;
-            flex-direction: column;
-        }
-        main {
-            flex: 1 0 auto;
-        }
-        .footer {
-            flex-shrink: 0;
-        }
-    </style>
+      }
+    }
+  }
+</script>
+
+<style>
+  body { background-color: #FAF9F4; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(14px); animation: reveal .7s cubic-bezier(.16,1,.3,1) forwards; }
+    .reveal-1 { animation-delay: .05s; }
+    .reveal-2 { animation-delay: .18s; }
+    @keyframes reveal { to { opacity: 1; transform: translateY(0); } }
+  }
+
+  .focus-ring:focus-visible {
+    outline: 2px solid #82983A;
+    outline-offset: 3px;
+  }
+
+  .grain::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+</style>
 </head>
-<body>
-    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
+
+<body class="font-sans text-ink-800 antialiased min-h-screen flex flex-col">
+
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-ink focus:text-white focus:px-4 focus:py-2 focus:rounded-full">Skip to content</a>
+
+<!-- ============================================================
+     HEADER
+============================================================ -->
+<header class="border-b border-ink-100">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center">
+    <a href="/" class="font-display text-lg sm:text-xl font-semibold tracking-tight text-ink-700">
+      Thermaco <span class="text-moss-600">HVAC</span>
+    </a>
+  </div>
+</header>
+
+<!-- ============================================================
+     SUCCESS MESSAGE
+============================================================ -->
+<main id="main" class="flex-1 relative overflow-hidden bg-ink-900 flex items-center">
+  <div class="absolute inset-0 grain"></div>
+
+  <div class="relative max-w-xl mx-auto px-5 sm:px-8 py-20 sm:py-28 text-center">
+
+    <div class="reveal reveal-1 inline-flex items-center justify-center h-14 w-14 rounded-full bg-moss-500/15 border border-moss-500/30 mb-6">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-moss-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6 9 17l-5-5"/>
+      </svg>
     </div>
-    <div class="container-fluid bg-dark px-0">
-        <div class="row g-0 d-none d-lg-flex">
-            <div class="col-lg-6 ps-5 text-start">
-                <div class="h-100 d-inline-flex align-items-center text-white"></div>
-            </div>
-            <div class="col-lg-6 text-end">
-                <div class="h-100 topbar-right d-inline-flex align-items-center text-white py-2 px-5">
-                    <span class="fs-5 fw-bold me-2"><i class="fa fa-phone-alt me-2"></i>Call Us:</span>
-                    <span class="fs-5 fw-bold">1 -289 890 2222</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top py-0 pe-5">
-        <a href="index.html" class="navbar-brand ps-5 me-0" style="display: flex; align-items: center; justify-content: center;">
-            <img src="img/logo.png" alt="InteliAir Logo" style="max-height: 20px; width: auto; margin: 0; padding: 0;">
-        </a>
-        <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="/about" class="nav-item nav-link">About Us</a>
-                <a href="/services" class="nav-item nav-link">Our Services</a>
-                <a href="/contact" class="nav-item nav-link">Contact</a>
-                <div class="nav-item dropdown">
-                    <div class="dropdown-menu bg-light m-0">
-                        <a href="project.html" class="dropdown-item">Projects</a>
-                        <a href="feature.html" class="dropdown-item">Features</a>
-                        <a href="team.html" class="dropdown-item">Our Team</a>
-                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                        <a href="404.html" class="dropdown-item">404 Page</a>
-                    </div>
-                </div>
-            </div>
-            <a href="/estimate" class="btn btn-primary px-3 d-none d-lg-block">Get A Quote</a>
-        </div>
-    </nav>
-    <main>
-        <div class="container-xxl py-5">
-            <div class="container">
-                <div class="row g-5">
-                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                        <p class="fw-medium text-uppercase text-primary mb-2">Sent</p>
-                        <h1 class="display-5 mb-4">Thank You</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-    <div class="container-fluid bg-dark footer py-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="container py-5">
-            <div class="row g-5">
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="text-white mb-4">Contact</h5>
-                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>289 890 2222</p>
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@thermaco.ca</p>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Schomberg, Ontario</p>
-                    <div class="d-flex pt-3"></div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="text-white mb-4">Connect & Support</h5>
-                    <a class="btn btn-link" href="/contact">Contact Form</a>
-                    <a class="btn btn-link" href="/support">Tech Support</a>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="text-white mb-4">Business Hours</h5>
-                    <p class="mb-1">Monday - Friday</p>
-                    <h6 class="text-light">09:00 am - 07:00 pm</h6>
-                    <p class="mb-1">Saturday</p>
-                    <h6 class="text-light">09:00 am - 12:00 pm</h6>
-                    <p class="mb-1">Sunday</p>
-                    <h6 class="text-light">Closed</h6>
-                    <hr class="border-light">
-                    <p class="mb-1 text-light"><strong>Emergency Service:</strong></p>
-                    <h6 class="text-light">Available 24/7</h6>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="text-white mb-4">Newsletter</h5>
-                    <p>Stay Connected for Exclusive Offers, HVAC Tips, and Industry Insights</p>
-                    <div class="position-relative w-100">
-                        <form method="post" action="https://submit.jotform.com/submit/240495998882075">
-                            <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="email" name="q4_email" placeholder="Your Email" required>
-                            <input type="hidden" id="input_7" name="q7_newsletter_tag" value="newsletter list">
-                            <div class="form-single-column" role="group" aria-labelledby="label_8" data-component="checkbox" style="display: none;">
-                                <input type="checkbox" aria-describedby="label_8" class="form-checkbox" id="input_8_0" name="q8_newsletter[]" value="Yes" checked />
-                            </div>
-                            <button type="submit" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Join</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/counterup/counterup.min.js"></script>
-    <script src="js/main.js"></script>
+
+    <h1 class="reveal reveal-1 font-display text-3xl sm:text-4xl font-semibold text-paper tracking-tight">
+      Request Received
+    </h1>
+
+    <p class="reveal reveal-2 mt-4 text-ink-200 text-base sm:text-lg leading-relaxed">
+      Thanks — your estimate request is in. We'll be in touch shortly to confirm the details.
+    </p>
+
+    <a href="/" class="reveal reveal-2 mt-8 inline-flex items-center gap-2 rounded-full bg-paper text-ink-800 text-sm font-semibold px-5 py-3 hover:bg-moss-50 transition-colors focus-ring">
+      Back to Home
+    </a>
+
+  </div>
+</main>
+
 </body>
 </html>
