@@ -135,6 +135,7 @@
     appearance: none;
   }
   .field::placeholder { color: #a4aa8b; }
+  select.field.is-placeholder { color: #a4aa8b; }
   .field:focus {
     outline: none;
     border-color: #82983A;
@@ -377,7 +378,7 @@
               </div>
               <div>
                 <label for="input_25" class="block text-xs font-semibold uppercase tracking-wide text-ink-500 mb-2">Preferred Service Time <span class="normal-case font-normal text-ink-300">(optional)</span></label>
-                <select class="field" id="input_25" x-ref="timeInput" name="q25_preferredService">
+                <select class="field" id="input_25" x-ref="timeInput" name="q25_preferredTime" x-model="timeVal" :class="timeVal === 'No Preference' ? 'is-placeholder' : ''">
                   <option value="No Preference" selected>No preference</option>
                   <option value="9:00 AM">9:00 AM</option>
                   <option value="9:30 AM">9:30 AM</option>
@@ -515,6 +516,7 @@ function estimateForm() {
     fileNames: [],
     error: '',
     dateVal: '',
+    timeVal: 'No Preference',
     datePicker: null,
     minDate: (function () {
       var d = new Date();
