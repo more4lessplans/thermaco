@@ -524,14 +524,18 @@
   </div>
 </div>
 
-<!-- Hidden JotForm submission — same form/endpoint as /estimate (formID 242634271405047),
-     submitted into a hidden iframe so the visitor never sees any Jotform UI.
-     Field names/values below are copied directly from Jotform's own generated
-     source (Request_Estimate.html) — that is the authoritative source for this
-     form's real field names. Do not rename without checking that source again.
-     simple_spc's value is fixed for this form (Jotform sets it via their own
-     script to "<formID>-<formID>"); omitting or altering it causes Jotform's
-     spam filter to silently drop the submission. -->
+<!-- Hidden JotForm submission — same form/endpoint AND same field plumbing as
+     the /estimate page's live form (see estimate.html), submitted into a hidden
+     iframe so the visitor never sees any Jotform UI or leaves this page.
+     Field names below are intentionally kept identical to estimate.html's
+     <form id="242634271405047"> — that page is the current source of truth for
+     this form's real question IDs. If Jotform's schema changes again, update
+     estimate.html first, then copy the same names/values here.
+     NOTE: the old version of this block used stale question IDs
+     (q10_serviceType / q11_yourInquiry) and a hardcoded simple_spc anti-spam
+     token that don't exist on the live form anymore — that mismatch is the
+     likely cause of past silent submission failures. Removed here to match
+     estimate.html exactly. -->
 <!-- sandbox (no allow-top-navigation) blocks Jotform's thank-you page from
      frame-busting out of this hidden iframe and redirecting the visible tab.
      The POST itself still lands fine — sandbox only restricts what the loaded
@@ -542,22 +546,17 @@
   method="POST"
   action="https://submit.jotform.com/submit/242634271405047"
   enctype="multipart/form-data"
+  name="form_242634271405047"
+  id="242634271405047"
+  accept-charset="UTF-8"
   target="lockSubmitFrame"
   style="display:none"
   aria-hidden="true">
   <input type="hidden" name="formID" value="242634271405047">
-  <input type="hidden" id="JWTContainer" value="">
-  <input type="hidden" id="cardinalOrderNumber" value="">
   <input type="hidden" name="jsExecutionTracker" :value="'build-date-' + lockBuildTs">
   <input type="hidden" name="submitSource" value="instant-estimate-lock-in">
-  <input type="hidden" name="submitDate" :value="new Date().toString()">
-  <input type="hidden" name="buildDate" :value="lockBuildTs">
   <input type="hidden" name="uploadServerUrl" value="https://upload.jotform.com/upload">
   <input type="hidden" name="eventObserver" value="1">
-  <!-- honeypot — must stay empty -->
-  <input type="text" name="website" value="" style="display:none">
-  <!-- anti-spam token — Jotform's own script sets this to "<formID>-<formID>" for this form -->
-  <input type="hidden" class="simple_spc" name="simple_spc" value="242634271405047-242634271405047">
 
   <input type="hidden" name="q3_name[first]" :value="leadFirstName">
   <input type="hidden" name="q3_name[last]" :value="leadLastName">
@@ -567,9 +566,10 @@
   <input type="hidden" name="q5_address[city]" :value="leadCity">
   <input type="hidden" name="q5_address[state]" value="ON">
   <input type="hidden" name="q5_address[postal]" :value="leadPostal">
+  <input type="hidden" name="q5_address[country]" value="Canada">
   <input type="hidden" name="q6_phoneNumber[full]" :value="leadPhone">
-  <input type="hidden" name="q10_serviceType" value="Installation">
-  <input type="hidden" name="q11_yourInquiry" :value="lockDescription">
+  <input type="hidden" name="q10_estimateType" value="Replacement">
+  <input type="hidden" name="q11_projectDescription" :value="lockDescription">
   <input type="hidden" name="q25_preferredTime" value="No Preference">
 </form>
 
@@ -588,6 +588,7 @@ function acApp() {
     scrolled: false,
     swiping: false,
     touchX: 0,
+    touchY: 0,
     displayEstimate: 0,
 
     // ---- lock-in-quote modal ----
@@ -729,10 +730,20 @@ function acApp() {
     next() { this.bump(); this.index = (this.index + 1) % this.currentOrder.length; },
     prev() { this.bump(); this.index = (this.index - 1 + this.currentOrder.length) % this.currentOrder.length; },
     bump() { this.swiping = true; setTimeout(() => this.swiping = false, 180); },
-    touchStart(e) { this.touchX = e.changedTouches[0].clientX; },
+    touchStart(e) {
+      this.touchX = e.changedTouches[0].clientX;
+      this.touchY = e.changedTouches[0].clientY;
+    },
     touchEnd(e) {
       const dx = e.changedTouches[0].clientX - this.touchX;
-      if (Math.abs(dx) > 45) { dx < 0 ? this.next() : this.prev(); }
+      const dy = e.changedTouches[0].clientY - this.touchY;
+      // Direction-lock: only treat this as a left/right swipe if the motion is
+      // clearly more horizontal than vertical. Without this check, a normal
+      // vertical scroll that drifts sideways even slightly (very common on
+      // mobile) gets misread as a swipe and silently changes the selected
+      // system — this was firing whenever someone scrolled past the card.
+      const isHorizontalSwipe = Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.5 && Math.abs(dy) < 60;
+      if (isHorizontalSwipe) { dx < 0 ? this.next() : this.prev(); }
     },
 
     // ---- sizing ----
