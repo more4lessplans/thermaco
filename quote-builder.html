@@ -502,6 +502,7 @@
         </div>
         <h3 class="font-display font-semibold text-ink-900 text-2xl tracking-tight">Quote requested</h3>
         <p class="text-ink-500 text-sm mt-2">You've requested firm pricing for the system below. We'll be in touch shortly to confirm.</p>
+        <p class="text-xs text-ink-400 font-mono mt-2">Ticket <span x-text="lockTicketId"></span></p>
 
         <div class="mt-6 flex flex-col items-center rounded-2xl bg-ink-50 border border-ink-100 p-6">
           <img :src="currentUnit.image" :alt="currentUnit.name" class="h-24 w-auto object-contain mb-3">
@@ -529,7 +530,11 @@
      simple_spc's value is fixed for this form (Jotform sets it via their own
      script to "<formID>-<formID>"); omitting or altering it causes Jotform's
      spam filter to silently drop the submission. -->
-<iframe name="lockSubmitFrame" style="display:none" aria-hidden="true" tabindex="-1"></iframe>
+<!-- sandbox (no allow-top-navigation) blocks Jotform's thank-you page from
+     frame-busting out of this hidden iframe and redirecting the visible tab.
+     The POST itself still lands fine — sandbox only restricts what the loaded
+     response page is allowed to do, not our ability to submit into it. -->
+<iframe name="lockSubmitFrame" style="display:none" aria-hidden="true" tabindex="-1" sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
 <form
   x-ref="lockForm"
   method="POST"
@@ -564,6 +569,7 @@
   <input type="hidden" name="q10_serviceType" value="Installation">
   <input type="hidden" name="q11_yourInquiry" :value="lockDescription">
   <input type="hidden" name="q25_preferredTime" value="No Preference">
+  <input type="hidden" name="q26_uniqueId" :value="lockTicketId">
 </form>
 
 <!-- ============================================================
@@ -764,6 +770,21 @@ function acApp() {
         + 'Estimated price: ' + this.money(this.displayEstimate) + ' + tax & install';
     },
 
+    // ---- lock-in-quote ticket id ----
+    // Jotform's real Unique ID field is populated by a separate widget
+    // (widgets.jotform.com/widget/autoincrement) that calls Jotform's own
+    // counter service when their embed JS runs. This page submits directly
+    // to Jotform without that widget, so there's no way to fetch the same
+    // incrementing sequence /estimate gets. Instead we generate our own
+    // guaranteed-unique ticket id, prefixed so it's clearly distinguishable
+    // from /estimate's numbering in the ticket email.
+    lockTicketId: '',
+    generateTicketId() {
+      const t = Date.now().toString(36).toUpperCase();
+      const r = Math.random().toString(36).slice(2, 6).toUpperCase();
+      return 'LP-' + t + '-' + r;
+    },
+
     openLock() { this.lockError = ''; this.lockStep = 'form'; this.lockOpen = true; },
     closeLock() { this.lockOpen = false; },
 
@@ -786,6 +807,7 @@ function acApp() {
       if (!this.leadAddress.trim() || !this.leadCity.trim()) { this.lockError = 'Please enter your street address and city.'; return; }
 
       this.lockBuildTs = Date.now();
+      this.lockTicketId = this.generateTicketId();
       this.lockSubmitting = true;
       try {
         this.$refs.lockForm.submit();
