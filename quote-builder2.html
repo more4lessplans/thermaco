@@ -57,12 +57,15 @@
     .reveal-3 { animation-delay: .28s; }
     @keyframes reveal { to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
 
-    /* scroll-triggered reveal for below-the-fold sections — feels intentional rather than auto-playing on load */
+    /* scroll-triggered reveal for below-the-fold sections — feels intentional rather than auto-playing on load.
+       No filter/blur here (unlike .reveal below): this one animates *while the page is actively being
+       scrolled* on mobile, and blur transitions are expensive to composite every frame — opacity+transform
+       alone still reads as an intentional reveal without the scroll jank. */
     .reveal-io {
-      opacity: 0; transform: translateY(22px) scale(.98); filter: blur(4px);
-      transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1), filter .9s cubic-bezier(.16,1,.3,1);
+      opacity: 0; transform: translateY(22px) scale(.98);
+      transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1);
     }
-    .reveal-io.is-in { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    .reveal-io.is-in { opacity: 1; transform: translateY(0) scale(1); }
     .reveal-io-d1.is-in { transition-delay: .08s; }
     .reveal-io-d2.is-in { transition-delay: .16s; }
     .reveal-io-d3.is-in { transition-delay: .24s; }
@@ -140,7 +143,7 @@
 ============================================================ -->
 <header
   x-show="scrolled" x-cloak x-transition.opacity
-  class="fixed top-0 inset-x-0 z-40 safe-t bg-paper/90 backdrop-blur-md border-b border-ink-100">
+  class="fixed top-0 inset-x-0 z-40 safe-t bg-paper/95 border-b border-ink-100">
   <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
     <span class="font-display font-semibold text-ink-900 tracking-tight">Thermaco <span class="text-moss-600">HVAC
     
@@ -222,7 +225,7 @@
       <div class="relative reveal-io reveal-io-d2">
         <div
           class="rounded-[2rem] border border-ink-100 bg-white/60 backdrop-blur-sm px-5 sm:px-10 pt-8 pb-7 overflow-hidden"
-          @touchstart="touchStart($event)" @touchend="touchEnd($event)">
+          @touchstart.passive="touchStart($event)" @touchend.passive="touchEnd($event)">
 
           <!-- badges -->
           <div class="flex justify-center items-center gap-2 mb-1 flex-wrap">
@@ -502,7 +505,6 @@
         </div>
         <h3 class="font-display font-semibold text-ink-900 text-2xl tracking-tight">Quote requested</h3>
         <p class="text-ink-500 text-sm mt-2">You've requested firm pricing for the system below. We'll be in touch shortly to confirm.</p>
-        <p class="text-xs text-ink-400 font-mono mt-2">Ticket <span x-text="lockTicketId"></span></p>
 
         <div class="mt-6 flex flex-col items-center rounded-2xl bg-ink-50 border border-ink-100 p-6">
           <img :src="currentUnit.image" :alt="currentUnit.name" class="h-24 w-auto object-contain mb-3">
@@ -522,14 +524,18 @@
   </div>
 </div>
 
-<!-- Hidden JotForm submission — same form/endpoint as /estimate (formID 242634271405047),
-     submitted into a hidden iframe so the visitor never sees any Jotform UI.
-     Field names/values below are copied directly from Jotform's own generated
-     source (Request_Estimate.html) — that is the authoritative source for this
-     form's real field names. Do not rename without checking that source again.
-     simple_spc's value is fixed for this form (Jotform sets it via their own
-     script to "<formID>-<formID>"); omitting or altering it causes Jotform's
-     spam filter to silently drop the submission. -->
+<!-- Hidden JotForm submission — same form/endpoint AND same field plumbing as
+     the /estimate page's live form (see estimate.html), submitted into a hidden
+     iframe so the visitor never sees any Jotform UI or leaves this page.
+     Field names below are intentionally kept identical to estimate.html's
+     <form id="242634271405047"> — that page is the current source of truth for
+     this form's real question IDs. If Jotform's schema changes again, update
+     estimate.html first, then copy the same names/values here.
+     NOTE: the old version of this block used stale question IDs
+     (q10_serviceType / q11_yourInquiry) and a hardcoded simple_spc anti-spam
+     token that don't exist on the live form anymore — that mismatch is the
+     likely cause of past silent submission failures. Removed here to match
+     estimate.html exactly. -->
 <!-- sandbox (no allow-top-navigation) blocks Jotform's thank-you page from
      frame-busting out of this hidden iframe and redirecting the visible tab.
      The POST itself still lands fine — sandbox only restricts what the loaded
@@ -540,22 +546,17 @@
   method="POST"
   action="https://submit.jotform.com/submit/242634271405047"
   enctype="multipart/form-data"
+  name="form_242634271405047"
+  id="242634271405047"
+  accept-charset="UTF-8"
   target="lockSubmitFrame"
   style="display:none"
   aria-hidden="true">
   <input type="hidden" name="formID" value="242634271405047">
-  <input type="hidden" id="JWTContainer" value="">
-  <input type="hidden" id="cardinalOrderNumber" value="">
   <input type="hidden" name="jsExecutionTracker" :value="'build-date-' + lockBuildTs">
   <input type="hidden" name="submitSource" value="instant-estimate-lock-in">
-  <input type="hidden" name="submitDate" :value="new Date().toString()">
-  <input type="hidden" name="buildDate" :value="lockBuildTs">
   <input type="hidden" name="uploadServerUrl" value="https://upload.jotform.com/upload">
   <input type="hidden" name="eventObserver" value="1">
-  <!-- honeypot — must stay empty -->
-  <input type="text" name="website" value="" style="display:none">
-  <!-- anti-spam token — Jotform's own script sets this to "<formID>-<formID>" for this form -->
-  <input type="hidden" class="simple_spc" name="simple_spc" value="242634271405047-242634271405047">
 
   <input type="hidden" name="q3_name[first]" :value="leadFirstName">
   <input type="hidden" name="q3_name[last]" :value="leadLastName">
@@ -565,11 +566,11 @@
   <input type="hidden" name="q5_address[city]" :value="leadCity">
   <input type="hidden" name="q5_address[state]" value="ON">
   <input type="hidden" name="q5_address[postal]" :value="leadPostal">
+  <input type="hidden" name="q5_address[country]" value="Canada">
   <input type="hidden" name="q6_phoneNumber[full]" :value="leadPhone">
-  <input type="hidden" name="q10_serviceType" value="Installation">
-  <input type="hidden" name="q11_yourInquiry" :value="lockDescription">
+  <input type="hidden" name="q10_estimateType" value="Replacement">
+  <input type="hidden" name="q11_projectDescription" :value="lockDescription">
   <input type="hidden" name="q25_preferredTime" value="No Preference">
-  <input type="hidden" name="q26_uniqueId" :value="lockTicketId">
 </form>
 
 <!-- ============================================================
@@ -770,21 +771,6 @@ function acApp() {
         + 'Estimated price: ' + this.money(this.displayEstimate) + ' + tax & install';
     },
 
-    // ---- lock-in-quote ticket id ----
-    // Jotform's real Unique ID field is populated by a separate widget
-    // (widgets.jotform.com/widget/autoincrement) that calls Jotform's own
-    // counter service when their embed JS runs. This page submits directly
-    // to Jotform without that widget, so there's no way to fetch the same
-    // incrementing sequence /estimate gets. Instead we generate our own
-    // guaranteed-unique ticket id, prefixed so it's clearly distinguishable
-    // from /estimate's numbering in the ticket email.
-    lockTicketId: '',
-    generateTicketId() {
-      const t = Date.now().toString(36).toUpperCase();
-      const r = Math.random().toString(36).slice(2, 6).toUpperCase();
-      return 'LP-' + t + '-' + r;
-    },
-
     openLock() { this.lockError = ''; this.lockStep = 'form'; this.lockOpen = true; },
     closeLock() { this.lockOpen = false; },
 
@@ -807,7 +793,6 @@ function acApp() {
       if (!this.leadAddress.trim() || !this.leadCity.trim()) { this.lockError = 'Please enter your street address and city.'; return; }
 
       this.lockBuildTs = Date.now();
-      this.lockTicketId = this.generateTicketId();
       this.lockSubmitting = true;
       try {
         this.$refs.lockForm.submit();
