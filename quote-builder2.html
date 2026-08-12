@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0">
+<title>New A/C Installed Fast | Get Your Instant Estimate</title>
+<meta name="description" content="Get an instant A/C installation estimate from an owner-operated, licensed & insured team. High-efficiency inverter and standard systems. Same-week install.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FAF9F4">
+
+<!-- FONTS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- TAILWIND + DESIGN TOKENS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: {
+            DEFAULT: '#45483D', 50:'#f2f3ef', 100:'#e2e4d9', 200:'#c5c9b4', 300:'#a4aa8b',
+            400:'#7d8365', 500:'#5f6349', 600:'#4b4e3a', 700:'#45483D', 800:'#33352c', 900:'#22231d'
+          },
+          moss: {
+            DEFAULT:'#82983A', 50:'#f4f7ea', 100:'#e6edcd', 200:'#cddb9d', 300:'#b1c66c',
+            400:'#9bb64c', 500:'#82983A', 600:'#68792e', 700:'#4f5c24', 800:'#3a4419', 900:'#272d10'
+          },
+          paper: '#FAF9F4'
+        },
+        fontFamily: {
+          display: ['"Fraunces"', 'ui-serif', 'Georgia', 'serif'],
+          sans: ['"Inter"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace']
+        }
+      }
+    }
+  }
+</script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { background-color: #FAF9F4; overscroll-behavior-y: contain; }
+  [x-cloak] { display: none !important; }
+
+  .safe-b { padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .safe-t { padding-top: env(safe-area-inset-top, 0px); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(14px) scale(.99); filter: blur(3px); animation: reveal .8s cubic-bezier(.16,1,.3,1) forwards; }
+    .reveal-1 { animation-delay: .05s; }
+    .reveal-2 { animation-delay: .16s; }
+    .reveal-3 { animation-delay: .28s; }
+    @keyframes reveal { to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
+
+    /* scroll-triggered reveal for below-the-fold sections — feels intentional rather than auto-playing on load */
+    .reveal-io {
+      opacity: 0; transform: translateY(22px) scale(.98); filter: blur(4px);
+      transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1), filter .9s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal-io.is-in { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    .reveal-io-d1.is-in { transition-delay: .08s; }
+    .reveal-io-d2.is-in { transition-delay: .16s; }
+    .reveal-io-d3.is-in { transition-delay: .24s; }
+    .reveal-io-d4.is-in { transition-delay: .32s; }
+    .reveal-io-d5.is-in { transition-delay: .4s; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-io { opacity: 1; transform: none; filter: none; }
+  }
+
+  @keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+  .floaty { animation: floaty 2.4s cubic-bezier(.45,0,.55,1) infinite; }
+
+  @keyframes pulseSoft {
+    0% { transform: scale(1); opacity: .55; }
+    70% { transform: scale(2.4); opacity: 0; }
+    100% { transform: scale(2.4); opacity: 0; }
+  }
+  .pulse-soft { animation: pulseSoft 2.6s cubic-bezier(.4,0,.2,1) infinite; }
+
+  .grain { position: relative; }
+  .grain::before {
+    content: "";
+    position: absolute; inset: 0; z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .focus-ring:focus-visible { outline: 2px solid #82983A; outline-offset: 3px; }
+
+  /* app-like snap flow */
+  .snap-wrap { scroll-snap-type: y proximity; }
+  .snap-block { scroll-snap-align: start; }
+
+  /* product image stage — knocks out plain-white product-photo backgrounds so units float
+     free on the card instead of sitting in a visible box. Multiply blends white pixels into
+     the light stage; true transparent-alpha source images will render unaffected. */
+  .stage-img {
+    transition: opacity .34s cubic-bezier(.16,1,.3,1), transform .34s cubic-bezier(.16,1,.3,1), filter .34s cubic-bezier(.16,1,.3,1);
+  }
+  .stage-img.swiping {
+    opacity: 0;
+    transform: scale(.93) translateX(var(--dx, 0px));
+    filter: blur(3px);
+  }
+
+  .segmented { background: #e2e4d9; border-radius: 9999px; padding: 4px; display: inline-flex; }
+  .segmented button { border-radius: 9999px; transition: background .25s cubic-bezier(.16,1,.3,1), color .25s cubic-bezier(.16,1,.3,1); }
+  .segmented button.active { background: #22231d; color: #FAF9F4; }
+
+  .dot { width: 6px; height: 6px; border-radius: 9999px; background: #c5c9b4; transition: all .2s ease; }
+  .dot.active { width: 18px; background: #82983A; }
+
+  input[type="range"] {
+    -webkit-appearance: none; appearance: none; height: 6px; border-radius: 9999px;
+    background: linear-gradient(to right, #82983A var(--fill,50%), #e2e4d9 var(--fill,50%));
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none; width: 26px; height: 26px; border-radius: 9999px;
+    background: #FAF9F4; border: 3px solid #82983A; box-shadow: 0 2px 6px rgba(34,35,29,0.25); cursor: pointer;
+  }
+  input[type="range"]::-moz-range-thumb {
+    width: 26px; height: 26px; border-radius: 9999px; background: #FAF9F4; border: 3px solid #82983A;
+    box-shadow: 0 2px 6px rgba(34,35,29,0.25); cursor: pointer;
+  }
+
+  .tap-btn { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+</style>
+</head>
+
+<body class="font-sans text-ink-800 antialiased" x-data="acApp()" x-init="init()">
+
+<!-- ============================================================
+     STICKY MINI HEADER (appears after hero scroll)
+============================================================ -->
+<header
+  x-show="scrolled" x-cloak x-transition.opacity
+  class="fixed top-0 inset-x-0 z-40 safe-t bg-paper/90 backdrop-blur-md border-b border-ink-100">
+  <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+    <span class="font-display font-semibold text-ink-900 tracking-tight">Thermaco <span class="text-moss-600">HVAC
+    
+    </span></span>
+    <a href="tel:+12898902222" class="inline-flex items-center gap-1.5 rounded-full bg-ink-900 text-paper text-sm font-semibold pl-3 pr-4 py-2 focus-ring tap-btn">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Call
+    </a>
+  </div>
+</header>
+
+<main class="snap-wrap">
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section class="snap-block relative min-h-[100dvh] flex flex-col grain overflow-hidden bg-gradient-to-b from-ink-900 via-ink-800 to-ink-900">
+    <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-moss-500/20 blur-3xl"></div>
+    <div class="absolute bottom-0 -left-16 w-64 h-64 rounded-full bg-moss-400/10 blur-3xl"></div>
+
+    <div class="relative z-10 flex-1 flex flex-col justify-center px-6 sm:px-10 max-w-3xl mx-auto text-center safe-t pt-10">
+      <p class="reveal reveal-1 inline-flex self-center items-center gap-2 text-xs font-semibold tracking-wide text-moss-300 bg-moss-500/10 border border-moss-400/30 rounded-full px-3.5 py-1.5 mb-6">
+        <span class="relative flex h-1.5 w-1.5">
+          <span class="pulse-soft absolute inline-flex h-full w-full rounded-full bg-moss-400"></span>
+          <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-moss-400"></span>
+        </span>
+        Booking same-week installs
+      </p>
+
+      <h1 class="reveal reveal-2 font-display font-semibold text-paper text-4xl sm:text-6xl leading-[1.05] tracking-tight">
+        New A/C. <span class="text-moss-400">Installed right.</span> Priced honestly.
+      </h1>
+
+      <p class="reveal reveal-3 mt-5 text-ink-200 text-base sm:text-lg max-w-lg mx-auto">
+        Get real pricing in 15 seconds — pick a system, enter your home size. Owner-operated, no call centre, no forms.
+      </p>
+
+      <div class="reveal reveal-3 mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="tel:+12898902222" class="tap-btn w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-moss-500 text-ink-900 font-semibold px-7 py-4 text-base active:scale-[0.97] transition-transform focus-ring">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Call Now
+        </a>
+        <a href="sms:+12898902222" class="tap-btn w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-paper/25 text-paper font-semibold px-7 py-4 text-base active:scale-[0.97] transition-transform focus-ring">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          Text Us
+        </a>
+      </div>
+    </div>
+
+    <button @click="scrollToBuilder()" class="tap-btn relative z-10 mx-auto mb-8 flex flex-col items-center gap-1 text-ink-300 focus-ring rounded-full">
+      <span class="text-xs tracking-wide">Build your estimate</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="floaty"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+  </section>
+
+  <!-- ============================================================
+       CATEGORY + CAROUSEL
+  ============================================================ -->
+  <section id="builder" class="snap-block relative py-14 sm:py-20 px-5 sm:px-8">
+    <div class="max-w-3xl mx-auto">
+
+      <div class="text-center mb-7 reveal-io">
+        <p class="text-[11px] font-semibold tracking-wide uppercase text-moss-600 mb-2">Step 1 of 2 &middot; Choose your system</p>
+        <h2 class="font-display font-semibold text-ink-900 text-2xl sm:text-3xl tracking-tight">Compare systems</h2>
+        <p class="text-ink-500 text-sm mt-1.5">Swipe or tap to browse — we recommend the Efficiency Upgrade for most homes</p>
+      </div>
+
+      <!-- category segmented control -->
+      <div class="flex justify-center mb-8 reveal-io reveal-io-d1">
+        <div class="segmented">
+          <button type="button" @click="setCategory('inverter')" :class="category==='inverter' && 'active'" class="tap-btn relative px-4 sm:px-5 py-2.5 text-sm font-semibold text-ink-700 focus-ring">
+           High Efficiency Upgrade
+          </button>
+          <button type="button" @click="setCategory('standard')" :class="category==='standard' && 'active'" class="tap-btn px-4 sm:px-5 py-2.5 text-sm font-semibold text-ink-700 focus-ring">Standard Replacement</button>
+        </div>
+      </div>
+
+      <!-- carousel card -->
+      <div class="relative reveal-io reveal-io-d2">
+        <div
+          class="rounded-[2rem] border border-ink-100 bg-white/60 backdrop-blur-sm px-5 sm:px-10 pt-8 pb-7 overflow-hidden"
+          @touchstart="touchStart($event)" @touchend="touchEnd($event)">
+
+          <!-- badges -->
+          <div class="flex justify-center items-center gap-2 mb-1 flex-wrap">
+            <span x-show="currentUnit.recommended" x-cloak class="inline-flex items-center gap-1 text-[11px] font-semibold tracking-wide uppercase text-paper bg-ink-900 rounded-full px-3 py-1">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+              Recommended
+            </span>
+            <span x-show="currentUnit.bestValue" x-cloak class="inline-flex items-center gap-1 text-[11px] font-semibold tracking-wide uppercase text-moss-700 bg-moss-100 rounded-full px-3 py-1">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+              Best Value
+            </span>
+          </div>
+
+          <!-- image stage -->
+          <div class="relative h-56 sm:h-72 flex items-center justify-center select-none">
+            <button type="button" @click="prev()" aria-label="Previous option"
+              class="tap-btn absolute left-0 sm:-left-3 z-10 h-11 w-11 rounded-full bg-white shadow-md border border-ink-100 flex items-center justify-center text-ink-700 active:scale-90 transition-transform focus-ring">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+
+            <img :src="currentUnit.image" :alt="currentUnit.name" :class="swiping && 'swiping'"
+                 class="stage-img relative h-full w-auto max-w-[75%] object-contain">
+
+            <button type="button" @click="next()" aria-label="Next option"
+              class="tap-btn absolute right-0 sm:-right-3 z-10 h-11 w-11 rounded-full bg-white shadow-md border border-ink-100 flex items-center justify-center text-ink-700 active:scale-90 transition-transform focus-ring">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+
+          <!-- dots -->
+          <div class="flex justify-center gap-1.5 mt-2 mb-5">
+            <template x-for="(key, i) in currentOrder" :key="key">
+              <span class="dot" :class="i===index && 'active'"></span>
+            </template>
+          </div>
+
+          <!-- name + brand -->
+          <div class="text-center">
+            <h3 class="font-display font-semibold text-xl sm:text-2xl text-ink-900" x-text="currentUnit.name"></h3>
+            <p class="text-ink-500 text-sm mt-1" x-text="currentUnit.subtitle"></p>
+          </div>
+
+          <!-- specs -->
+          <ul class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-w-md mx-auto">
+            <template x-for="spec in currentUnit.specs" :key="spec">
+              <li class="flex items-start gap-2 text-sm text-ink-700">
+                <svg class="shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#82983A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                <span x-text="spec"></span>
+              </li>
+            </template>
+          </ul>
+
+          <!-- inconspicuous starting price -->
+          <p class="text-center mt-6 text-[11px] text-ink-400 font-mono">
+            starting at <span x-text="money(currentUnit.startPrice)"></span> <span x-text="'(' + currentUnit.startTon + ' ton)'"></span> + tax &amp; install
+          </p>
+
+          <!-- step-forward prompt: names the selected unit so the next step feels continuous -->
+          <button type="button" @click="scrollToPrice()"
+            class="tap-btn mt-5 w-full inline-flex items-center justify-center gap-2 rounded-full bg-ink-900 text-paper font-semibold px-6 py-3.5 text-sm active:scale-[0.97] transition-transform focus-ring">
+            <span>Get your price for the <span x-text="currentUnit.name"></span></span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="floaty"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PRICE BUILDER
+  ============================================================ -->
+  <section id="price" class="snap-block relative py-14 sm:py-20 px-5 sm:px-8 bg-ink-900 grain overflow-hidden">
+    <div class="max-w-lg mx-auto relative z-10">
+
+      <div class="text-center mb-7 reveal-io">
+        <p class="text-[11px] font-semibold tracking-wide uppercase text-moss-400 mb-2">Step 2 of 2 &middot; Your price</p>
+
+        <!-- mini product stage: same unit image as the compare step, so the two steps read as one flow.
+             No card/box — just the transparent PNG floating on the dark background with a soft grounding shadow. -->
+        <div class="mx-auto mb-4 relative h-24 sm:h-28 w-40 sm:w-48 flex items-center justify-center select-none">
+          <div class="absolute bottom-1 sm:bottom-1.5 h-3 sm:h-3.5 w-16 sm:w-20 rounded-full blur-[2px]"
+               style="background: radial-gradient(closest-side, rgba(130,152,58,0.28), rgba(130,152,58,0) 72%);"
+               :class="swiping && 'swiping'"></div>
+          <img :src="currentUnit.image" :alt="currentUnit.name" :class="swiping && 'swiping'"
+               class="stage-img relative h-full w-auto max-w-[70%] object-contain">
+        </div>
+
+        <h2 class="font-display font-semibold text-paper text-2xl sm:text-3xl tracking-tight">Your instant estimate</h2>
+        <p class="text-ink-300 text-sm mt-1.5">For the <span class="text-moss-400 font-semibold" x-text="currentUnit.name"></span> — adjust below</p>
+      </div>
+
+      <!-- size mode toggle -->
+      <div class="flex justify-center mb-6 reveal-io reveal-io-d1">
+        <div class="segmented">
+          <button type="button" @click="sizeMode='sqft'" :class="sizeMode==='sqft' && 'active'" class="tap-btn px-5 py-2.5 text-sm font-semibold text-ink-700 focus-ring">By Square Footage</button>
+          <button type="button" @click="sizeMode='tonnage'" :class="sizeMode==='tonnage' && 'active'" class="tap-btn px-5 py-2.5 text-sm font-semibold text-ink-700 focus-ring">By Tonnage</button>
+        </div>
+      </div>
+
+      <div class="rounded-[2rem] bg-paper px-6 sm:px-8 py-7 reveal-io reveal-io-d2">
+
+        <!-- sq ft control -->
+        <div x-show="sizeMode==='sqft'" x-cloak>
+          <div class="flex items-end justify-between mb-3">
+            <label class="text-sm font-semibold text-ink-700">Home size</label>
+            <span class="font-mono text-lg font-semibold text-ink-900" x-text="sqft.toLocaleString() + ' sq ft'"></span>
+          </div>
+          <input type="range" min="900" max="5000" step="50" x-model.number="sqft"
+                 :style="'--fill:' + ((sqft-900)/(5000-900)*100) + '%'"
+                 class="w-full focus-ring">
+          <div class="flex justify-between text-xs text-ink-400 mt-2">
+            <span>900 sq ft</span>
+            <span>5,000 sq ft</span>
+          </div>
+        </div>
+
+        <!-- tonnage control -->
+        <div x-show="sizeMode==='tonnage'" x-cloak>
+          <label class="text-sm font-semibold text-ink-700 block mb-3">System size</label>
+          <div class="flex items-center justify-center gap-5">
+            <button type="button" @click="tonnage = Math.max(1.5, +(tonnage-0.5).toFixed(1))" class="tap-btn h-12 w-12 rounded-full bg-ink-100 text-ink-800 text-xl font-semibold active:scale-90 transition-transform focus-ring">–</button>
+            <span class="font-mono text-2xl font-semibold text-ink-900 w-24 text-center" x-text="tonnage.toFixed(1) + ' ton'"></span>
+            <button type="button" @click="tonnage = Math.min(5, +(tonnage+0.5).toFixed(1))" class="tap-btn h-12 w-12 rounded-full bg-ink-100 text-ink-800 text-xl font-semibold active:scale-90 transition-transform focus-ring">+</button>
+          </div>
+        </div>
+
+        <div class="h-px bg-ink-100 my-6"></div>
+
+        <!-- result -->
+        <div class="text-center">
+          <p class="text-xs uppercase tracking-wide text-ink-400 font-semibold">Estimated installed price</p>
+          <p class="font-display font-semibold text-4xl sm:text-5xl text-ink-900 mt-2 tabular-nums" x-text="money(displayEstimate)"></p>
+          <p class="text-xs text-ink-400 mt-2">+ tax · <span x-text="currentUnit.name"></span> · <span x-text="effectiveTons.toFixed(1)"></span>-ton system</p>
+          <p class="inline-flex items-center gap-1.5 text-xs font-semibold text-moss-700 bg-moss-100 rounded-full px-3 py-1 mt-3">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
+            10-year compressor &amp; parts warranty
+          </p>
+        </div>
+
+        <div class="mt-7 flex flex-col sm:flex-row gap-3">
+          <button type="button" @click="openLock()" class="tap-btn flex-1 inline-flex items-center justify-center gap-2 rounded-full bg-moss-500 text-ink-900 font-semibold px-6 py-4 text-sm active:scale-[0.97] transition-transform focus-ring">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Lock In My Quote
+          </button>
+          <a :href="smsHref" class="tap-btn flex-1 inline-flex items-center justify-center gap-2 rounded-full border border-ink-200 text-ink-800 font-semibold px-6 py-4 text-sm active:scale-[0.97] transition-transform focus-ring">
+            Text Instead
+          </a>
+        </div>
+
+        <p class="text-center text-[11px] text-ink-400 mt-5 leading-relaxed">
+          Estimate only — final pricing confirmed after a free in-home assessment. No obligation.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TRUST STRIP
+  ============================================================ -->
+  <section class="snap-block py-14 sm:py-20 px-5 sm:px-8">
+    <div class="max-w-3xl mx-auto reveal-io">
+      <div class="grid grid-cols-2 sm:grid-cols-4">
+        <div class="text-center px-3 py-6 sm:py-0">
+          <p class="font-display font-semibold text-ink-900 text-lg sm:text-xl whitespace-nowrap">10+ Years</p>
+          <p class="text-xs text-ink-500 mt-1.5 whitespace-nowrap">Refined through experience</p>
+        </div>
+        <div class="text-center px-3 py-6 sm:py-0 sm:border-l sm:border-ink-100">
+          <p class="font-display font-semibold text-ink-900 text-lg sm:text-xl whitespace-nowrap">313A Licensed</p>
+          <p class="text-xs text-ink-500 mt-1.5 whitespace-nowrap">Fully insured, fully accountable</p>
+        </div>
+        <div class="text-center px-3 py-6 sm:py-0 border-t border-ink-100 sm:border-t-0 sm:border-l">
+          <p class="font-display font-semibold text-ink-900 text-lg sm:text-xl whitespace-nowrap">Owner-Operated</p>
+          <p class="text-xs text-ink-500 mt-1.5 whitespace-nowrap">Never subcontracted</p>
+        </div>
+        <div class="text-center px-3 py-6 sm:py-0 border-t border-ink-100 sm:border-t-0 sm:border-l sm:border-ink-100">
+          <p class="font-display font-semibold text-ink-900 text-lg sm:text-xl whitespace-nowrap">White-Glove</p>
+          <p class="text-xs text-ink-500 mt-1.5 whitespace-nowrap">Precision, from start to finish</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     LOCK IN QUOTE — MODAL
+     Collects name + phone, submits silently to the same JotForm
+     used by /estimate (via hidden iframe so the page never
+     navigates away), then shows an in-page confirmation with the
+     selected system.
+============================================================ -->
+<div x-show="lockOpen" x-cloak
+     class="fixed inset-0 z-50 flex items-end sm:items-center justify-center"
+     role="dialog" aria-modal="true">
+
+  <div x-show="lockOpen" x-transition.opacity @click="closeLock()"
+       class="absolute inset-0 bg-ink-900/60 backdrop-blur-sm"></div>
+
+  <div x-show="lockOpen" x-transition.opacity.scale.95
+       class="relative w-full sm:max-w-md bg-paper rounded-t-[2rem] sm:rounded-[2rem] px-6 sm:px-8 pt-7 pb-8 safe-b max-h-[92dvh] overflow-y-auto">
+
+    <button type="button" @click="closeLock()" aria-label="Close"
+      class="tap-btn absolute right-5 top-5 h-9 w-9 rounded-full bg-ink-50 flex items-center justify-center text-ink-500 focus-ring">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+
+    <!-- STEP 1: form -->
+    <template x-if="lockStep === 'form'">
+      <div>
+        <p class="text-[11px] font-semibold tracking-wide uppercase text-moss-600 mb-1">Lock in my quote</p>
+        <h3 class="font-display font-semibold text-ink-900 text-2xl tracking-tight">Request firm pricing</h3>
+
+        <!-- selected system recap -->
+        <div class="mt-5 flex items-center gap-4 rounded-2xl bg-ink-50 border border-ink-100 p-4">
+          <img :src="currentUnit.image" :alt="currentUnit.name" class="h-16 w-16 object-contain shrink-0">
+          <div class="min-w-0">
+            <p class="font-display font-semibold text-ink-900 leading-tight truncate" x-text="currentUnit.name"></p>
+            <p class="text-xs text-ink-500 mt-0.5" x-text="currentUnit.subtitle"></p>
+            <p class="text-xs text-ink-400 mt-0.5" x-text="effectiveTons.toFixed(1) + '-ton · ' + money(displayEstimate) + ' est.'"></p>
+          </div>
+        </div>
+
+        <p class="text-ink-500 text-sm mt-5">Leave your details — we'll confirm exact pricing and get a firm quote back to you.</p>
+
+        <div class="mt-4 space-y-3">
+          <div>
+            <label for="lockName" class="block text-xs font-semibold uppercase tracking-wide text-ink-500 mb-2">Full Name</label>
+            <input type="text" id="lockName" x-model="leadName" placeholder="Jamie Nguyen"
+              class="w-full rounded-xl border border-ink-100 bg-white px-4 py-3.5 text-sm text-ink-800 focus-ring">
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label for="lockPhone" class="block text-xs font-semibold uppercase tracking-wide text-ink-500 mb-2">Phone</label>
+              <input type="tel" id="lockPhone" x-model="leadPhone" @input="formatLeadPhone($event)" placeholder="(000) 000-0000" maxlength="14" inputmode="tel"
+                class="w-full rounded-xl border border-ink-100 bg-white px-4 py-3.5 text-sm text-ink-800 focus-ring">
+            </div>
+            <div>
+              <label for="lockEmail" class="block text-xs font-semibold uppercase tracking-wide text-ink-500 mb-2">Email</label>
+              <input type="email" id="lockEmail" x-model="leadEmail" placeholder="you@example.com" inputmode="email"
+                class="w-full rounded-xl border border-ink-100 bg-white px-4 py-3.5 text-sm text-ink-800 focus-ring">
+            </div>
+          </div>
+          <div>
+            <label for="lockAddress" class="block text-xs font-semibold uppercase tracking-wide text-ink-500 mb-2">Street Address</label>
+            <input type="text" id="lockAddress" x-model="leadAddress" placeholder="123 Main St"
+              class="w-full rounded-xl border border-ink-100 bg-white px-4 py-3.5 text-sm text-ink-800 focus-ring">
+          </div>
+          <div class="grid grid-cols-3 gap-3">
+            <div class="col-span-2">
+              <label for="lockCity" class="block text-xs font-semibold uppercase tracking-wide text-ink-500 mb-2">City</label>
+              <input type="text" id="lockCity" x-model="leadCity" placeholder="Schomberg"
+                class="w-full rounded-xl border border-ink-100 bg-white px-4 py-3.5 text-sm text-ink-800 focus-ring">
+            </div>
+            <div>
+              <label for="lockPostal" class="block text-xs font-semibold uppercase tracking-wide text-ink-500 mb-2">Postal</label>
+              <input type="text" id="lockPostal" x-model="leadPostal" placeholder="L0G 1T0"
+                class="w-full rounded-xl border border-ink-100 bg-white px-4 py-3.5 text-sm text-ink-800 focus-ring">
+            </div>
+          </div>
+        </div>
+
+        <p x-show="lockError" x-cloak x-text="lockError" class="mt-3 text-sm text-[#c17a5a]"></p>
+
+        <button type="button" @click="submitLock()" :disabled="lockSubmitting"
+          class="tap-btn mt-6 w-full inline-flex items-center justify-center gap-2 rounded-full bg-moss-500 text-ink-900 font-semibold px-6 py-4 text-sm active:scale-[0.97] transition-transform focus-ring disabled:opacity-60">
+          <span x-text="lockSubmitting ? 'Submitting…' : 'Confirm & Lock In'"></span>
+        </button>
+        <p class="text-center text-[11px] text-ink-400 mt-4 leading-relaxed">No payment required — this just flags your selection for firm pricing.</p>
+      </div>
+    </template>
+
+    <!-- STEP 2: confirmation -->
+    <template x-if="lockStep === 'confirmed'">
+      <div class="text-center">
+        <div class="mx-auto h-12 w-12 rounded-full bg-moss-100 flex items-center justify-center mb-4">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4f5c24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+        </div>
+        <h3 class="font-display font-semibold text-ink-900 text-2xl tracking-tight">Quote requested</h3>
+        <p class="text-ink-500 text-sm mt-2">You've requested firm pricing for the system below. We'll be in touch shortly to confirm.</p>
+        <p class="text-xs text-ink-400 font-mono mt-2">Ticket <span x-text="lockTicketId"></span></p>
+
+        <div class="mt-6 flex flex-col items-center rounded-2xl bg-ink-50 border border-ink-100 p-6">
+          <img :src="currentUnit.image" :alt="currentUnit.name" class="h-24 w-auto object-contain mb-3">
+          <p class="font-display font-semibold text-ink-900 text-lg" x-text="currentUnit.name"></p>
+          <p class="text-xs text-ink-500 mt-0.5" x-text="currentUnit.subtitle"></p>
+          <p class="text-sm text-ink-700 font-mono mt-2" x-text="effectiveTons.toFixed(1) + '-ton system · ' + (sizeMode==='sqft' ? sqft.toLocaleString() + ' sq ft' : effectiveTons.toFixed(1) + ' ton')"></p>
+          <p class="font-display font-semibold text-ink-900 text-2xl mt-2" x-text="money(displayEstimate)"></p>
+        </div>
+
+        <button type="button" @click="closeLock()"
+          class="tap-btn mt-6 w-full inline-flex items-center justify-center gap-2 rounded-full bg-ink-900 text-paper font-semibold px-6 py-4 text-sm active:scale-[0.97] transition-transform focus-ring">
+          Done
+        </button>
+      </div>
+    </template>
+
+  </div>
+</div>
+
+<!-- Hidden JotForm submission — same form/endpoint as /estimate (formID 242634271405047),
+     submitted into a hidden iframe so the visitor never sees any Jotform UI.
+     Field names/values below are copied directly from Jotform's own generated
+     source (Request_Estimate.html) — that is the authoritative source for this
+     form's real field names. Do not rename without checking that source again.
+     simple_spc's value is fixed for this form (Jotform sets it via their own
+     script to "<formID>-<formID>"); omitting or altering it causes Jotform's
+     spam filter to silently drop the submission. -->
+<!-- sandbox (no allow-top-navigation) blocks Jotform's thank-you page from
+     frame-busting out of this hidden iframe and redirecting the visible tab.
+     The POST itself still lands fine — sandbox only restricts what the loaded
+     response page is allowed to do, not our ability to submit into it. -->
+<iframe name="lockSubmitFrame" style="display:none" aria-hidden="true" tabindex="-1" sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
+<form
+  x-ref="lockForm"
+  method="POST"
+  action="https://submit.jotform.com/submit/242634271405047"
+  enctype="multipart/form-data"
+  target="lockSubmitFrame"
+  style="display:none"
+  aria-hidden="true">
+  <input type="hidden" name="formID" value="242634271405047">
+  <input type="hidden" id="JWTContainer" value="">
+  <input type="hidden" id="cardinalOrderNumber" value="">
+  <input type="hidden" name="jsExecutionTracker" :value="'build-date-' + lockBuildTs">
+  <input type="hidden" name="submitSource" value="instant-estimate-lock-in">
+  <input type="hidden" name="submitDate" :value="new Date().toString()">
+  <input type="hidden" name="buildDate" :value="lockBuildTs">
+  <input type="hidden" name="uploadServerUrl" value="https://upload.jotform.com/upload">
+  <input type="hidden" name="eventObserver" value="1">
+  <!-- honeypot — must stay empty -->
+  <input type="text" name="website" value="" style="display:none">
+  <!-- anti-spam token — Jotform's own script sets this to "<formID>-<formID>" for this form -->
+  <input type="hidden" class="simple_spc" name="simple_spc" value="242634271405047-242634271405047">
+
+  <input type="hidden" name="q3_name[first]" :value="leadFirstName">
+  <input type="hidden" name="q3_name[last]" :value="leadLastName">
+  <input type="hidden" name="q4_email" :value="leadEmail">
+  <input type="hidden" name="q5_address[addr_line1]" :value="leadAddress">
+  <input type="hidden" name="q5_address[addr_line2]" value="">
+  <input type="hidden" name="q5_address[city]" :value="leadCity">
+  <input type="hidden" name="q5_address[state]" value="ON">
+  <input type="hidden" name="q5_address[postal]" :value="leadPostal">
+  <input type="hidden" name="q6_phoneNumber[full]" :value="leadPhone">
+  <input type="hidden" name="q10_serviceType" value="Installation">
+  <input type="hidden" name="q11_yourInquiry" :value="lockDescription">
+  <input type="hidden" name="q25_preferredTime" value="No Preference">
+  <input type="hidden" name="q26_uniqueId" :value="lockTicketId">
+</form>
+
+<!-- ============================================================
+     APP LOGIC
+============================================================ -->
+<script>
+function acApp() {
+  return {
+    // ---- state ----
+    category: 'inverter',
+    index: 0,
+    sizeMode: 'sqft',
+    sqft: 1500,
+    tonnage: 1.5,
+    scrolled: false,
+    swiping: false,
+    touchX: 0,
+    displayEstimate: 0,
+
+    // ---- lock-in-quote modal ----
+    lockOpen: false,
+    lockStep: 'form',
+    leadName: '',
+    leadPhone: '',
+    leadEmail: '',
+    leadAddress: '',
+    leadCity: '',
+    leadPostal: '',
+    lockError: '',
+    lockSubmitting: false,
+    lockBuildTs: Date.now(),
+
+    standardOrder: ['mideaStandard', 'keeprite', 'goodman', 'lennox'],
+    inverterOrder: ['mideaCooling', 'mideaHeat'],
+
+    units: {
+      mideaStandard: {
+        name: 'Midea', subtitle: 'Standard Cube-Style Condenser', tag: 'Cube Style', bestValue: true,
+        image: 'images/mova.webp',
+        specs: [
+          'Standard cube-style condenser cabinet',
+          'Single-stage cooling, sized to match your existing ductwork',
+          'New TXV-equipped evaporator coil included standard',
+          'R-410A refrigerant, ready for a same-week swap',
+          'Best value for a like-for-like replacement',
+          'Backed by our 10-year compressor & parts warranty'
+        ],
+        startTon: 1.5, startPrice: 3000, endTon: 4, endPrice: 5000
+      },
+      lennox: {
+        name: 'Lennox', subtitle: 'Standard Cube-Style Condenser', tag: 'Cube Style',
+        image: 'images/lennox.webp',
+        specs: [
+          'Standard cube-style condenser cabinet',
+          'Single-stage scroll compressor for steady, reliable cooling',
+          'New TXV-equipped evaporator coil for precise refrigerant metering',
+          'R-410A refrigerant, fully code-compliant',
+          'Powder-coated steel cabinet built for Ontario weather',
+          'Trusted, widely available parts & manufacturer support'
+        ],
+        startTon: 1.5, startPrice: 4000, endTon: 4, endPrice: 6000
+      },
+      keeprite: {
+        name: 'KeepRite', subtitle: 'Standard Cube-Style Condenser', tag: 'Cube Style',
+        image: 'images/keeprite.webp',
+        specs: [
+          'Standard cube-style condenser cabinet',
+          'Single-stage cooling engineered for a straightforward replacement',
+          'New TXV-equipped evaporator coil for consistent comfort',
+          'R-410A refrigerant, fully code-compliant',
+          'Durable outdoor-rated cabinet built to handle the elements',
+          'Reliable performance backed by strong local parts support'
+        ],
+        startTon: 1.5, startPrice: 3500, endTon: 4, endPrice: 5500
+      },
+      goodman: {
+        name: 'Goodman', subtitle: 'Standard Cube-Style Condenser', tag: 'Cube Style',
+        image: 'images/goodman.webp',
+        specs: [
+          'Standard cube-style condenser cabinet',
+          'Single-stage cooling for a straightforward, reliable replacement',
+          'New TXV-equipped evaporator coil for consistent comfort',
+          'R-410A refrigerant, fully code-compliant',
+          'Durable outdoor-rated cabinet built to handle the elements',
+          'Reliable performance backed by strong local parts support'
+        ],
+        startTon: 1.5, startPrice: 3500, endTon: 4, endPrice: 5500
+      },
+      mideaCooling: {
+        name: 'Midea Inverter', subtitle: 'Cooling Only', tag: 'Efficiency Upgrade', recommended: true,
+        image: 'images/nxtgen-cooling.webp',
+        specs: [
+          'Variable-speed inverter compressor that fine-tunes output to your home',
+          'New TXV-equipped evaporator coil for maximum efficiency',
+          'Low-profile horizontal discharge design',
+          'Whisper-quiet operation, ideal for tight side-yards',
+          'High-efficiency operation that helps lower summer energy bills',
+          'Smooth, consistent cooling without the on/off temperature swings'
+        ],
+        startTon: 1.5, startPrice: 3200, endTon: 4, endPrice: 5200
+      },
+      mideaHeat: {
+        name: 'Midea Inverter', subtitle: 'Cooling + Heat Pump', tag: 'Efficiency Upgrade Upgrade',
+        image: 'images/nxtgen-withheat.webp',
+        specs: [
+          'Variable-speed inverter heat pump — cooling and heating in one system',
+          'New TXV-equipped evaporator coil for efficient year-round operation',
+          'Low-profile horizontal discharge design',
+          'Cools in summer, heats through spring & fall shoulder seasons',
+          'Lower year-round energy use versus single-stage systems',
+          'Extends comfortable temperatures well beyond just summer'
+        ],
+        startTon: 2, startPrice: 4000, endTon: 4, endPrice: 5500
+      }
+    },
+
+    init() {
+      this.displayEstimate = this.estimate;
+      this.$watch('estimate', (val) => this.animateEstimate(val));
+      window.addEventListener('scroll', () => { this.scrolled = window.scrollY > window.innerHeight * 0.7; }, { passive: true });
+      this.setupRevealObserver();
+    },
+
+    // ---- premium price count-up ----
+    animateEstimate(target) {
+      const start = this.displayEstimate;
+      const startTime = performance.now();
+      const dur = 450;
+      const ease = t => 1 - Math.pow(1 - t, 3);
+      const step = (now) => {
+        const p = Math.min(1, (now - startTime) / dur);
+        this.displayEstimate = Math.round(start + (target - start) * ease(p));
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    },
+
+    // ---- scroll-triggered reveal ----
+    setupRevealObserver() {
+      if (!('IntersectionObserver' in window)) {
+        document.querySelectorAll('.reveal-io').forEach(el => el.classList.add('is-in'));
+        return;
+      }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) { entry.target.classList.add('is-in'); io.unobserve(entry.target); }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.reveal-io').forEach(el => io.observe(el));
+    },
+
+    // ---- category / carousel ----
+    get currentOrder() { return this.category === 'standard' ? this.standardOrder : this.inverterOrder; },
+    get currentUnit() { return this.units[this.currentOrder[this.index]]; },
+    setCategory(cat) { this.category = cat; this.index = 0; },
+    next() { this.bump(); this.index = (this.index + 1) % this.currentOrder.length; },
+    prev() { this.bump(); this.index = (this.index - 1 + this.currentOrder.length) % this.currentOrder.length; },
+    bump() { this.swiping = true; setTimeout(() => this.swiping = false, 180); },
+    touchStart(e) { this.touchX = e.changedTouches[0].clientX; },
+    touchEnd(e) {
+      const dx = e.changedTouches[0].clientX - this.touchX;
+      if (Math.abs(dx) > 45) { dx < 0 ? this.next() : this.prev(); }
+    },
+
+    // ---- sizing ----
+    get effectiveTons() {
+      if (this.sizeMode === 'tonnage') return this.tonnage;
+      let t = Math.round((this.sqft / 1000) / 0.5) * 0.5;
+      return Math.min(5, Math.max(1.5, t));
+    },
+
+    // ---- pricing ----
+    get estimate() {
+      const u = this.currentUnit;
+      const steps = (u.endTon - u.startTon) / 0.5;
+      const perStep = (u.endPrice - u.startPrice) / steps;
+      const delta = (this.effectiveTons - u.startTon) / 0.5;
+      const raw = u.startPrice + perStep * delta;
+      return Math.round(raw / 50) * 50;
+    },
+
+    money(n) { return '$' + Math.round(n).toLocaleString('en-CA'); },
+
+    // ---- lock-in quote ----
+    get leadFirstName() { return this.leadName.trim().split(/\s+/)[0] || ''; },
+    get leadLastName() { return this.leadName.trim().split(/\s+/).slice(1).join(' ') || '-'; },
+    get sizeLabel() { return this.sizeMode === 'sqft' ? this.sqft.toLocaleString() + ' sq ft' : this.effectiveTons.toFixed(1) + ' ton'; },
+    get lockDescription() {
+      const u = this.currentUnit;
+      return 'LOCKED-IN QUOTE REQUEST — submitted via Instant Estimate tool\n'
+        + 'Name: ' + this.leadName.trim() + '\n'
+        + 'Phone: ' + this.leadPhone + '\n'
+        + 'Email: ' + this.leadEmail.trim() + '\n'
+        + 'Address: ' + this.leadAddress.trim() + (this.leadCity.trim() ? ', ' + this.leadCity.trim() : '') + (this.leadPostal.trim() ? ' ' + this.leadPostal.trim() : '') + '\n'
+        + 'System: ' + u.name + ' (' + u.subtitle + ')\n'
+        + 'Category: ' + (this.category === 'inverter' ? 'High Efficiency Upgrade' : 'Standard Replacement') + '\n'
+        + 'Size: ' + this.effectiveTons.toFixed(1) + ' ton (' + this.sizeLabel + ')\n'
+        + 'Estimated price: ' + this.money(this.displayEstimate) + ' + tax & install';
+    },
+
+    // ---- lock-in-quote ticket id ----
+    // Jotform's real Unique ID field is populated by a separate widget
+    // (widgets.jotform.com/widget/autoincrement) that calls Jotform's own
+    // counter service when their embed JS runs. This page submits directly
+    // to Jotform without that widget, so there's no way to fetch the same
+    // incrementing sequence /estimate gets. Instead we generate our own
+    // guaranteed-unique ticket id, prefixed so it's clearly distinguishable
+    // from /estimate's numbering in the ticket email.
+    lockTicketId: '',
+    generateTicketId() {
+      const t = Date.now().toString(36).toUpperCase();
+      const r = Math.random().toString(36).slice(2, 6).toUpperCase();
+      return 'LP-' + t + '-' + r;
+    },
+
+    openLock() { this.lockError = ''; this.lockStep = 'form'; this.lockOpen = true; },
+    closeLock() { this.lockOpen = false; },
+
+    formatLeadPhone(e) {
+      const digits = e.target.value.replace(/\D/g, '').slice(0, 10);
+      let out = digits;
+      if (digits.length > 6) out = '(' + digits.slice(0,3) + ') ' + digits.slice(3,6) + '-' + digits.slice(6);
+      else if (digits.length > 3) out = '(' + digits.slice(0,3) + ') ' + digits.slice(3);
+      else if (digits.length > 0) out = '(' + digits;
+      this.leadPhone = out;
+      e.target.value = out;
+    },
+
+    submitLock() {
+      this.lockError = '';
+      if (!this.leadName.trim()) { this.lockError = 'Please enter your name.'; return; }
+      const digits = this.leadPhone.replace(/\D/g, '');
+      if (digits.length < 10) { this.lockError = 'Please enter a valid phone number.'; return; }
+      if (!/^\S+@\S+\.\S+$/.test(this.leadEmail.trim())) { this.lockError = 'Please enter a valid email address.'; return; }
+      if (!this.leadAddress.trim() || !this.leadCity.trim()) { this.lockError = 'Please enter your street address and city.'; return; }
+
+      this.lockBuildTs = Date.now();
+      this.lockTicketId = this.generateTicketId();
+      this.lockSubmitting = true;
+      try {
+        this.$refs.lockForm.submit();
+      } catch (err) { /* still show confirmation — submission best-effort */ }
+
+      setTimeout(() => {
+        this.lockSubmitting = false;
+        this.lockStep = 'confirmed';
+      }, 500);
+    },
+
+    // ---- pre-filled SMS ----
+    get smsBody() {
+      const u = this.currentUnit;
+      return "Hi, I'd like to lock in pricing for the " + u.name + ' (' + u.subtitle + '), '
+        + this.effectiveTons.toFixed(1) + '-ton system, estimated around ' + this.money(this.displayEstimate) + '.';
+    },
+    get smsHref() { return 'sms:+12898902222?&body=' + encodeURIComponent(this.smsBody); },
+
+    scrollToBuilder() {
+      document.getElementById('builder').scrollIntoView({ behavior: 'smooth' });
+    },
+
+    scrollToPrice() {
+      document.getElementById('price').scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+}
+</script>
+
+</body>
+</html>
