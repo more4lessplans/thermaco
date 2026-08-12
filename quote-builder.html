@@ -96,9 +96,17 @@
 
   .focus-ring:focus-visible { outline: 2px solid #82983A; outline-offset: 3px; }
 
-  /* app-like snap flow */
-  .snap-wrap { scroll-snap-type: y proximity; }
-  .snap-block { scroll-snap-align: start; }
+  /* app-like snap flow — only on larger viewports. On mobile, most sections
+     (builder card, price section) run taller than the screen, so scroll-snap
+     fights the natural scroll gesture: it keeps trying to pull the page back
+     to the section's top edge, which feels like a glitch/stutter whenever a
+     touch scroll pauses partway through a section. Disabling it below the
+     sm breakpoint removes that fight entirely; scrolling above sm is closer
+     to one-section-per-screen so snapping still feels natural there. */
+  @media (min-width: 640px) {
+    .snap-wrap { scroll-snap-type: y proximity; }
+    .snap-block { scroll-snap-align: start; }
+  }
 
   /* product image stage — knocks out plain-white product-photo backgrounds so units float
      free on the card instead of sitting in a visible box. Multiply blends white pixels into
@@ -208,7 +216,7 @@
       <div class="text-center mb-7 reveal-io">
         <p class="text-[11px] font-semibold tracking-wide uppercase text-moss-600 mb-2">Step 1 of 2 &middot; Choose your system</p>
         <h2 class="font-display font-semibold text-ink-900 text-2xl sm:text-3xl tracking-tight">Compare systems</h2>
-        <p class="text-ink-500 text-sm mt-1.5">Swipe or tap to browse — we recommend the Efficiency Upgrade for most homes</p>
+        <p class="text-ink-500 text-sm mt-1.5">Tap the arrows to browse — we recommend the Efficiency Upgrade for most homes</p>
       </div>
 
       <!-- category segmented control -->
@@ -224,8 +232,7 @@
       <!-- carousel card -->
       <div class="relative reveal-io reveal-io-d2">
         <div
-          class="rounded-[2rem] border border-ink-100 bg-white/60 backdrop-blur-sm px-5 sm:px-10 pt-8 pb-7 overflow-hidden"
-          @touchstart.passive="touchStart($event)" @touchend.passive="touchEnd($event)">
+          class="rounded-[2rem] border border-ink-100 bg-white/60 backdrop-blur-sm px-5 sm:px-10 pt-8 pb-7 overflow-hidden">
 
           <!-- badges -->
           <div class="flex justify-center items-center gap-2 mb-1 flex-wrap">
@@ -587,8 +594,6 @@ function acApp() {
     tonnage: 1.5,
     scrolled: false,
     swiping: false,
-    touchX: 0,
-    touchY: 0,
     displayEstimate: 0,
 
     // ---- lock-in-quote modal ----
@@ -730,21 +735,6 @@ function acApp() {
     next() { this.bump(); this.index = (this.index + 1) % this.currentOrder.length; },
     prev() { this.bump(); this.index = (this.index - 1 + this.currentOrder.length) % this.currentOrder.length; },
     bump() { this.swiping = true; setTimeout(() => this.swiping = false, 180); },
-    touchStart(e) {
-      this.touchX = e.changedTouches[0].clientX;
-      this.touchY = e.changedTouches[0].clientY;
-    },
-    touchEnd(e) {
-      const dx = e.changedTouches[0].clientX - this.touchX;
-      const dy = e.changedTouches[0].clientY - this.touchY;
-      // Direction-lock: only treat this as a left/right swipe if the motion is
-      // clearly more horizontal than vertical. Without this check, a normal
-      // vertical scroll that drifts sideways even slightly (very common on
-      // mobile) gets misread as a swipe and silently changes the selected
-      // system — this was firing whenever someone scrolled past the card.
-      const isHorizontalSwipe = Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.5 && Math.abs(dy) < 60;
-      if (isHorizontalSwipe) { dx < 0 ? this.next() : this.prev(); }
-    },
 
     // ---- sizing ----
     get effectiveTons() {
