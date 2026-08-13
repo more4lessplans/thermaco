@@ -41,6 +41,19 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
+<!-- PRELOAD A/C UNIT IMAGES — all 6 carousel photos, so flipping between
+     units with the prev/next arrows is instant instead of waiting on a
+     network fetch + decode the first time each one is shown. The first
+     unit shown (mideaStandard, the default carousel start) gets
+     fetchpriority="high" since it's the one visible on load; the rest are
+     "low" so they don't compete with the hero/font/critical-path requests. -->
+<link rel="preload" as="image" href="images/mova.webp" fetchpriority="high">
+<link rel="preload" as="image" href="images/lennox.webp" fetchpriority="low">
+<link rel="preload" as="image" href="images/keeprite.webp" fetchpriority="low">
+<link rel="preload" as="image" href="images/goodman.webp" fetchpriority="low">
+<link rel="preload" as="image" href="images/nxtgen-cooling.webp" fetchpriority="low">
+<link rel="preload" as="image" href="images/nxtgen-withheat.webp" fetchpriority="low">
+
 <!-- TAILWIND + DESIGN TOKENS -->
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -276,7 +289,7 @@
          blur pass, a dark scrim gradient on top, and the section's existing
          grain overlay; scaled up slightly so the blur never shows a hard edge -->
     <img src="images/bg.jpeg" alt="" aria-hidden="true"
-         class="absolute inset-0 w-full h-full object-cover scale-110 opacity-40 blur-sm pointer-events-none select-none">
+         class="absolute inset-0 w-full h-full object-cover scale-110 opacity-50 blur-sm pointer-events-none select-none">
     <div class="absolute inset-0 bg-gradient-to-b from-ink-900/80 via-ink-900/55 to-ink-900/85"></div>
     <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-moss-500/20 blur-3xl"></div>
     <div class="absolute bottom-0 -left-16 w-64 h-64 rounded-full bg-moss-400/10 blur-3xl"></div>
@@ -868,6 +881,22 @@ function acApp() {
       this.$watch('estimate', (val) => this.animateEstimate(val));
       window.addEventListener('scroll', () => { this.scrolled = window.scrollY > window.innerHeight * 0.7; }, { passive: true });
       this.setupRevealObserver();
+      this.preloadUnitImages();
+    },
+
+    // ---- warm the browser cache + decode for every carousel image up
+    // front, so prev()/next() never has to wait on a fetch or decode the
+    // first time a given unit is shown. The <link rel="preload"> tags in
+    // <head> already kick off the network fetch as early as possible; this
+    // walks the same list via the Image() constructor as a fallback (covers
+    // browsers that dedupe/ignore preload hints) and also forces an async
+    // decode so paint isn't blocked the first time the tag flips currentUnit.
+    preloadUnitImages() {
+      Object.values(this.units).forEach(u => {
+        const img = new Image();
+        img.src = u.image;
+        if (img.decode) img.decode().catch(() => {});
+      });
     },
 
     // ---- premium price count-up ----
