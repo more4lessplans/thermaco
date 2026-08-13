@@ -272,11 +272,12 @@
        HERO
   ============================================================ -->
   <section class="snap-block relative min-h-[100svh] flex flex-col grain overflow-hidden bg-gradient-to-b from-ink-900 via-ink-800 to-ink-900">
-    <!-- faint blurred background image — adds a bit of texture behind the
-         gradient without competing with the headline; kept low-opacity and
-         heavily blurred, scaled up slightly so the blur never shows a hard edge -->
+    <!-- background image — visible but kept from fighting the headline via a
+         blur pass, a dark scrim gradient on top, and the section's existing
+         grain overlay; scaled up slightly so the blur never shows a hard edge -->
     <img src="images/bg.jpeg" alt="" aria-hidden="true"
-         class="absolute inset-0 w-full h-full object-cover scale-110 opacity-[0.08] blur-2xl pointer-events-none select-none">
+         class="absolute inset-0 w-full h-full object-cover scale-110 opacity-40 blur-sm pointer-events-none select-none">
+    <div class="absolute inset-0 bg-gradient-to-b from-ink-900/80 via-ink-900/55 to-ink-900/85"></div>
     <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-moss-500/20 blur-3xl"></div>
     <div class="absolute bottom-0 -left-16 w-64 h-64 rounded-full bg-moss-400/10 blur-3xl"></div>
 
@@ -533,28 +534,31 @@
        Also doubles as real, crawlable text content and objection-
        handling for the ad campaign.
   ============================================================ -->
-  <section class="py-14 sm:py-20 px-5 sm:px-8 bg-ink-50/60">
-    <div class="max-w-2xl mx-auto reveal-io">
-      <div class="text-center mb-8">
-        <p class="text-[11px] font-semibold tracking-wide uppercase text-moss-600 mb-2">FAQ</p>
-        <h2 class="font-display font-semibold text-ink-900 text-2xl sm:text-3xl tracking-tight">Straight answers before you call</h2>
+<section class="py-14 sm:py-20 px-5 sm:px-8 bg-ink-50/60">
+  <div class="max-w-2xl mx-auto reveal-io">
+    <div class="text-center mb-8">
+      <p class="text-[11px] font-semibold tracking-wide uppercase text-moss-600 mb-2">FAQ</p>
+      <h2 class="font-display font-semibold text-ink-900 text-2xl sm:text-3xl tracking-tight">Straight answers before you call</h2>
+    </div>
+
+    <div class="space-y-5">
+      <div>
+        <h3 class="font-semibold text-ink-900">How quickly can you install a new air conditioner?</h3>
+        <p class="text-sm text-ink-600 mt-1.5">Most installations are completed within the same week. We’ll confirm your exact installation date after a free assessment.</p>
       </div>
-      <div class="space-y-5">
-        <div>
-          <h3 class="font-semibold text-ink-900">How fast can you install a new air conditioner?</h3>
-          <p class="text-sm text-ink-600 mt-1.5">Most installs are booked and completed within the same week, depending on unit availability and your home's ductwork. Your exact date is confirmed after a free in-home assessment.</p>
-        </div>
-        <div>
-          <h3 class="font-semibold text-ink-900">Is the online estimate the final price?</h3>
-          <p class="text-sm text-ink-600 mt-1.5">The online estimate gives you a clear, realistic starting point based on your home and the system you choose. Your final price is confirmed after we review your installation requirements, either in person or through photos, including factors like ductwork, electrical, and accessibility.</p>
-        </div>
-       
-          <h3 class="font-semibold text-ink-900">Do you subcontract installations?</h3>
-          <p class="text-sm text-ink-600 mt-1.5">No. Thermaco is owner-operated — every install is completed by the owner, never handed off to a subcontractor.</p>
-        </div>
+
+      <div>
+        <h3 class="font-semibold text-ink-900">Is the online estimate my final price?</h3>
+        <p class="text-sm text-ink-600 mt-1.5">It’s a realistic starting estimate based on your home and the system you choose. Your final price is confirmed after we review your installation requirements, including electrical, ductwork, and accessibility.</p>
+      </div>
+
+      <div>
+        <h3 class="font-semibold text-ink-900">Do you use subcontractors?</h3>
+        <p class="text-sm text-ink-600 mt-1.5">No. Thermaco is owner-operated. Every installation is completed by the owner—never subcontracted.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
 </main>
 
