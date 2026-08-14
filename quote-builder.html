@@ -2,16 +2,57 @@
 <html lang="en-CA">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0">
-<title>New A/C Installed Fast | Get Your Instant Estimate</title>
-<meta name="description" content="Get an instant A/C installation estimate from an owner-operated, licensed & insured team. High-efficiency inverter and standard systems. Same-week install.">
-<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>A/C Install Quote | Schomberg & Newmarket, ON | Thermaco HVAC</title>
+<meta name="description" content="Instant A/C installation pricing from Thermaco — owner-operated, TSSA-licensed HVAC contractor serving Schomberg, Newmarket, Bradford & King Township, ON. Same-week installs, no call centre.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <meta name="theme-color" content="#FAF9F4">
+
+<!-- CANONICAL — update to the exact live URL this page will be published at
+     (e.g. https://www.thermaco.ca/estimate). A wrong/missing canonical on an
+     ad-campaign page can cause it to compete with or dilute your main site. -->
+<link rel="canonical" href="https://www.thermaco.ca/estimate">
+
+<!-- LOCAL / GEO SIGNALS -->
+<meta name="geo.placename" content="Schomberg, Newmarket, Bradford, Tottenham, New Tecumseth, King, Alliston, Beeton, Bond Head">
+<meta name="geo.region" content="CA-ON">
+<meta name="author" content="Thermaco HVAC Solutions">
+
+<!-- OPEN GRAPH -->
+<meta property="og:type" content="business.business">
+<meta property="og:site_name" content="Thermaco HVAC Solutions">
+<meta property="og:title" content="A/C Install Quote | Schomberg & Newmarket, ON | Thermaco HVAC">
+<meta property="og:description" content="Owner-operated, TSSA-licensed & insured. Get real A/C installation pricing in 15 seconds — no call centre, no forms. Serving Schomberg, Newmarket, Bradford & King Township, ON.">
+<meta property="og:url" content="https://www.thermaco.ca/estimate">
+<meta property="og:locale" content="en_CA">
+<meta property="og:image" content="https://www.thermaco.ca/assets/heat-pump-banner.jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Thermaco HVAC technician installing an air conditioner in Schomberg, Ontario">
+
+<!-- TWITTER CARD -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="A/C Install Quote | Schomberg & Newmarket, ON | Thermaco HVAC">
+<meta name="twitter:description" content="Owner-operated, TSSA-licensed HVAC contractor. Real A/C pricing in 15 seconds — serving Schomberg, Newmarket, Bradford & King Township, ON.">
+<meta name="twitter:image" content="https://www.thermaco.ca/assets/heat-pump-banner.jpeg">
 
 <!-- FONTS -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- PRELOAD A/C UNIT IMAGES — all 6 carousel photos, so flipping between
+     units with the prev/next arrows is instant instead of waiting on a
+     network fetch + decode the first time each one is shown. The first
+     unit shown (mideaStandard, the default carousel start) gets
+     fetchpriority="high" since it's the one visible on load; the rest are
+     "low" so they don't compete with the hero/font/critical-path requests. -->
+<link rel="preload" as="image" href="images/mova.webp" fetchpriority="high">
+<link rel="preload" as="image" href="images/lennox.webp" fetchpriority="low">
+<link rel="preload" as="image" href="images/keeprite.webp" fetchpriority="low">
+<link rel="preload" as="image" href="images/goodman.webp" fetchpriority="low">
+<link rel="preload" as="image" href="images/nxtgen-cooling.webp" fetchpriority="low">
+<link rel="preload" as="image" href="images/nxtgen-withheat.webp" fetchpriority="low">
 
 <!-- TAILWIND + DESIGN TOKENS -->
 <script src="https://cdn.tailwindcss.com"></script>
@@ -142,6 +183,75 @@
 
   .tap-btn { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 </style>
+
+<!-- ============================================================
+     STRUCTURED DATA — local business + service + FAQ.
+     NAP and service-area list match thermaco.ca exactly; keep them
+     in sync if either changes. ratingValue/aggregateRating is
+     deliberately omitted — don't add one until you have a real
+     ratingCount from Google Business Profile to back it (a rating
+     without a count is invalid schema and risks a manual action).
+============================================================ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HVACBusiness",
+  "name": "Thermaco HVAC Solutions",
+  "image": "https://www.thermaco.ca/assets/heat-pump-banner.jpeg",
+  "url": "https://www.thermaco.ca/estimate",
+  "telephone": "+1-289-890-2222",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Schomberg",
+    "addressRegion": "ON",
+    "addressCountry": "CA"
+  },
+  "areaServed": [
+    "Schomberg, ON", "Newmarket, ON", "Bradford, ON", "Tottenham, ON",
+    "New Tecumseth, ON", "King Township, ON", "Alliston, ON", "Beeton, ON", "Bond Head, ON"
+  ],
+  "sameAs": [],
+  "makesOffer": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Central Air Conditioner Installation",
+      "serviceType": "Air Conditioner Installation",
+      "provider": { "@type": "HVACBusiness", "name": "Thermaco HVAC Solutions" },
+      "areaServed": "Schomberg, Newmarket, Bradford, Tottenham, New Tecumseth, King, Alliston, Beeton, Bond Head, ON"
+    }
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How fast can Thermaco install a new air conditioner?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Most new A/C installations are booked and completed within the same week, subject to unit availability and your home's ductwork. Your exact install date is confirmed after a free in-home assessment." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the online estimate the final price?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It's a real, honest starting point based on your home size and system choice. The firm price is confirmed after a free in-home assessment, since ductwork, electrical, and access can affect final cost." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are Thermaco technicians licensed and insured?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Thermaco is TSSA licensed and fully insured, with 313A refrigeration and G1 gas certification held on every job." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Thermaco subcontract installations?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Thermaco is owner-operated and every install is completed by our own crew — never subcontracted out." }
+    }
+  ]
+}
+</script>
 </head>
 
 <body class="font-sans text-ink-800 antialiased" x-data="acApp()" x-init="init()">
@@ -156,10 +266,16 @@
     <span class="font-display font-semibold text-ink-900 tracking-tight">Thermaco <span class="text-moss-600">HVAC
     
     </span></span>
-    <a href="tel:+12898902222" class="inline-flex items-center gap-1.5 rounded-full bg-ink-900 text-paper text-sm font-semibold pl-3 pr-4 py-2 focus-ring tap-btn">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      Call
-    </a>
+    <div class="flex items-center gap-2">
+      <a :href="smsHref" class="inline-flex items-center gap-1.5 rounded-full border border-ink-200 text-ink-800 text-sm font-semibold pl-3 pr-4 py-2 focus-ring tap-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        Text
+      </a>
+      <a href="tel:+12898902222" class="inline-flex items-center gap-1.5 rounded-full bg-ink-900 text-paper text-sm font-semibold pl-3 pr-4 py-2 focus-ring tap-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Call
+      </a>
+    </div>
   </div>
 </header>
 
@@ -168,17 +284,23 @@
   <!-- ============================================================
        HERO
   ============================================================ -->
-  <section class="snap-block relative min-h-screen flex flex-col grain overflow-hidden bg-gradient-to-b from-ink-900 via-ink-800 to-ink-900">
+  <section class="snap-block relative min-h-[100svh] flex flex-col grain overflow-hidden bg-gradient-to-b from-ink-900 via-ink-800 to-ink-900">
+    <!-- background image — visible but kept from fighting the headline via a
+         blur pass, a dark scrim gradient on top, and the section's existing
+         grain overlay; scaled up slightly so the blur never shows a hard edge -->
+    <img src="images/bg.jpeg" alt="" aria-hidden="true"
+         class="absolute inset-0 w-full h-full object-cover scale-110 opacity-70 blur-sm pointer-events-none select-none">
+    <div class="absolute inset-0 bg-gradient-to-b from-ink-900/80 via-ink-900/55 to-ink-900/85"></div>
     <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-moss-500/20 blur-3xl"></div>
     <div class="absolute bottom-0 -left-16 w-64 h-64 rounded-full bg-moss-400/10 blur-3xl"></div>
 
-    <div class="relative z-10 flex-1 flex flex-col justify-center px-6 sm:px-10 max-w-3xl mx-auto text-center safe-t pt-10">
-      <p class="reveal reveal-1 inline-flex self-center items-center gap-2 text-xs font-semibold tracking-wide text-moss-300 bg-moss-500/10 border border-moss-400/30 rounded-full px-3.5 py-1.5 mb-6">
+    <div class="relative z-10 flex-1 flex flex-col justify-center px-6 sm:px-10 max-w-3xl mx-auto text-center safe-t pt-8 pb-6">
+      <p class="reveal reveal-1 inline-flex self-center items-center gap-2 text-xs font-semibold tracking-wide text-moss-300 bg-moss-500/10 border border-moss-400/30 rounded-full px-3.5 py-1.5 mb-5">
         <span class="relative flex h-1.5 w-1.5">
           <span class="pulse-soft absolute inline-flex h-full w-full rounded-full bg-moss-400"></span>
           <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-moss-400"></span>
         </span>
-        Booking same-week installs
+        Booking Same-Week Installs
       </p>
 
       <h1 class="reveal reveal-2 font-display font-semibold text-paper text-4xl sm:text-6xl leading-[1.05] tracking-tight">
@@ -186,24 +308,24 @@
       </h1>
 
       <p class="reveal reveal-3 mt-5 text-ink-200 text-base sm:text-lg max-w-lg mx-auto">
-        Get real pricing in 15 seconds — pick a system, enter your home size. Owner-operated, no call centre, no forms.
+        Get real pricing in 15 seconds — pick a system, enter your home size. Owner-operated, TSSA licensed &amp; insured, serving Schomberg, Newmarket, Bradford &amp; King Township.
       </p>
 
-      <div class="reveal reveal-3 mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-        <a href="tel:+12898902222" class="tap-btn w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-moss-500 text-ink-900 font-semibold px-7 py-4 text-base active:scale-[0.97] transition-transform focus-ring">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          Call Now
-        </a>
-        <a href="sms:+12898902222" class="tap-btn w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-paper/25 text-paper font-semibold px-7 py-4 text-base active:scale-[0.97] transition-transform focus-ring">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-          Text Us
-        </a>
+      <!-- PRIMARY CTA — this is the actual conversion action for the ad campaign,
+           so it lives in the always-visible button row now instead of only as a
+           scroll-cue at the bottom of the hero (which 100vh could push below the
+           fold on phones with a dynamic address/toolbar). -->
+      <div class="reveal reveal-3 mt-8 flex flex-col items-center gap-3">
+        <button type="button" @click="scrollToBuilder()"
+          class="tap-btn w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-moss-500 text-ink-900 font-semibold px-8 py-4 text-base active:scale-[0.97] transition-transform focus-ring shadow-lg shadow-moss-500/20">
+          Build My Estimate
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
       </div>
     </div>
 
-    <button @click="scrollToBuilder()" class="tap-btn relative z-10 mx-auto mb-8 flex flex-col items-center gap-1 text-ink-300 focus-ring rounded-full">
-      <span class="text-xs tracking-wide">Build your estimate</span>
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="floaty"><path d="m6 9 6 6 6-6"/></svg>
+    <button @click="scrollToBuilder()" class="tap-btn relative z-10 mx-auto mb-6 flex flex-col items-center gap-1 text-ink-400 focus-ring rounded-full safe-b" aria-hidden="true" tabindex="-1">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="floaty"><path d="m6 9 6 6 6-6"/></svg>
     </button>
   </section>
 
@@ -234,9 +356,10 @@
         <div
           class="rounded-[2rem] border border-ink-100 bg-white/60 backdrop-blur-sm px-5 sm:px-10 pt-8 pb-7 overflow-hidden">
 
-          <!-- badges -->
-          <div class="flex justify-center items-center gap-2 mb-1 flex-wrap">
-            <span x-show="currentUnit.recommended" x-cloak class="inline-flex items-center gap-1 text-[11px] font-semibold tracking-wide uppercase text-paper bg-ink-900 rounded-full px-3 py-1">
+          <!-- badges — fixed-height row so the image stage below never shifts
+               position when a unit has zero, one, or two badges to show -->
+          <div class="flex justify-center items-center gap-2 h-6 mb-3 flex-wrap">
+            <span x-show="currentUnit.recommended" x-cloak class="inline-flex items-center gap-1 text-[11px] font-semibold tracking-wide uppercase text-paper bg-moss-600 rounded-full px-3 py-1">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
               Recommended
             </span>
@@ -394,28 +517,95 @@
   ============================================================ -->
   <section class="snap-block py-14 sm:py-20 px-5 sm:px-8">
     <div class="max-w-3xl mx-auto reveal-io">
+      <div class="flex justify-center items-center gap-1 mb-3" aria-label="5 out of 5 stars">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="text-moss-500"><path d="M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.6 6.9L12 17.3l-6.2 3.9 1.6-6.9L2.1 9.6l7-.7L12 2.5z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="text-moss-500"><path d="M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.6 6.9L12 17.3l-6.2 3.9 1.6-6.9L2.1 9.6l7-.7L12 2.5z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="text-moss-500"><path d="M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.6 6.9L12 17.3l-6.2 3.9 1.6-6.9L2.1 9.6l7-.7L12 2.5z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="text-moss-500"><path d="M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.6 6.9L12 17.3l-6.2 3.9 1.6-6.9L2.1 9.6l7-.7L12 2.5z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="text-moss-500"><path d="M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.6 6.9L12 17.3l-6.2 3.9 1.6-6.9L2.1 9.6l7-.7L12 2.5z"/></svg>
+      </div>
+      <p class="text-center text-xs font-semibold tracking-wide uppercase text-moss-600 mb-6">
+        Verified by homeowners across King Township
+      </p>
       <div class="grid grid-cols-2 sm:grid-cols-4">
-        <div class="text-center px-3 py-6 sm:py-0">
-          <p class="font-display font-semibold text-ink-900 text-lg sm:text-xl whitespace-nowrap">10+ Years</p>
-          <p class="text-xs text-ink-500 mt-1.5 whitespace-nowrap">Refined through experience</p>
+        <div class="text-center px-3 py-4 sm:py-0">
+          <p class="font-display font-semibold text-ink-900 text-lg sm:text-xl">10+ Years</p>
+          <p class="text-xs text-ink-500 mt-1.5">Refined through experience</p>
         </div>
-        <div class="text-center px-3 py-6 sm:py-0 sm:border-l sm:border-ink-100">
-          <p class="font-display font-semibold text-ink-900 text-lg sm:text-xl whitespace-nowrap">313A Licensed</p>
-          <p class="text-xs text-ink-500 mt-1.5 whitespace-nowrap">Fully insured, fully accountable</p>
+        <div class="text-center px-3 py-4 sm:py-0 sm:border-l sm:border-ink-100">
+          <p class="font-display font-semibold text-ink-900 text-lg sm:text-xl">TSSA Licensed</p>
+          <p class="text-xs text-ink-500 mt-1.5">313A &amp; G1 certified</p>
         </div>
-        <div class="text-center px-3 py-6 sm:py-0 border-t border-ink-100 sm:border-t-0 sm:border-l">
-          <p class="font-display font-semibold text-ink-900 text-lg sm:text-xl whitespace-nowrap">Owner-Operated</p>
-          <p class="text-xs text-ink-500 mt-1.5 whitespace-nowrap">Never subcontracted</p>
+        <div class="text-center px-3 py-4 sm:py-0 border-t border-ink-100 sm:border-t-0 sm:border-l">
+          <p class="font-display font-semibold text-ink-900 text-lg sm:text-xl">Owner-Operated</p>
+          <p class="text-xs text-ink-500 mt-1.5">Never subcontracted</p>
         </div>
-        <div class="text-center px-3 py-6 sm:py-0 border-t border-ink-100 sm:border-t-0 sm:border-l sm:border-ink-100">
-          <p class="font-display font-semibold text-ink-900 text-lg sm:text-xl whitespace-nowrap">White-Glove</p>
-          <p class="text-xs text-ink-500 mt-1.5 whitespace-nowrap">Precision, from start to finish</p>
+        <div class="text-center px-3 py-4 sm:py-0 border-t border-ink-100 sm:border-t-0 sm:border-l sm:border-ink-100">
+          <p class="font-display font-semibold text-ink-900 text-lg sm:text-xl">White-Glove</p>
+          <p class="text-xs text-ink-500 mt-1.5">Precision, from start to finish</p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ============================================================
+       FAQ — mirrors the FAQPage JSON-LD above almost word for word
+       (search engines want the visible copy and the schema to match).
+       Also doubles as real, crawlable text content and objection-
+       handling for the ad campaign.
+  ============================================================ -->
+<section class="py-14 sm:py-20 px-5 sm:px-8 bg-ink-50/60">
+  <div class="max-w-2xl mx-auto reveal-io">
+    <div class="text-center mb-8">
+      <p class="text-[11px] font-semibold tracking-wide uppercase text-moss-600 mb-2">FAQ</p>
+      <h2 class="font-display font-semibold text-ink-900 text-2xl sm:text-3xl tracking-tight">Straight answers before you call</h2>
+    </div>
+
+    <div class="space-y-5">
+      <div>
+        <h3 class="font-semibold text-ink-900">How quickly can you install a new air conditioner?</h3>
+        <p class="text-sm text-ink-600 mt-1.5">Most installations are completed within the same week. We’ll confirm your exact installation date after a free assessment.</p>
+      </div>
+
+      <div>
+        <h3 class="font-semibold text-ink-900">Is the online estimate my final price?</h3>
+        <p class="text-sm text-ink-600 mt-1.5">It’s a realistic starting estimate based on your home and the system you choose. Your final price is confirmed after we review your installation requirements, including electrical, ductwork, and accessibility.</p>
+      </div>
+
+      <div>
+        <h3 class="font-semibold text-ink-900">Do you use subcontractors?</h3>
+        <p class="text-sm text-ink-600 mt-1.5">No. Thermaco is owner-operated. Every installation is completed by the owner—never subcontracted.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 </main>
+
+<!-- ============================================================
+     FOOTER — real NAP + service-area copy for local SEO and trust.
+     A page with zero footer/address text gives Google (and buyers)
+     nothing to confirm you're a real, local business.
+============================================================ -->
+<footer class="px-5 sm:px-8 py-12 bg-ink-900 text-ink-300">
+  <div class="max-w-3xl mx-auto grid sm:grid-cols-3 gap-8 text-sm">
+    <div>
+      <p class="font-display font-semibold text-paper text-lg mb-2">Thermaco HVAC</p>
+      <p class="leading-relaxed">Owner-operated heating &amp; cooling based in Schomberg, Ontario. TSSA licensed &amp; insured, 313A refrigeration and G1 gas certified, 10+ years in the trade.</p>
+    </div>
+    <div>
+      <p class="font-semibold text-paper mb-2">Contact</p>
+      <p><a href="tel:+12898902222" class="hover:text-moss-400 focus-ring">289-890-2222</a></p>
+      <p class="mt-1">Schomberg, ON &middot; Canada</p>
+      <p class="mt-1">Available 24/7 for emergencies</p>
+    </div>
+    <div>
+      <p class="font-semibold text-paper mb-2">Service Areas</p>
+      <p class="leading-relaxed">Schomberg, Newmarket, Bradford, Tottenham, New Tecumseth, King, Alliston, Beeton, Bond Head &amp; surrounding Ontario regions.</p>
+    </div>
+  </div>
+  <p class="max-w-3xl mx-auto mt-8 pt-6 border-t border-ink-700 text-xs text-ink-500">&copy; <span x-text="new Date().getFullYear()"></span> Thermaco HVAC Solutions. All rights reserved.</p>
+</footer>
 
 <!-- ============================================================
      LOCK IN QUOTE — MODAL
@@ -698,6 +888,22 @@ function acApp() {
       this.$watch('estimate', (val) => this.animateEstimate(val));
       window.addEventListener('scroll', () => { this.scrolled = window.scrollY > window.innerHeight * 0.7; }, { passive: true });
       this.setupRevealObserver();
+      this.preloadUnitImages();
+    },
+
+    // ---- warm the browser cache + decode for every carousel image up
+    // front, so prev()/next() never has to wait on a fetch or decode the
+    // first time a given unit is shown. The <link rel="preload"> tags in
+    // <head> already kick off the network fetch as early as possible; this
+    // walks the same list via the Image() constructor as a fallback (covers
+    // browsers that dedupe/ignore preload hints) and also forces an async
+    // decode so paint isn't blocked the first time the tag flips currentUnit.
+    preloadUnitImages() {
+      Object.values(this.units).forEach(u => {
+        const img = new Image();
+        img.src = u.image;
+        if (img.decode) img.decode().catch(() => {});
+      });
     },
 
     // ---- premium price count-up ----
