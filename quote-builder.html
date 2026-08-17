@@ -105,6 +105,23 @@
   gtag('config', 'AW-18395102506');
 </script>
 
+<!-- Event snippet for LOCK IN PRICE conversion page
+In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+<script>
+function gtag_report_conversion(url) {
+  var callback = function () {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  };
+  gtag('event', 'conversion', {
+      'send_to': 'AW-18395102506/s-zhCICNoeMcEKr6u8NE',
+      'event_callback': callback
+  });
+  return false;
+}
+</script>
+
 <style>
   html { scroll-behavior: smooth; }
   body { background-color: #FAF9F4; overscroll-behavior-y: contain; }
@@ -1027,17 +1044,14 @@ function acApp() {
         this.$refs.lockForm.submit();
       } catch (err) { /* still show confirmation — submission best-effort */ }
 
-      // Google Ads conversion — "Quote Lock-In Request". Fired here, past
-      // all validation, so only real submitted leads count (not just modal
-      // opens or abandoned forms). No redirect/callback needed since we
-      // stay on-page and show the confirmed step below.
+      // Google Ads conversion — "LOCK IN PRICE". Fired here, past all
+      // validation, so only real submitted leads count (not just modal
+      // opens or abandoned forms). No url passed to gtag_report_conversion
+      // since we stay on-page and show the confirmed step below rather
+      // than redirecting.
       try {
-        if (typeof gtag === 'function') {
-          gtag('event', 'conversion', {
-            'send_to': 'AW-18395102506/vCH0CIa0nuMcEKr6u8NE',
-            'value': 1.0,
-            'currency': 'CAD'
-          });
+        if (typeof gtag_report_conversion === 'function') {
+          gtag_report_conversion();
         }
       } catch (err) { /* tracking failure should never block the lead flow */ }
 
