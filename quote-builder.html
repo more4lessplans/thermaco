@@ -93,6 +93,18 @@
 
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
 
+<!-- Google tag (gtag.js) — loads the base Google Ads tracking tag for this
+     account. The actual "Quote Lock-In Request" conversion event is fired
+     from submitLock() in the app logic below, once the lead form actually
+     succeeds — not just when the modal opens. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18395102506"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-18395102506');
+</script>
+
 <style>
   html { scroll-behavior: smooth; }
   body { background-color: #FAF9F4; overscroll-behavior-y: contain; }
@@ -1014,6 +1026,20 @@ function acApp() {
       try {
         this.$refs.lockForm.submit();
       } catch (err) { /* still show confirmation — submission best-effort */ }
+
+      // Google Ads conversion — "Quote Lock-In Request". Fired here, past
+      // all validation, so only real submitted leads count (not just modal
+      // opens or abandoned forms). No redirect/callback needed since we
+      // stay on-page and show the confirmed step below.
+      try {
+        if (typeof gtag === 'function') {
+          gtag('event', 'conversion', {
+            'send_to': 'AW-18395102506/vCH0CIa0nuMcEKr6u8NE',
+            'value': 1.0,
+            'currency': 'CAD'
+          });
+        }
+      } catch (err) { /* tracking failure should never block the lead flow */ }
 
       setTimeout(() => {
         this.lockSubmitting = false;
