@@ -5,23 +5,74 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <!-- ============================================================
-     EARLY HERO IMAGE PRELOAD (performance)
-     The hero background image is currently only added to the DOM
-     after Alpine.js downloads, parses, and runs init() — meaning
-     the browser can't start fetching it until well into the page
-     load, which delays Largest Contentful Paint (LCP), a Core Web
-     Vital and a Google ranking signal. This tiny synchronous script
-     runs before anything else loads and tells the browser to start
-     fetching the correct seasonal image immediately. Alpine still
-     controls which image actually renders — this just "warms" the
-     browser cache so it's instant by the time Alpine mounts it.
+     SEASON LOGIC — single source of truth
+     Both the early hero-image preload below AND the Alpine
+     'season' store (registered further down, right before the
+     Alpine script tag) call this same window.__getSeason()
+     function. Previously the month cutoffs were hardcoded twice
+     (once here, once inside the hero's own x-data) and could
+     silently drift out of sync if only one copy got edited.
+     Now there's exactly one place to change the boundaries or the
+     seasonal quote-builder path.
+     Uses America/Toronto explicitly (not the visitor's local
+     clock) so the promo doesn't flip early/late for out-of-region
+     traffic or a server in a different timezone.
 ============================================================ -->
 <script>
+window.__getSeason = function () {
+  // NOTE: these are real Unicode characters (—, ·), not HTML entities.
+  // This function lives inside a <script> block, whose content is raw
+  // text — the browser only decodes &entity; markup inside HTML
+  // attributes/body text, never inside <script>. The original copy of
+  // these strings lived in an x-data HTML attribute where &mdash; etc.
+  // worked; typed straight here they'd render as the literal text
+  // "&mdash;" on the page, so real characters are used instead.
+  var month = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Toronto', month: 'numeric' }).format(new Date());
+  var m = parseInt(month, 10);
+  if (m === 6 || m === 7 || m === 8) {
+    return {
+      name: 'summer',
+      eyebrow: 'Summer Cooling Promo',
+      label: 'High-Efficiency Cooling, Installed Right',
+      sub: 'Beat the Ontario heat with a quiet, high-SEER system sized correctly for your home — not oversold.',
+      img: '/assets/heat-pump-banner.jpeg',
+      quotePath: '/quote-builder'
+    };
+  }
+  if (m === 11 || m === 12 || m === 1 || m === 2 || m === 3) {
+    return {
+      name: 'winter',
+      eyebrow: 'Winter Heating Promo',
+      label: 'Furnace & Heat Pump Season Is Here',
+      sub: 'Reliable heat before the deep freeze hits. Furnace tune-ups, replacements, and hybrid heat pump installs.',
+      img: '/assets/furnace-banner.jpeg',
+      quotePath: '/furnace-quote-builder'
+    };
+  }
+  return {
+    name: 'shoulder',
+    eyebrow: 'Schomberg & Newmarket, Ontario · Owner-Operated',
+    label: 'Comfort You Can Call Directly',
+    sub: 'The right time to plan your system upgrade — before the next heat wave or cold snap arrives.',
+    img: '',
+    quotePath: '/estimate'
+  };
+};
+
+// ------------------------------------------------------------
+// EARLY HERO IMAGE PRELOAD (performance)
+// The hero background image is currently only added to the DOM
+// after Alpine.js downloads, parses, and runs init() — meaning
+// the browser can't start fetching it until well into the page
+// load, which delays Largest Contentful Paint (LCP), a Core Web
+// Vital and a Google ranking signal. This tiny synchronous block
+// runs before anything else loads and tells the browser to start
+// fetching the correct seasonal image immediately. Alpine still
+// controls which image actually renders — this just "warms" the
+// browser cache so it's instant by the time Alpine mounts it.
+// ------------------------------------------------------------
 (function () {
-  var m = new Date().getMonth() + 1;
-  var img = (m === 6 || m === 7 || m === 8) ? '/assets/heat-pump-banner.jpeg'
-          : (m === 11 || m === 12 || m === 1 || m === 2 || m === 3) ? '/assets/furnace-banner.jpeg'
-          : null;
+  var img = window.__getSeason().img;
   if (img) {
     var link = document.createElement('link');
     link.rel = 'preload';
@@ -263,6 +314,18 @@
   }
 </script>
 
+<!-- Registers the 'season' store from the shared window.__getSeason()
+     function above (computed once). The hero section and every
+     "get a quote" / "see pricing" link on the page read from
+     $store.season so they can never disagree with each other about
+     which season it currently is. Must run via the alpine:init event
+     (fires right before Alpine scans the DOM) so the store exists
+     before any x-data/x-init on the page tries to read it. -->
+<script>
+document.addEventListener('alpine:init', () => {
+  Alpine.store('season', window.__getSeason());
+});
+</script>
 <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.14.1/dist/cdn.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
 
@@ -346,41 +409,15 @@
      DYNAMIC SEASONAL HERO
 ============================================================ -->
 <section
-  x-data="{
-    season: 'shoulder',
-    label: '',
-    sub: '',
-    img: '',
-    init() {
-      const month = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Toronto', month: 'numeric' }).format(new Date());
-      const m = parseInt(month, 10);
-      if (m === 6 || m === 7 || m === 8) {
-        this.season = 'summer';
-        this.label = 'High-Efficiency Cooling, Installed Right';
-        this.sub = 'Beat the Ontario heat with a quiet, high-SEER system sized correctly for your home &mdash; not oversold.';
-        this.img = '/assets/heat-pump-banner.jpeg';
-      } else if (m === 11 || m === 12 || m === 1 || m === 2 || m === 3) {
-        this.season = 'winter';
-        this.label = 'Furnace &amp; Heat Pump Season Is Here';
-        this.sub = 'Reliable heat before the deep freeze hits. Furnace tune-ups, replacements, and hybrid heat pump installs.';
-        this.img = '/assets/furnace-banner.jpeg';
-      } else {
-        this.season = 'shoulder';
-        this.label = 'Comfort You Can Call Directly';
-        this.sub = 'The right time to plan your system upgrade &mdash; before the next heat wave or cold snap arrives.';
-        this.img = '';
-      }
-    }
-  }"
-  x-init="init()"
+  x-data
   class="relative overflow-hidden"
 >
   <!-- Background image layer (seasonal) -->
   <div class="absolute inset-0 bg-ink-800">
-    <template x-if="img">
-      <img :src="img" alt="Seasonal HVAC service promotion" class="w-full h-full object-cover" onerror="this.style.display='none'" fetchpriority="high" decoding="async" loading="eager">
+    <template x-if="$store.season.img">
+      <img :src="$store.season.img" alt="Seasonal HVAC service promotion" class="w-full h-full object-cover" onerror="this.style.display='none'" fetchpriority="high" decoding="async" loading="eager">
     </template>
-    <template x-if="!img">
+    <template x-if="!$store.season.img">
       <div class="w-full h-full bg-gradient-to-br from-ink-700 via-ink-800 to-moss-800"></div>
     </template>
   </div>
@@ -391,18 +428,18 @@
   <div class="relative max-w-7xl mx-auto px-5 sm:px-8 pt-16 pb-20 sm:pt-24 sm:pb-28">
     <div class="max-w-3xl">
       <p class="reveal reveal-1 inline-flex items-center gap-2 text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] text-moss-300 mb-6">
-        <span x-text="season === 'summer' ? 'Summer Cooling Promo' : season === 'winter' ? 'Winter Heating Promo' : 'Schomberg &amp; Newmarket, Ontario &middot; Owner-Operated'">Schomberg &amp; Newmarket, Ontario &middot; Owner-Operated</span>
+        <span x-text="$store.season.eyebrow">Schomberg &amp; Newmarket, Ontario &middot; Owner-Operated</span>
       </p>
 
-      <h1 class="reveal reveal-2 font-display text-4xl sm:text-6xl leading-[1.05] font-semibold text-paper tracking-tight" x-text="label">Comfort You Can Call Directly</h1>
+      <h1 class="reveal reveal-2 font-display text-4xl sm:text-6xl leading-[1.05] font-semibold text-paper tracking-tight" x-text="$store.season.label">Comfort You Can Call Directly</h1>
 
-      <p class="reveal reveal-3 mt-6 text-lg sm:text-xl text-ink-100/90 max-w-xl" x-text="sub">The right time to plan your system upgrade &mdash; before the next heat wave or cold snap arrives.</p>
+      <p class="reveal reveal-3 mt-6 text-lg sm:text-xl text-ink-100/90 max-w-xl" x-text="$store.season.sub">The right time to plan your system upgrade &mdash; before the next heat wave or cold snap arrives.</p>
 
       <div class="reveal reveal-4 mt-10 flex flex-col sm:flex-row gap-4">
         <a href="#quote" data-jsphone class="inline-flex items-center justify-center gap-2 rounded-full bg-moss-500 text-ink-900 font-semibold px-7 py-4 text-base hover:bg-moss-400 active:scale-[0.98] transition-all shadow-lg shadow-moss-900/30 focus-ring">
           Call Direct: <span data-jsphone-num>Tap to Call</span>
         </a>
-        <a href="/quote-builder" class="inline-flex items-center justify-center gap-2 rounded-full border border-paper/30 text-paper font-semibold px-7 py-4 text-base hover:bg-paper/10 transition-colors focus-ring">
+        <a href="/estimate" :href="$store.season.quotePath" class="inline-flex items-center justify-center gap-2 rounded-full border border-paper/30 text-paper font-semibold px-7 py-4 text-base hover:bg-paper/10 transition-colors focus-ring">
           See Pricing
         </a>
       </div>
@@ -498,7 +535,7 @@
         </div>
       </div>
 
-      <a href="/quote-builder" class="mt-10 flex items-center justify-center gap-2 w-full rounded-full bg-moss-500 text-ink-900 font-semibold px-6 py-4 hover:bg-moss-400 active:scale-[0.98] transition-all focus-ring">
+      <a href="/estimate" :href="$store.season.quotePath" class="mt-10 flex items-center justify-center gap-2 w-full rounded-full bg-moss-500 text-ink-900 font-semibold px-6 py-4 hover:bg-moss-400 active:scale-[0.98] transition-all focus-ring">
         <span class="sm:hidden">Get My Free Quote</span>
         <span class="hidden sm:inline">Get My Exact Number &mdash; Free Quote</span>
       </a>
@@ -687,7 +724,7 @@
       Call direct for a free, no-obligation quote on your repair or install.
     </p>
     <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-      <a href="/estimate" class="inline-flex items-center justify-center gap-2 rounded-full bg-ink-900 text-paper font-semibold px-8 py-4 text-base hover:bg-ink-800 active:scale-[0.98] transition-all focus-ring">
+      <a href="/estimate" x-data :href="$store.season.quotePath" class="inline-flex items-center justify-center gap-2 rounded-full bg-ink-900 text-paper font-semibold px-8 py-4 text-base hover:bg-ink-800 active:scale-[0.98] transition-all focus-ring">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>
         Get a Free Estimate
       </a>
@@ -757,7 +794,7 @@
       <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       Call Direct
     </a>
-    <a href="/estimate" class="flex items-center justify-center gap-2 rounded-full bg-moss-500 text-ink-900 font-semibold py-3.5 text-sm active:scale-[0.97] transition-transform focus-ring">
+    <a href="/estimate" :href="$store.season.quotePath" class="flex items-center justify-center gap-2 rounded-full bg-moss-500 text-ink-900 font-semibold py-3.5 text-sm active:scale-[0.97] transition-transform focus-ring">
       Get Free Quote
     </a>
   </div>
