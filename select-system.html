@@ -94,11 +94,12 @@
     @keyframes reveal { to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
   }
 
-  /* exit transition — the whole stage softens and pulls back a touch
-     before handing off to the estimate builder, so the tap feels like
-     it opened something rather than just linking to a new URL. */
-  #stage { transition: opacity .38s cubic-bezier(.16,1,.3,1), transform .38s cubic-bezier(.16,1,.3,1), filter .38s cubic-bezier(.16,1,.3,1); }
-  body.leaving #stage { opacity: 0; transform: scale(.97); filter: blur(6px); }
+  /* exit transition — a quick, simple fade before handing off to the
+     next builder page (previously combined scale + blur + a longer
+     duration, which read as a "funny"/heavy animation rather than a
+     snappy tap response). */
+  #stage { transition: opacity .15s ease-out; }
+  body.leaving #stage { opacity: 0; }
 
   .card-glow {
     transition: box-shadow .35s cubic-bezier(.16,1,.3,1), border-color .35s cubic-bezier(.16,1,.3,1),
@@ -208,7 +209,7 @@
       e.preventDefault();
       var href = this.getAttribute('href');
       document.body.classList.add('leaving');
-      setTimeout(function () { window.location.href = href; }, 380);
+      setTimeout(function () { window.location.href = href; }, 150);
     });
   });
 </script>
