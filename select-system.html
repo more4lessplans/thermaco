@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Choose Your System | Thermaco HVAC</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#22231d">
+
+<link rel="icon" type="image/svg+xml" href="/favi/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favi/favicon-32x32.png">
+<link rel="shortcut icon" href="/favi/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" sizes="180x180" href="/favi/apple-icon-180x180.png">
+
+<!-- FONTS — same pairing as the estimate builder -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- PRELOAD — both system photos so the choice screen never shows a flash-in -->
+<link rel="preload" as="image" href="images/furnace/midea.webp" fetchpriority="high">
+<link rel="preload" as="image" href="images/nxtgen-withheat.webp" fetchpriority="high">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: {
+            DEFAULT: '#45483D', 50:'#f2f3ef', 100:'#e2e4d9', 200:'#c5c9b4', 300:'#a4aa8b',
+            400:'#7d8365', 500:'#5f6349', 600:'#4b4e3a', 700:'#45483D', 800:'#33352c', 900:'#22231d'
+          },
+          moss: {
+            DEFAULT:'#82983A', 50:'#f4f7ea', 100:'#e6edcd', 200:'#cddb9d', 300:'#b1c66c',
+            400:'#9bb64c', 500:'#82983A', 600:'#68792e', 700:'#4f5c24', 800:'#3a4419', 900:'#272d10'
+          },
+          paper: '#FAF9F4'
+        },
+        fontFamily: {
+          display: ['"Fraunces"', 'ui-serif', 'Georgia', 'serif'],
+          sans: ['"Inter"', 'ui-sans-serif', 'system-ui', 'sans-serif']
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  html, body { height: 100%; overscroll-behavior: contain; }
+  body { background-color: #22231d; }
+  [x-cloak] { display: none !important; }
+
+  .safe-b { padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .safe-t { padding-top: env(safe-area-inset-top, 0px); }
+
+  /* fine paper-grain, same recipe as the estimate builder */
+  .grain { position: relative; }
+  .grain::before {
+    content: "";
+    position: absolute; inset: 0; z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  /* premium dot field — a fine moss dot-grid that fades OUT toward the
+     center via a radial mask, so it frames the two cards at the edges
+     of the screen instead of competing with them behind the content. */
+  .dot-field {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-image: radial-gradient(rgba(203,214,157,0.55) 1px, transparent 1.5px);
+    background-size: 26px 26px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, transparent 25%, black 85%);
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, transparent 25%, black 85%);
+    opacity: .35;
+  }
+
+  .focus-ring:focus-visible { outline: 2px solid #82983A; outline-offset: 3px; }
+  .tap-btn { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+
+  @keyframes pulseSoft {
+    0% { transform: scale(1); opacity: .55; }
+    70% { transform: scale(2.4); opacity: 0; }
+    100% { transform: scale(2.4); opacity: 0; }
+  }
+  .pulse-soft { animation: pulseSoft 2.6s cubic-bezier(.4,0,.2,1) infinite; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(14px) scale(.99); filter: blur(3px); animation: reveal .8s cubic-bezier(.16,1,.3,1) forwards; }
+    .reveal-1 { animation-delay: .05s; }
+    .reveal-2 { animation-delay: .14s; }
+    .reveal-3 { animation-delay: .24s; }
+    .reveal-4 { animation-delay: .34s; }
+    @keyframes reveal { to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
+  }
+
+  /* exit transition — the whole stage softens and pulls back a touch
+     before handing off to the estimate builder, so the tap feels like
+     it opened something rather than just linking to a new URL. */
+  #stage { transition: opacity .38s cubic-bezier(.16,1,.3,1), transform .38s cubic-bezier(.16,1,.3,1), filter .38s cubic-bezier(.16,1,.3,1); }
+  body.leaving #stage { opacity: 0; transform: scale(.97); filter: blur(6px); }
+
+  .card-glow {
+    transition: box-shadow .35s cubic-bezier(.16,1,.3,1), border-color .35s cubic-bezier(.16,1,.3,1),
+                background-color .35s cubic-bezier(.16,1,.3,1), transform .2s cubic-bezier(.16,1,.3,1);
+  }
+  .card-glow:hover, .card-glow:focus-visible {
+    border-color: rgba(130,152,58,.55);
+    background-color: rgba(255,255,255,.06);
+    box-shadow: 0 0 0 1px rgba(130,152,58,.15), 0 24px 48px -20px rgba(0,0,0,.55), 0 0 60px -18px rgba(130,152,58,.35);
+  }
+  .card-glow:active { transform: scale(.98); }
+
+  .card-img { filter: drop-shadow(0 18px 30px rgba(0,0,0,.45)); transition: transform .4s cubic-bezier(.16,1,.3,1); }
+  .card-glow:hover .card-img { transform: translateY(-4px) scale(1.03); }
+
+  .cta-chip { transition: gap .25s cubic-bezier(.16,1,.3,1), color .25s ease; }
+  .card-glow:hover .cta-chip { gap: .6rem; color: #cddb9d; }
+</style>
+</head>
+
+<body class="font-sans text-paper antialiased h-full">
+
+<div id="stage" class="relative min-h-[100svh] flex flex-col grain overflow-hidden bg-gradient-to-b from-ink-900 via-ink-800 to-ink-900">
+
+  <!-- ambient glow, matching the hero -->
+  <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-moss-500/20 blur-3xl"></div>
+  <div class="absolute bottom-0 -left-16 w-64 h-64 rounded-full bg-moss-400/10 blur-3xl"></div>
+  <div class="dot-field"></div>
+
+  <!-- BRAND BAR -->
+  <header class="relative z-10 safe-t">
+    <div class="max-w-5xl mx-auto px-5 sm:px-8 py-5 flex items-center justify-between">
+      <span class="font-display font-semibold text-paper tracking-tight text-lg">Thermaco <span class="text-moss-400">HVAC</span></span>
+      <div class="flex items-center gap-2">
+        <a href="sms:+12898902222" class="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-ink-700 text-ink-200 text-sm font-semibold pl-3 pr-4 py-2 focus-ring tap-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          Text
+        </a>
+        <a href="tel:+12898902222" class="inline-flex items-center gap-1.5 rounded-full bg-moss-500 text-ink-900 text-sm font-semibold pl-3 pr-4 py-2 focus-ring tap-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Call
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CHOICE -->
+  <main class="relative z-10 flex-1 flex flex-col justify-center px-5 sm:px-8 py-6">
+    <div class="max-w-3xl mx-auto w-full text-center">
+
+      <p class="reveal reveal-1 inline-flex items-center gap-2 text-xs font-semibold tracking-wide text-moss-300 bg-moss-500/10 border border-moss-400/30 rounded-full px-3.5 py-1.5 mb-5">
+        <span class="relative flex h-1.5 w-1.5">
+          <span class="pulse-soft absolute inline-flex h-full w-full rounded-full bg-moss-400"></span>
+          <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-moss-400"></span>
+        </span>
+        Step 1 of 2 &middot; Choose your system
+      </p>
+
+      <h1 class="reveal reveal-2 font-display font-semibold text-3xl sm:text-5xl leading-[1.08] tracking-tight">
+        What needs pricing today?
+      </h1>
+      <p class="reveal reveal-3 mt-4 text-ink-200 text-base sm:text-lg max-w-md mx-auto">
+        Pick a system and we'll build your instant estimate in the next step.
+      </p>
+
+      <!-- the two choices -->
+      <div class="reveal reveal-4 mt-10 grid grid-cols-1 sm:grid-cols-2 gap-5 text-left">
+
+        <a href="furnace-quote-builder.html"
+           class="system-card card-glow tap-btn focus-ring group relative flex flex-col items-center text-center rounded-[2rem] border border-ink-700/70 bg-white/[0.03] backdrop-blur-sm px-6 pt-8 pb-6">
+          <div class="h-40 sm:h-48 w-full flex items-center justify-center mb-4">
+            <img src="images/furnace/midea.webp" alt="Furnace" class="card-img h-full w-auto max-w-[80%] object-contain">
+          </div>
+          <h2 class="font-display font-semibold text-xl sm:text-2xl text-paper tracking-tight">Furnace</h2>
+          <p class="text-ink-300 text-sm mt-1.5">Gas furnace replacement &amp; install</p>
+          <span class="cta-chip mt-6 inline-flex items-center gap-2 text-sm font-semibold text-moss-300">
+            See furnace pricing
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+
+        <a href="quote-builder.html"
+           class="system-card card-glow tap-btn focus-ring group relative flex flex-col items-center text-center rounded-[2rem] border border-ink-700/70 bg-white/[0.03] backdrop-blur-sm px-6 pt-8 pb-6">
+          <div class="h-40 sm:h-48 w-full flex items-center justify-center mb-4">
+            <img src="images/nxtgen-withheat.webp" alt="Air conditioner" class="card-img h-full w-auto max-w-[80%] object-contain">
+          </div>
+          <h2 class="font-display font-semibold text-xl sm:text-2xl text-paper tracking-tight">Air Conditioner</h2>
+          <p class="text-ink-300 text-sm mt-1.5">Central A/C &amp; heat pump systems</p>
+          <span class="cta-chip mt-6 inline-flex items-center gap-2 text-sm font-semibold text-moss-300">
+            See A/C pricing
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+
+      </div>
+    </div>
+  </main>
+
+  <p class="reveal reveal-4 relative z-10 text-center text-ink-400 text-xs pb-6 safe-b">Owner-operated &middot; TSSA licensed &amp; insured</p>
+</div>
+
+<script>
+  // soften the stage out, then hand off — gives the tap a sense of opening
+  // into the next step instead of a flat page-to-page link.
+  document.querySelectorAll('.system-card').forEach(function (card) {
+    card.addEventListener('click', function (e) {
+      e.preventDefault();
+      var href = this.getAttribute('href');
+      document.body.classList.add('leaving');
+      setTimeout(function () { window.location.href = href; }, 380);
+    });
+  });
+</script>
+
+</body>
+</html>
