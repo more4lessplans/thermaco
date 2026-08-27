@@ -94,13 +94,6 @@
     @keyframes reveal { to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
   }
 
-  /* exit transition — a quick, simple fade before handing off to the
-     next builder page (previously combined scale + blur + a longer
-     duration, which read as a "funny"/heavy animation rather than a
-     snappy tap response). */
-  #stage { transition: opacity .15s ease-out; }
-  body.leaving #stage { opacity: 0; }
-
   .card-glow {
     transition: box-shadow .35s cubic-bezier(.16,1,.3,1), border-color .35s cubic-bezier(.16,1,.3,1),
                 background-color .35s cubic-bezier(.16,1,.3,1), transform .2s cubic-bezier(.16,1,.3,1);
@@ -200,19 +193,6 @@
 
   <p class="reveal reveal-4 relative z-10 text-center text-ink-400 text-xs pb-6 safe-b">Owner-operated &middot; TSSA licensed &amp; insured</p>
 </div>
-
-<script>
-  // soften the stage out, then hand off — gives the tap a sense of opening
-  // into the next step instead of a flat page-to-page link.
-  document.querySelectorAll('.system-card').forEach(function (card) {
-    card.addEventListener('click', function (e) {
-      e.preventDefault();
-      var href = this.getAttribute('href');
-      document.body.classList.add('leaving');
-      setTimeout(function () { window.location.href = href; }, 150);
-    });
-  });
-</script>
 
 </body>
 </html>
