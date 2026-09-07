@@ -27,11 +27,23 @@ window.__getSeason = function () {
   // these strings lived in an x-data HTML attribute where &mdash; etc.
   // worked; typed straight here they'd render as the literal text
   // "&mdash;" on the page, so real characters are used instead.
+  //
+  // FOUR SEASONS, FOUR HEROES:
+  //   Jun–Aug   -> cooling           (peak AC promo, "See Pricing" CTA)
+  //   Sep–Oct   -> shoulder_heating  (pre-heating-season prep, no pricing CTA)
+  //   Nov–Mar   -> heating           (peak furnace/heat pump promo, "See Pricing" CTA)
+  //   Apr–May   -> shoulder_cooling  (pre-cooling-season prep, no pricing CTA)
+  //
+  // `isShoulder: true` is what the hero template checks to decide whether
+  // to show the "See Pricing" button (main seasons) or the "Call or Text
+  // to Schedule" button + $100 peace-of-mind line (shoulder seasons).
   var month = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Toronto', month: 'numeric' }).format(new Date());
   var m = parseInt(month, 10);
+
   if (m === 6 || m === 7 || m === 8) {
     return {
-      name: 'summer',
+      name: 'cooling',
+      isShoulder: false,
       eyebrow: 'Summer Cooling Promo',
       label: 'High-Efficiency Cooling, Installed Right',
       sub: 'Beat the Ontario heat with a quiet, high-SEER system sized correctly for your home — not oversold.',
@@ -39,9 +51,21 @@ window.__getSeason = function () {
       quotePath: '/quote-builder'
     };
   }
+  if (m === 9 || m === 10) {
+    return {
+      name: 'shoulder_heating',
+      isShoulder: true,
+      eyebrow: 'Fall Heating Readiness',
+      label: 'Ready Your Furnace or Heat Pump Before the Cold Arrives',
+      sub: 'The best time to service, replace, or fine-tune a gas furnace or heat pump is before the first cold snap — not during it. A brief inspection now catches small issues before they become no-heat emergencies.',
+      img: '/hero/shoulder-hero.webp',
+      quotePath: '/furnace-quote-builder'
+    };
+  }
   if (m === 11 || m === 12 || m === 1 || m === 2 || m === 3) {
     return {
-      name: 'winter',
+      name: 'heating',
+      isShoulder: false,
       eyebrow: 'Winter Heating Promo',
       label: 'Furnace & Heat Pump Season Is Here',
       sub: 'Reliable heat before the deep freeze hits. Furnace tune-ups, replacements, and hybrid heat pump installs.',
@@ -49,13 +73,15 @@ window.__getSeason = function () {
       quotePath: '/furnace-quote-builder'
     };
   }
+  // m === 4 || m === 5
   return {
-    name: 'shoulder',
-    eyebrow: 'Schomberg & Newmarket, Ontario · Owner-Operated',
-    label: 'Comfort You Can Call Directly',
-    sub: 'The right time to plan your system upgrade — before the next heat wave or cold snap arrives.',
+    name: 'shoulder_cooling',
+    isShoulder: true,
+    eyebrow: 'Spring Cooling Readiness',
+    label: 'Upgrade or Maintain Your Cooling System, On Your Terms',
+    sub: 'The most sensible time to service, upgrade, or replace a cooling system is before the first heat wave — while you\u2019re planning ahead, not scrambling for same-day relief. A short preventative visit now can spare you a breakdown this summer.',
     img: '/hero/shoulder-hero.webp',
-    quotePath: '/estimate'
+    quotePath: '/quote-builder'
   };
 };
 
@@ -439,10 +465,29 @@ document.addEventListener('alpine:init', () => {
         <a href="#quote" data-jsphone class="inline-flex items-center justify-center gap-2 rounded-full bg-moss-500 text-ink-900 font-semibold px-7 py-4 text-base hover:bg-moss-400 active:scale-[0.98] transition-all shadow-lg shadow-moss-900/30 focus-ring">
           Call Direct: <span data-jsphone-num>Tap to Call</span>
         </a>
-        <a href="/estimate" :href="$store.season.quotePath" class="inline-flex items-center justify-center gap-2 rounded-full border border-paper/30 text-paper font-semibold px-7 py-4 text-base hover:bg-paper/10 transition-colors focus-ring">
-          See Pricing
-        </a>
+
+        <!-- Main seasons (heating / cooling): pricing CTA -->
+        <template x-if="!$store.season.isShoulder">
+          <a href="/estimate" :href="$store.season.quotePath" class="inline-flex items-center justify-center gap-2 rounded-full border border-paper/30 text-paper font-semibold px-7 py-4 text-base hover:bg-paper/10 transition-colors focus-ring">
+            See Pricing
+          </a>
+        </template>
+
+        <!-- Shoulder seasons: no pricing CTA — just an easy way to text and book a visit -->
+        <template x-if="$store.season.isShoulder">
+          <a href="#" data-jssms class="inline-flex items-center justify-center gap-2 rounded-full border border-paper/30 text-paper font-semibold px-7 py-4 text-base hover:bg-paper/10 transition-colors focus-ring">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Text to Schedule
+          </a>
+        </template>
       </div>
+
+      <!-- Shoulder-season peace-of-mind line: maintenance / assessment / service, from $100 -->
+      <template x-if="$store.season.isShoulder">
+        <p class="reveal reveal-4 mt-5 text-sm sm:text-base text-paper/80 max-w-xl">
+          Preventative maintenance, a new-system assessment, or any service visit &mdash; starting at just <span class="font-semibold text-moss-300">$100</span> for total peace of mind.
+        </p>
+      </template>
 
       <!-- 5-star verified badge -->
       <div class="reveal reveal-4 mt-10 inline-flex items-center gap-3 rounded-2xl bg-paper/10 border border-paper/15 px-5 py-3">
@@ -794,9 +839,16 @@ document.addEventListener('alpine:init', () => {
       <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       Call Direct
     </a>
-    <a href="/estimate" class="flex items-center justify-center gap-2 rounded-full bg-moss-500 text-ink-900 font-semibold py-3.5 text-sm active:scale-[0.97] transition-transform focus-ring">
-      Get Free Quote
-    </a>
+    <template x-if="!$store.season.isShoulder">
+      <a href="/estimate" :href="$store.season.quotePath" class="flex items-center justify-center gap-2 rounded-full bg-moss-500 text-ink-900 font-semibold py-3.5 text-sm active:scale-[0.97] transition-transform focus-ring">
+        Get Free Quote
+      </a>
+    </template>
+    <template x-if="$store.season.isShoulder">
+      <a href="#" data-jssms class="flex items-center justify-center gap-2 rounded-full bg-moss-500 text-ink-900 font-semibold py-3.5 text-sm active:scale-[0.97] transition-transform focus-ring">
+        Text to Schedule
+      </a>
+    </template>
   </div>
 </div>
 
@@ -842,6 +894,10 @@ document.addEventListener('alpine:init', () => {
     a.setAttribute('href', 'tel:' + digits);
     var num = a.querySelector('[data-jsphone-num]');
     if (num) num.textContent = phone;
+  });
+  // Shoulder-season "Text to Schedule" CTA — same number, sms: instead of tel:
+  document.querySelectorAll('a[data-jssms]').forEach(function (a) {
+    a.setAttribute('href', 'sms:' + digits);
   });
 })();
 
