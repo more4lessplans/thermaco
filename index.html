@@ -890,15 +890,32 @@ document.addEventListener('alpine:init', () => {
   var codes = [50,56,57,45,56,57,48,45,50,50,50,50]; // "289-890-2222"
   var phone = String.fromCharCode.apply(null, codes);
   var digits = phone.replace(/\D/g, '');
-  document.querySelectorAll('a[data-jsphone]').forEach(function (a) {
-    a.setAttribute('href', 'tel:' + digits);
-    var num = a.querySelector('[data-jsphone-num]');
-    if (num) num.textContent = phone;
-  });
-  // Shoulder-season "Text to Schedule" CTA — same number, sms: instead of tel:
-  document.querySelectorAll('a[data-jssms]').forEach(function (a) {
-    a.setAttribute('href', 'sms:' + digits);
-  });
+
+  function injectContact() {
+    document.querySelectorAll('a[data-jsphone]').forEach(function (a) {
+      a.setAttribute('href', 'tel:' + digits);
+      var num = a.querySelector('[data-jsphone-num]');
+      if (num) num.textContent = phone;
+    });
+    // Shoulder-season "Text to Schedule" CTA — same number, sms: instead of tel:
+    // NOTE: these <a data-jssms> elements live inside Alpine `<template x-if>`
+    // blocks (hero + sticky bar), so they don't exist in the DOM yet the first
+    // time this runs during initial parsing — Alpine's script is `defer`red and
+    // only clones its x-if templates into real nodes once it mounts, which
+    // happens later. Calling injectContact() immediately would silently find
+    // zero data-jssms elements and leave those links as dead href="#". So this
+    // same function also runs a second time below, on Alpine's
+    // 'alpine:initialized' event, once the templated links actually exist.
+    document.querySelectorAll('a[data-jssms]').forEach(function (a) {
+      a.setAttribute('href', 'sms:' + digits);
+    });
+  }
+
+  // Run once immediately for the always-present data-jsphone elements, and
+  // again after Alpine mounts so the templated data-jssms links (only
+  // rendered during shoulder-season months) get their sms: href too.
+  injectContact();
+  document.addEventListener('alpine:initialized', injectContact);
 })();
 
 (function () {
