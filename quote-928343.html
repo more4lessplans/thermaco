@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Your Quote | Midea Communicating −30° Systems | Thermaco HVAC</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FAF9F4">
+
+<!-- FONTS — same pairing as the rest of the site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: {
+            DEFAULT: '#45483D', 50:'#f2f3ef', 100:'#e2e4d9', 200:'#c5c9b4', 300:'#a4aa8b',
+            400:'#7d8365', 500:'#5f6349', 600:'#4b4e3a', 700:'#45483D', 800:'#33352c', 900:'#22231d'
+          },
+          moss: {
+            DEFAULT:'#82983A', 50:'#f4f7ea', 100:'#e6edcd', 200:'#cddb9d', 300:'#b1c66c',
+            400:'#9bb64c', 500:'#82983A', 600:'#68792e', 700:'#4f5c24', 800:'#3a4419', 900:'#272d10'
+          },
+          rust: { 50:'#fdf3ee', 300:'#e3a780', 500:'#c17a4a', 700:'#8f5530' },
+          paper: '#FAF9F4'
+        },
+        fontFamily: {
+          display: ['"Fraunces"', 'ui-serif', 'Georgia', 'serif'],
+          sans: ['"Inter"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace']
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { background-color: #FAF9F4; overscroll-behavior-y: contain; }
+  [x-cloak] { display: none !important; }
+  .safe-b { padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .safe-t { padding-top: env(safe-area-inset-top, 0px); }
+
+  .grain { position: relative; }
+  .grain::before {
+    content: "";
+    position: absolute; inset: 0; z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  @keyframes pulseSoft {
+    0% { transform: scale(1); opacity: .55; }
+    70% { transform: scale(2.4); opacity: 0; }
+    100% { transform: scale(2.4); opacity: 0; }
+  }
+  .pulse-soft { animation: pulseSoft 2.6s cubic-bezier(.4,0,.2,1) infinite; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(14px) scale(.99); filter: blur(3px); animation: reveal .8s cubic-bezier(.16,1,.3,1) forwards; }
+    .reveal-1 { animation-delay: .05s; }
+    .reveal-2 { animation-delay: .14s; }
+    .reveal-3 { animation-delay: .24s; }
+    @keyframes reveal { to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
+
+    .reveal-io {
+      opacity: 0; transform: translateY(20px) scale(.98); filter: blur(4px);
+      transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1), filter .8s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal-io.is-in { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    .reveal-io-d1.is-in { transition-delay: .06s; }
+    .reveal-io-d2.is-in { transition-delay: .12s; }
+  }
+  @media (prefers-reduced-motion: reduce) { .reveal-io { opacity: 1; transform: none; filter: none; } }
+
+  .focus-ring:focus-visible { outline: 2px solid #82983A; outline-offset: 3px; }
+  .tap-btn { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+
+  .quote-card {
+    transition: box-shadow .3s cubic-bezier(.16,1,.3,1), border-color .3s cubic-bezier(.16,1,.3,1), transform .2s cubic-bezier(.16,1,.3,1);
+  }
+  .quote-card.is-pick {
+    border-color: rgba(130,152,58,.55);
+    box-shadow: 0 0 0 1px rgba(130,152,58,.18), 0 24px 48px -24px rgba(34,35,29,.35);
+  }
+
+  .divider-fade { background: linear-gradient(to right, transparent, #c5c9b4, transparent); height: 1px; }
+
+  /* product image stage — soft radial backdrop so the unit photo floats
+     rather than sitting flat against the white card */
+  .unit-stage {
+    background: radial-gradient(ellipse at 50% 60%, #f2f3ef 0%, transparent 72%);
+  }
+  .unit-stage img { filter: drop-shadow(0 14px 22px rgba(34,35,29,.16)); }
+</style>
+</head>
+
+<body class="font-sans text-ink-800 antialiased">
+
+<!-- BRAND BAR -->
+<header class="relative z-10 safe-t bg-ink-900">
+  <div class="max-w-4xl mx-auto px-5 sm:px-8 py-5 flex items-center justify-between">
+    <span class="font-display font-semibold text-paper tracking-tight text-lg">Thermaco <span class="text-moss-400">HVAC</span></span>
+  </div>
+</header>
+
+<!-- HERO / QUOTE HEADER -->
+<section class="relative grain overflow-hidden bg-gradient-to-b from-ink-900 via-ink-800 to-ink-900 text-paper">
+  <div class="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-moss-500/20 blur-3xl"></div>
+  <div class="absolute bottom-0 -left-16 w-64 h-64 rounded-full bg-moss-400/10 blur-3xl"></div>
+
+  <div class="relative z-10 max-w-4xl mx-auto px-5 sm:px-8 pt-8 pb-14 sm:pt-12 sm:pb-16">
+    <p class="reveal reveal-1 inline-flex items-center gap-2 text-xs font-semibold tracking-wide text-moss-300 bg-moss-500/10 border border-moss-400/30 rounded-full px-3.5 py-1.5 mb-5">
+      <span class="relative flex h-1.5 w-1.5">
+        <span class="pulse-soft absolute inline-flex h-full w-full rounded-full bg-moss-400"></span>
+        <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-moss-400"></span>
+      </span>
+      Valid through October 1, 2026 &middot; 15 days
+    </p>
+
+    <h1 class="reveal reveal-2 font-display font-semibold text-3xl sm:text-5xl leading-[1.08] tracking-tight max-w-2xl">
+          Your Midea Communicating Cold Climate Heat Pump Quote
+    </h1>
+    <p class="reveal reveal-3 mt-4 text-ink-200 text-base sm:text-lg max-w-xl">
+     Both systems below maintain their heat output down to −30°F, helping minimize how often your backup heat needs to run. Every option includes full installation, a new Wi-Fi-enabled dual-fuel smart controller, and a 10-year parts and compressor warranty.
+    </p>
+  </div>
+</section>
+
+<main class="max-w-4xl mx-auto px-5 sm:px-8">
+
+  <!-- INCLUDED IN EVERY QUOTE -->
+  <section class="reveal-io -mt-8 sm:-mt-10 relative z-10 mb-14">
+    <div class="rounded-3xl border border-ink-100 bg-white px-6 py-6 sm:px-8 sm:py-7 shadow-[0_20px_44px_-28px_rgba(34,35,29,0.25)]">
+      <p class="font-display font-semibold text-ink-900 text-lg mb-4">Included on every system</p>
+      <div class="grid sm:grid-cols-3 gap-4 sm:gap-6 text-sm text-ink-600">
+        <div class="flex gap-3">
+          <svg class="shrink-0 mt-0.5" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#82983A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          Complete professional installation &amp; commissioning
+        </div>
+        <div class="flex gap-3">
+          <svg class="shrink-0 mt-0.5" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#82983A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          New Wi-Fi dual-fuel smart controller
+        </div>
+        <div class="flex gap-3">
+          <svg class="shrink-0 mt-0.5" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#82983A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          10-year parts &amp; compressor warranty
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="mb-16">
+    <h2 class="reveal-io font-display font-semibold text-ink-900 text-2xl sm:text-3xl tracking-tight mb-2">Pricing</h2>
+    <p class="reveal-io reveal-io-d1 text-ink-500 mb-8 max-w-lg">Four configurations, two tonnages each. The 5-ton size is what we'd put in your home.</p>
+
+    <div class="grid sm:grid-cols-2 gap-5">
+
+      <!-- Kepler 4-ton -->
+      <div class="reveal-io quote-card rounded-3xl border border-ink-100 bg-white p-6 sm:p-7">
+        <div class="unit-stage h-36 sm:h-40 flex items-center justify-center rounded-2xl mb-5">
+          <img src="kepler.png" alt="Midea Kepler condenser" class="h-full w-auto max-w-[80%] object-contain">
+        </div>
+        <p class="text-xs font-semibold tracking-wide text-ink-400 mb-1">Best Value</p>
+        <h3 class="font-display font-semibold text-xl text-ink-900">Midea Kepler</h3>
+        <p class="text-ink-500 text-sm mt-0.5">4-Ton &middot; AZPN/48WD</p>
+        <p class="font-display font-semibold text-3xl text-ink-900 mt-5">$5,100 <span class="text-base font-sans font-medium text-ink-400">+ tax</span></p>
+        <p class="text-ink-500 text-sm mt-2">Strong cold-climate performance at the lowest upfront cost.</p>
+      </div>
+
+      <!-- Kepler 5-ton — RECOMMENDED -->
+      <div class="reveal-io reveal-io-d1 quote-card is-pick relative rounded-3xl border border-ink-100 bg-white p-6 sm:p-7">
+        <span class="absolute -top-3 left-6 inline-flex items-center gap-1.5 rounded-full bg-moss-500 text-ink-900 text-xs font-semibold px-3 py-1">
+          Recommended
+        </span>
+        <div class="unit-stage h-36 sm:h-40 flex items-center justify-center rounded-2xl mb-5 mt-2">
+          <img src="kepler.png" alt="Midea Kepler condenser" class="h-full w-auto max-w-[80%] object-contain">
+        </div>
+        <p class="text-xs font-semibold tracking-wide text-ink-400 mb-1">Best Value</p>
+        <h3 class="font-display font-semibold text-xl text-ink-900">Midea Kepler</h3>
+        <p class="text-ink-500 text-sm mt-0.5">5-Ton &middot; AZPN/60WD</p>
+        <p class="font-display font-semibold text-3xl text-ink-900 mt-5">$5,600 <span class="text-base font-sans font-medium text-ink-400">+ tax</span></p>
+        <p class="text-ink-500 text-sm mt-2">Sized to carry your home further into the cold before the oil furnace has to pick up the difference — less oil burned per winter.</p>
+      </div>
+
+      <!-- EVOX 4-ton -->
+      <div class="reveal-io quote-card rounded-3xl border border-ink-100 bg-white p-6 sm:p-7">
+        <div class="unit-stage h-36 sm:h-40 flex items-center justify-center rounded-2xl mb-5">
+          <img src="evox.png" alt="Midea EVOX condenser" class="h-full w-auto max-w-[80%] object-contain">
+        </div>
+        <p class="text-xs font-semibold tracking-wide text-ink-400 mb-1">Premium</p>
+        <h3 class="font-display font-semibold text-xl text-ink-900">Midea EVOX</h3>
+        <p class="text-ink-500 text-sm mt-0.5">4-Ton &middot; MO1HE-H48B</p>
+        <p class="font-display font-semibold text-3xl text-ink-900 mt-5">$6,600 <span class="text-base font-sans font-medium text-ink-400">+ tax</span></p>
+        <p class="text-ink-500 text-sm mt-2">Higher efficiency and superior ultra-cold heating capacity.</p>
+      </div>
+
+      <!-- EVOX 5-ton — RECOMMENDED -->
+      <div class="reveal-io reveal-io-d1 quote-card is-pick relative rounded-3xl border border-ink-100 bg-white p-6 sm:p-7">
+        <span class="absolute -top-3 left-6 inline-flex items-center gap-1.5 rounded-full bg-moss-500 text-ink-900 text-xs font-semibold px-3 py-1">
+          Recommended
+        </span>
+        <div class="unit-stage h-36 sm:h-40 flex items-center justify-center rounded-2xl mb-5 mt-2">
+          <img src="evox.png" alt="Midea EVOX condenser" class="h-full w-auto max-w-[80%] object-contain">
+        </div>
+        <p class="text-xs font-semibold tracking-wide text-ink-400 mb-1">Premium</p>
+        <h3 class="font-display font-semibold text-xl text-ink-900">Midea EVOX</h3>
+        <p class="text-ink-500 text-sm mt-0.5">5-Ton &middot; MO1HE-H60B</p>
+        <p class="font-display font-semibold text-3xl text-ink-900 mt-5">$7,100 <span class="text-base font-sans font-medium text-ink-400">+ tax</span></p>
+        <p class="text-ink-500 text-sm mt-2">Maximum heating output at your home's coldest hours, minimizing oil furnace runtime through the season.</p>
+      </div>
+
+    </div>
+
+    <p class="reveal-io text-ink-500 text-sm mt-6">Typical payback for choosing EVOX over Kepler: 5–10 years, from the efficiency gain.</p>
+  </section>
+
+  <div class="divider-fade mb-14"></div>
+
+  <!-- SIDE BY SIDE -->
+  <section class="mb-16">
+    <h2 class="reveal-io font-display font-semibold text-ink-900 text-2xl sm:text-3xl tracking-tight mb-8">Kepler vs. EVOX</h2>
+
+    <div class="space-y-8">
+      <div class="reveal-io grid sm:grid-cols-[140px_1fr] gap-2 sm:gap-6">
+        <p class="font-display font-semibold text-ink-900">Efficiency</p>
+        <div class="grid sm:grid-cols-2 gap-4 text-sm text-ink-600">
+          <p><span class="font-semibold text-ink-800">Kepler</span> &mdash; 14.5 SEER2</p>
+          <p><span class="font-semibold text-ink-800">EVOX</span> &mdash; up to 19 SEER2</p>
+        </div>
+      </div>
+
+      <div class="reveal-io grid sm:grid-cols-[140px_1fr] gap-2 sm:gap-6">
+        <p class="font-display font-semibold text-ink-900">Cold-Climate Heating</p>
+        <div class="grid sm:grid-cols-2 gap-4 text-sm text-ink-600">
+          <p><span class="font-semibold text-ink-800">Kepler</span> &mdash; reliable −30°F performance with a standard communicating inverter</p>
+          <p><span class="font-semibold text-ink-800">EVOX</span> &mdash; hyper-heat with Enhanced Vapor Injection (EVI), holding higher output in extreme cold</p>
+        </div>
+      </div>
+
+      <div class="reveal-io grid sm:grid-cols-[140px_1fr] gap-2 sm:gap-6">
+        <p class="font-display font-semibold text-ink-900">Positioning</p>
+        <div class="grid sm:grid-cols-2 gap-4 text-sm text-ink-600">
+          <p><span class="font-semibold text-ink-800">Kepler</span> &mdash; best balance of cold-climate capability and lower upfront cost</p>
+          <p><span class="font-semibold text-ink-800">EVOX</span> &mdash; higher efficiency and superior deep-freeze heating capacity</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING CTA -->
+  <section class="reveal-io mb-16">
+    <div class="rounded-3xl bg-ink-900 text-paper px-6 py-8 sm:px-10 sm:py-10 text-center grain relative overflow-hidden">
+      <div class="absolute -top-16 -right-16 w-56 h-56 rounded-full bg-moss-500/20 blur-3xl"></div>
+      <p class="relative font-display font-semibold text-xl sm:text-2xl mb-2">Ready to lock in this price?</p>
+      <p class="relative text-ink-300 text-sm mb-6">This quote holds through October 1, 2026. Call or text to book your install date.</p>
+      <div class="relative flex items-center justify-center gap-3">
+        <a href="tel:+12898902222" class="inline-flex items-center gap-1.5 rounded-full bg-moss-500 text-ink-900 text-sm font-semibold pl-4 pr-5 py-2.5 focus-ring tap-btn">Call to Book</a>
+        <a href="sms:+12898902222" class="inline-flex items-center gap-1.5 rounded-full border border-ink-600 text-ink-200 text-sm font-semibold pl-4 pr-5 py-2.5 focus-ring tap-btn">Text Us</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<p class="text-center text-ink-400 text-xs pb-8 safe-b">Owner-operated &middot; TSSA licensed &amp; insured</p>
+
+<script>
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.reveal-io').forEach(el => el.classList.add('is-in'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('is-in'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal-io').forEach(el => io.observe(el));
+  }
+</script>
+
+</body>
+</html>
