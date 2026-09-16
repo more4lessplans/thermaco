@@ -7,6 +7,36 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#FAF9F4">
 
+<!-- EXPIRY REDIRECT — quote is only valid through Oct 1, 2026.
+     Runs before the page paints so an expired link 404s with no flash of content.
+     Adjust EXPIRY_ISO if the quote's valid-through date changes, and
+     REDIRECT_URL if your 404 page lives somewhere other than /404. -->
+<script>
+  (function () {
+    var EXPIRY_ISO = '2026-10-02T00:00:00-04:00'; // day after "valid through Oct 1, 2026"
+    var REDIRECT_URL = '/404';
+    if (Date.now() >= new Date(EXPIRY_ISO).getTime()) {
+      window.location.replace(REDIRECT_URL);
+    }
+  })();
+</script>
+
+<!-- LINK PREVIEW (SMS / iMessage / social) -->
+<meta name="description" content="Your Midea cold-climate heat pump quote from Thermaco — installed, warrantied, valid through October 1, 2026.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Thermaco HVAC">
+<meta property="og:title" content="Your Midea Heat Pump Quote — Thermaco HVAC">
+<meta property="og:description" content="Kepler & EVOX cold-climate systems, rated to −30°F. Full install, smart controller, and a 10-year warranty included.">
+<meta property="og:image" content="https://thermaco.ca/quotes/social.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Thermaco HVAC">
+<meta property="og:url" content="https://thermaco.ca/quotes/quote-928343.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Your Midea Heat Pump Quote — Thermaco HVAC">
+<meta name="twitter:description" content="Kepler & EVOX cold-climate systems, rated to −30°F. Full install, smart controller, and a 10-year warranty included.">
+<meta name="twitter:image" content="https://thermaco.ca/quotes/social.png">
+
 <!-- FONTS — same pairing as the rest of the site -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
