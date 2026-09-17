@@ -112,6 +112,8 @@
 
   .focus-ring:focus-visible { outline: 2px solid #82983A; outline-offset: 3px; }
   .tap-btn { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+  summary::-webkit-details-marker { display: none; }
+  summary::marker { content: ""; }
 
   .quote-card {
     transition: box-shadow .3s cubic-bezier(.16,1,.3,1), border-color .3s cubic-bezier(.16,1,.3,1), transform .2s cubic-bezier(.16,1,.3,1);
@@ -184,6 +186,62 @@
           10-year parts &amp; compressor warranty
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- INSTALLATION DETAILS -->
+  <section class="mb-16">
+    <h2 class="reveal-io font-display font-semibold text-ink-900 text-2xl sm:text-3xl tracking-tight mb-2">Installation Details</h2>
+    <p class="reveal-io reveal-io-d1 text-ink-500 mb-6 max-w-lg">What every install includes to Ontario code, and what's specific to your home.</p>
+
+    <div class="space-y-4">
+
+      <!-- Standard procedures — dropdown -->
+      <details class="reveal-io group rounded-3xl border border-ink-100 bg-white overflow-hidden">
+        <summary class="cursor-pointer list-none flex items-center justify-between gap-4 px-6 py-5 sm:px-7 sm:py-6 select-none tap-btn focus-ring">
+          <span class="font-display font-semibold text-ink-900 text-lg">Standard installation procedures</span>
+          <svg class="shrink-0 transition-transform duration-300 group-open:rotate-45" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#82983A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+        </summary>
+        <div class="px-6 pb-6 sm:px-7 sm:pb-7 text-sm text-ink-600 border-t border-ink-100">
+          <p class="text-ink-500 pt-5 pb-1">Every Thermaco install is performed to Ontario code (TSSA/CSA B52 refrigeration):</p>
+          <ul class="space-y-2.5 mt-3">
+            <li class="flex gap-3"><svg class="shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#82983A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>500-micron vacuum evacuation, held and verified on a digital micron gauge before charging</li>
+            <li class="flex gap-3"><svg class="shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#82983A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Nitrogen-purged flush of the lineset to clear debris, oils, and moisture</li>
+            <li class="flex gap-3"><svg class="shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#82983A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>All refrigerant joints silver-brazed under a live nitrogen purge, then pressure-tested for leaks</li>
+            <li class="flex gap-3"><svg class="shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#82983A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Code-compliant electrical hookup — correctly sized breaker and wire, disconnect, and proper bonding/grounding</li>
+            <li class="flex gap-3"><svg class="shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#82983A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Refrigerant charge set and verified against manufacturer superheat/subcooling targets, not just weighed in</li>
+            <li class="flex gap-3"><svg class="shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#82983A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Condensate drainage sloped, tested, and protected against winter freeze-up</li>
+            <li class="flex gap-3"><svg class="shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#82983A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Lineset insulated and secured along its full run, UV-rated wherever it's exposed outdoors</li>
+            <li class="flex gap-3"><svg class="shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#82983A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Outdoor unit set level with proper clearances for airflow, service access, and snow load</li>
+            <li class="flex gap-3"><svg class="shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#82983A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Full system commissioning — airflow check, Wi-Fi controller setup and pairing, functional test-out</li>
+            <li class="flex gap-3"><svg class="shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#82983A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Old equipment removed, with refrigerant recovered per environmental regulations</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- Job-specific scope -->
+      <div class="reveal-io reveal-io-d1 rounded-3xl border border-ink-100 bg-white px-6 py-6 sm:px-7 sm:py-7">
+        <p class="font-display font-semibold text-ink-900 text-lg mb-4">Specific to your install</p>
+        <div class="grid sm:grid-cols-2 gap-x-8 gap-y-5 text-sm">
+          <div>
+            <p class="text-xs font-semibold tracking-wide text-ink-400 mb-2">Reused</p>
+            <ul class="space-y-2 text-ink-600">
+              <li>Existing 40A breaker &amp; circuit wiring</li>
+              <li>Existing copper lineset (flushed &amp; pressure-tested as part of install)</li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-xs font-semibold tracking-wide text-ink-400 mb-2">New</p>
+            <ul class="space-y-2 text-ink-600">
+              <li>Indoor Coil</li>
+              <li>Custom sheet metal fabrication</li>
+              <li>Wi-Fi dual-fuel smart controller</li>
+              <li>Wall bracket &amp; stand, relocated so it no longer blocks the window</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
